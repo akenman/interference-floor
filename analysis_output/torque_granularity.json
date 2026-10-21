@@ -1,0 +1,53 @@
+{
+ "note": "Exact-tier residual floor in the pendulum world: the generator updates tau every 0.01 s inside a 0.1 s ramp, the action label records only the last value of each 0.05 s interval; windows sitting inside a ramp carry an unobservable intra-interval torque schedule.",
+ "protocol": {
+  "val_episodes": 300,
+  "window_seed": 0,
+  "n_windows": 30000,
+  "L": 8,
+  "K": 5,
+  "pos_idx": [
+   1,
+   2,
+   12,
+   13
+  ],
+  "prior_impl": "physics_prior_spec.prior_raw_np",
+  "ramp_criterion": "|a(t+1)-a(t)| > 1e-6"
+ },
+ "ramp_fraction": 0.1876,
+ "n_ramp": 5628,
+ "tiers": {
+  "euler005": {
+   "one_step": 3.6300188741138237,
+   "one_step_da0": 3.637202603039581,
+   "one_step_dane0": 3.5987442991549363
+  },
+  "euler001x5": {
+   "one_step": 0.5323973989633143,
+   "one_step_da0": 0.5328803488281753,
+   "one_step_dane0": 0.5303009128300581
+  },
+  "rk4005": {
+   "one_step": 0.16722865931373496,
+   "one_step_da0": 0.16831423862744263,
+   "one_step_dane0": 0.16244385757756405
+  },
+  "rk4001x5": {
+   "one_step": 0.037833567802722984,
+   "one_step_da0": 0.017664758067826938,
+   "one_step_dane0": 0.07923792708364934
+  }
+ },
+ "exact_tier_gap_px": 0.061573169015822396,
+ "prereg_reference": {
+  "file": "experiments/prereg_P0a_prior_ladder.json",
+  "field": "aliasing_floor",
+  "quoted": {
+   "ramp_fraction": 0.188,
+   "da0_px": 0.018,
+   "dane0_px": 0.079,
+   "floor_upper_bound_px": 0.06
+  }
+ }
+}

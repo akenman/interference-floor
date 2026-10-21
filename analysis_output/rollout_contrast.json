@@ -1,0 +1,66 @@
+{
+ "baseline": {
+  "head_ff_rms": 0.01967342384159565,
+  "head_ct_rms": 0.014915704727172852
+ },
+ "w_ff": 100.0,
+ "w_roll": 0.3,
+ "n_train": 120000,
+ "epochs": 900,
+ "lr": 0.001,
+ "seed": 42,
+ "cells": {
+  "no_roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.0041756704449653625,
+    "head_ff_rms": 0.004712665919214487,
+    "head_ct_rms": 0.015292936936020851,
+    "ff_over_baseline": 0.2395447766062187,
+    "ct_over_baseline": 1.0252909410415434
+   },
+   {
+    "epoch": 500,
+    "train_huber": 0.002976029645651579,
+    "head_ff_rms": 0.005513993091881275,
+    "head_ct_rms": 0.014410487376153469,
+    "ff_over_baseline": 0.28027623134022067,
+    "ct_over_baseline": 0.9661284960878183
+   },
+   {
+    "epoch": 900,
+    "train_huber": 0.002634295029565692,
+    "head_ff_rms": 0.0054687997326254845,
+    "head_ct_rms": 0.014220498502254486,
+    "ff_over_baseline": 0.2779790531967682,
+    "ct_over_baseline": 0.953390990393376
+   }
+  ],
+  "roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.0049452995881438255,
+    "head_ff_rms": 0.02866221033036709,
+    "head_ct_rms": 0.01829433999955654,
+    "ff_over_baseline": 1.4568999560598288,
+    "ct_over_baseline": 1.2265152960710346
+   },
+   {
+    "epoch": 500,
+    "train_huber": 0.0031500612385571003,
+    "head_ff_rms": 0.024606740102171898,
+    "head_ct_rms": 0.019600851461291313,
+    "ff_over_baseline": 1.2507604319562162,
+    "ct_over_baseline": 1.314108305294033
+   },
+   {
+    "epoch": 900,
+    "train_huber": 0.0026578297838568687,
+    "head_ff_rms": 0.025782385841012,
+    "head_ct_rms": 0.018963675945997238,
+    "ff_over_baseline": 1.3105184968617478,
+    "ct_over_baseline": 1.27138987348348
+   }
+  ]
+ }
+}

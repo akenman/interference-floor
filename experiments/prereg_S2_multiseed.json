@@ -1,0 +1,43 @@
+{
+  "experiment": "SLOT-2",
+  "title": "T18/T19 机制数字多种子复现——论文 §6.7 的统计保险",
+  "prereg_written_at": "2026-10-03",
+  "status": "PREREGISTERED",
+
+  "question": "论文 §6.7 的机制主张（纯学习闭环崩塌 16–38px、辨识的采样器-物理混叠、时程因果）目前是单种子测量（seed 42）。用 3 个种子复现，这些方向性结论是否稳定？——种子统计功效是现行审稿敏感点（Colas et al.; 'Don't let your analysis go to seed' 2025），这是论文 #1 投稿前最后一块统计软肋。",
+
+  "design": {
+    "seeds": [42, 43, 44],
+    "seed_semantics": "seed 42 = 原始复算（同默认数据）；43/44 = 重生成偏移世界（generate_g4 --seed）+ 重训干净臂（torch 种子）。NM 辨识的窗口采样固定 seed=123（声明：种子变异来自世界数据与训练，不来自 NM 窗口；NM 本身确定性）",
+    "clean_data": "trajectories_hinge.npz（固定，不变异——主张是评估期鲁棒性与辨识，不是干净数据方差）",
+    "per_seed_pipeline": [
+      "python -X utf8 generate_g4.py --seed S --outdir g4_seedS",
+      "python -X utf8 eval_g4.py --seed S --g125 g4_seedS/g4_g125.npz --drag g4_seedS/g4_drag.npz --output analysis_output/S2_g4_sS.json（内联训练 hybrid_fixed/hybrid_nmext/noprior，60 epochs，协议同 T18）",
+      "python -X utf8 eval_nmmulti.py --g125 g4_seedS/g4_g125.npz --drag g4_seedS/g4_drag.npz --output analysis_output/S2_nmmulti_sS.json（纯 NM 辨识，CPU/GPU 轻；g125 计划增补 nm5_H1 臂使时程因果逐 seed 可算）"
+    ],
+    "cost_estimate": "每 seed ≈ 2.5–3.5h（6 个训练 + 8 个 NM 臂）× 3 seed ≈ 8–10h（与 SLOT-1c 并行，第 3 并发槽）"
+  },
+
+  "criteria": {
+    "R2-a 崩塌复现": {"test": "3/3 seed：g125 与 drag 上 noprior 闭环 k5 ≥ 3× hybrid_fixed k5（原 8.4×/9.1×）", "verdict": "全过 ⇒ 崩塌主张种子稳健"},
+    "R2-b 混叠复现": {"test": "3/3 seed：clean nm5_H5 辨识 ĝ ∈ [600, 850]（补偿盆地，原 706；非真值邻域）；g125 nm5sub_H5 |ĝ/1125−1| ≤ 0.20（原 −15%）"},
+    "R2-c 时程因果复现": {"test": "3/3 seed：ĝ(H1) < ĝ(H5) < ĝ(H10) 且 k5(H10) ≤ k5(H1)"},
+    "报告义务": "逐 seed 全表（含偏离项）；任何 seed 违反 ⇒ 该主张降格为'2/3 seed 复现'并如实标注"
+  },
+
+  "analysis_convention": {
+    "outputs": "analysis_output/S2_g4_s{42,43,44}.json + S2_nmmulti_s{42,43,44}.json；汇总脚本 tmp_s2_multiseed.py 出逐主张判定表",
+    "order": "R2-a → R2-b → R2-c；不做 seed 追加（铁律 3）"
+  },
+
+  "stop_rule": [
+    "eval_g4/eval_nmmulti 在新数据上崩溃 → 修协议重启（记录于 DEEP_DIVE）",
+    "NM 不收敛（目标评估发散）→ 该臂记 UNDECIDED，不换优化器"
+  ],
+
+  "limitations": [
+    "干净数据固定不变异（主张域=评估鲁棒性+辨识）",
+    "NM 窗口采样固定 seed=123（声明）",
+    "机制数字的绝对值仍限于单引擎对（铰链拉格朗日）"
+  ]
+}

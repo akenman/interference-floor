@@ -1,0 +1,24 @@
+{
+ "k": 7,
+ "pooled": 0.16051439969251974,
+ "se": 0.022494692902231554,
+ "ci_low": 0.1164248016041459,
+ "ci_high": 0.20460399778089358,
+ "z": 7.135656414166745,
+ "p": 9.632294961647858e-13,
+ "q": 6.48961963522689,
+ "df": 6,
+ "effects": [
+  0.1597,
+  0.12109999999999996,
+  0.20659999999999998,
+  0.14933333333333332,
+  0.09100000000000001,
+  0.2459999999999999,
+  0.0677
+ ],
+ "n_negative": 0,
+ "unit": "variant (7 gating variants, shared seeds and architecture)",
+ "caveat": "fixed-effect combination over non-independent units; z is anticonservative",
+ "source": "analysis_output/E1a_stageB_report.json"
+}

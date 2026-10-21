@@ -1,0 +1,19 @@
+{
+  "episodes": 40,
+  "summary": {
+    "prior": {
+      "hit_rate": 0.45,
+      "mean_min_dist": 55.43097183828637
+    },
+    "model": {
+      "hit_rate": 0.6,
+      "mean_min_dist": 38.19806591363743
+    },
+    "energy": {
+      "hit_rate": 0.225,
+      "mean_min_dist": 61.243839650668555
+    }
+  },
+  "criterion_A_pp": 14.999999999999996,
+  "criterion_B_pp": 37.5
+}

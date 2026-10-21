@@ -1,0 +1,93 @@
+{
+  "experiment": "P0-c",
+  "title": "辅助监督 2×2 分解——「人类语义」唯一可操纵入口的因果检验",
+  "prereg_written_at": "2026-10-02",
+  "prereg_commit": "先于任何 P0-c 全量训练 run 提交（冒烟除外，见 stop_rule）",
+  "status": "PREREGISTERED",
+
+  "question": "把「人类语义」唯一可操纵的入口——辅助监督——单独拿出来：它在状态预测上有正增益吗？爻标签是人工定义语义（接触/能量趋势/趋靶）；原型/commit/usage 是自监督聚类，无人类语义。E0 里 ours_base（带爻头+原型）0.978 vs ours_yao（全删）0.415，配对 p=0.049，差 0.56px——但那是「删模块」，容量与接口同时变了，不是「关监督」。P0-c 用 2×2 把监督梯度单独作为因果变量：架构与容量完全不变，只改损失权重。",
+
+  "motivation_from_prior_results": {
+    "E0": "ours_base 0.969 vs ours_yao 0.415（euler005，配对 p=0.049，差 0.56px）：删模块反而更好 ⇒ 爻/原型模块在粗先验档是负债；但归因不明（容量？接口？监督信号？）。",
+    "P0-a": "先验质量决定闭环地板；粗积分器是负债。",
+    "P0-b": "训练配方买得到稳定性、买不到先验质量；精确先验臂（rk4001x5）对配方不敏感（A/B 逐位 0.49）⇒ 精确先验下残差≈0，会把辅助损失的影响压平。",
+    "T10/门控线": "结构先验（门控）已判负并关闭；辅助监督是符号理念剩下的最后一条可检验路径（爻标签语义→监督信号，不进预测路径）。"
+  },
+
+  "design": {
+    "type": "2×2 因子设计（同架构同容量，只改损失权重）",
+    "factors": {
+      "爻监督（人类语义）": {"开": "w_yao=0.1（默认）", "关": "w_yao=0"},
+      "原型家族（自监督聚类）": {"开": "w_proto=0.05, w_commit=0.01, w_usage=0.02（默认）", "关": "三者全 0"}
+    },
+    "cells": [
+      {"id": "C00", "meaning": "无辅助监督", "extra_train_args": "--w_yao 0 --w_proto 0 --w_commit 0 --w_usage 0"},
+      {"id": "C01", "meaning": "仅原型家族（自监督聚类，无人类语义）", "extra_train_args": "--w_yao 0"},
+      {"id": "C10", "meaning": "仅爻监督（人类语义，无聚类）", "extra_train_args": "--w_proto 0 --w_commit 0 --w_usage 0"},
+      {"id": "C11", "meaning": "全默认（= E0 的 ours_base 配方）", "extra_train_args": ""}
+    ],
+    "semantics_guarantee": "train_e0 的 ResidualLoss 在 w_*=0 时模块保留、监督梯度关闭（损失项照算、权重乘 0）；这是「关监督」而非「删模块」。冒烟已核验：C00 冒烟 yao_acc=0.498（≈随机）vs 有监督臂 0.967。",
+    "arm": "ours_base",
+    "prior_spec": "euler005（粗先验）",
+    "prior_spec_rationale": "E0 的 0.56px 异常就发生在粗先验档；精确先验下残差≈0 会把辅助损失的影响压平（P0-b 已证精确臂对配方不敏感）。",
+    "seeds": [42, 43, 44, 45, 46, 47],
+    "n": 6,
+    "recipe": {"w_roll": 0.0, "lr": 0.001, "windows_per_epoch": 150000, "detach_prior": false, "epochs": 60},
+    "checkpoint_roots": "每格一个根目录（铁律 4：损失权重不在 assert_dir_not_foreign 的七项内，必须靠目录隔离）：checkpoints-P0c/C00 … checkpoints-P0c/C11",
+    "n_runs": 24,
+    "cost_estimate": "24 run × ~34 min ≈ 13.6 GPU·h（2 并发 ≈ 6–7 h 壁钟）",
+    "cmd_template": "python -X utf8 run_e0.py --arms ours_base --seeds 42 43 44 45 46 47 --prior_spec euler005 --checkpoint_root checkpoints-P0c/<格> --w_roll 0 --lr 1e-3 --windows_per_epoch 150000 --epochs 60 --extra_train_args=\"<格的附加参数>\" --max-jobs 1（两链并行，全局并发 2）"
+  },
+
+  "hypotheses": {
+    "H1": "若 E0 的 ours_yao 反常（删模块更好）源于监督信号有害，则爻监督主效应 > 0（C10/C11 比 C00/C01 差）。",
+    "H2": "若爻监督有益（人类语义提供可学的正则/特征），则爻监督主效应 < 0。",
+    "H3": "若 E0 反常源于模块容量/接口本身（与监督无关），则两主效应均 ≈ 0（无影响区间）。",
+    "H4": "原型家族（自监督）独立于爻监督有自己的主效应（方向待数据）。"
+  },
+
+  "criteria": {
+    "threshold_calibration": "阈值来自 E0 实测：效应量 0.56px、配对 SD ≈ 0.2px ⇒ n=6 的 MDE ≈ 0.23px（约为粗先验臂单步 0.97px 的 24%，高于 5–9% 噪声底，可检出）。",
+    "P0c-1 爻监督主效应": {
+      "test": "mean(C10, C11) − mean(C00, C01)（单步 one_step_model，同 seed 配对）",
+      "verdict": ">+0.23px ⇒ 有害；<−0.23px ⇒ 有益；其间 ⇒ 无影响（该配方下）"
+    },
+    "P0c-2 原型家族主效应": {
+      "test": "mean(C01, C11) − mean(C00, C10)（单步，同 seed 配对）",
+      "verdict": "同 P0c-1 门槛"
+    },
+    "P0c-3 交互项": {
+      "test": "(C11−C10) − (C01−C00)（单步，同 seed 配对）",
+      "verdict": "报告效应量与 CI，不设判定门槛"
+    },
+    "secondary": [
+      "闭环 rollout k=5（四格同口径）",
+      "yao_acc：确认监督确实被学到——C10/C11 预期 ≈0.96x，C00/C01 预期 ≈0.7x（基线水平）；若 C10/C11 的 yao_acc 不升，说明监督未生效，实验作废重查",
+      "崩溃率（ITT：含崩溃 run 的 best.pt）"
+    ],
+    "噪声底": "同配置重跑实测 5–9%（F10）⇒ <10% 的臂间差距不得声称显著；主判据以 0.23px 配对门槛为准"
+  },
+
+  "analysis_convention": {
+    "pairing": "同 seed 配对（四格共享 seed 42–47）",
+    "itt": "含崩溃 run 的 best.pt，同时报崩溃率；剔除口径只作敏感性分析",
+    "order": "按预注册顺序报告（P0c-1 → P0c-2 → P0c-3 → 次口径），不做事后筛选",
+    "reporting": "方向性结论必须同时给配对 t、效应量、CI、方向一致性计数（6 seed 中同向个数）",
+    "analysis_script": "tmp_p0c_compare.py（同 seed 配对；主效应/交互/崩溃率）+ 图 figures/P0c_two_by_two.png；报告 build_e0_report.py --checkpoint_root checkpoints-P0c/<格> --skip_analytic --out analysis_output/P0c_<格>.json × 4"
+  },
+
+  "stop_rule": [
+    "启动核验失败（四格日志不隔离 / run 目录缺失 / 显存超 6GB / 并发超 2）→ 立即停止，修复后重启；重启的 run 全部从 scratch 重训，不许续用半程权重",
+    "训练中 OOM/崩溃 → 该 run 保留已存 best.pt 计 ITT，崩溃率入报告；崩溃率 >25%（>6/24）→ 实验判 UNDECIDED（功效不足），不追加 seed",
+    "发现配方污染（某格 best.pt 的 args 与预注册不符）→ 该格全部 run 作废重跑，不修补数字",
+    "中途不得加 seed、加格、改判据阈值；一切增补须另立预注册增补文件"
+  ],
+
+  "limitations": [
+    "仅粗先验档（euler005）；精确先验下的辅助监督效应未测（预期被压平，P0-b 证据）",
+    "wpe=150,000（成本控制口径）：精确臂逐位不受影响、弱臂 5–30% 欠训（F10/10.19.20 实测）",
+    "n=6，单世界（1-DOF 铰链）；结论不外推到多自由度",
+    "「无影响」判定限于本配方与本世界，不是对辅助监督的普适否定",
+    "爻监督与原型家族在代码上共享 evidence/EMA 通路（ema_prototypes 在四格都运行），本实验分离的是监督梯度，不是模块前向的存在性"
+  ]
+}

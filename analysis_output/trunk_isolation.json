@@ -1,0 +1,86 @@
+{
+ "baseline": {
+  "head_ff_rms": 0.01967342384159565,
+  "head_ct_rms": 0.014915704727172852
+ },
+ "w_ff": 100.0,
+ "w_roll": 0.3,
+ "seed": 42,
+ "cells": {
+  "frozen_no_roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.0042157904244959354,
+    "head_ff_rms": 0.004712665919214487,
+    "head_ct_rms": 0.015292936936020851,
+    "ff_over_baseline": 0.2395447766062187,
+    "ct_over_baseline": 1.0252909410415434
+   },
+   {
+    "epoch": 500,
+    "train_huber": 0.002984889317303896,
+    "head_ff_rms": 0.005513993091881275,
+    "head_ct_rms": 0.014410487376153469,
+    "ff_over_baseline": 0.28027623134022067,
+    "ct_over_baseline": 0.9661284960878183
+   },
+   {
+    "epoch": 900,
+    "train_huber": 0.002638942329213023,
+    "head_ff_rms": 0.0054687997326254845,
+    "head_ct_rms": 0.014220498502254486,
+    "ff_over_baseline": 0.2779790531967682,
+    "ct_over_baseline": 0.953390990393376
+   }
+  ],
+  "frozen_roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.005030079744756222,
+    "head_ff_rms": 0.02866221033036709,
+    "head_ct_rms": 0.01829433999955654,
+    "ff_over_baseline": 1.4568999560598288,
+    "ct_over_baseline": 1.2265152960710346
+   },
+   {
+    "epoch": 500,
+    "train_huber": 0.003196999430656433,
+    "head_ff_rms": 0.024606740102171898,
+    "head_ct_rms": 0.019600851461291313,
+    "ff_over_baseline": 1.2507604319562162,
+    "ct_over_baseline": 1.314108305294033
+   },
+   {
+    "epoch": 900,
+    "train_huber": 0.0026974822394549847,
+    "head_ff_rms": 0.025782385841012,
+    "head_ct_rms": 0.018963675945997238,
+    "ff_over_baseline": 1.3105184968617478,
+    "ct_over_baseline": 1.27138987348348
+   }
+  ],
+  "free_no_roll": [
+   {
+    "epoch": 100,
+    "head_ff_rms": 0.009895070292570644,
+    "head_ct_rms": 0.013718093190275619,
+    "ff_over_baseline": 0.5029663556401114,
+    "ct_over_baseline": 0.9197080152226753
+   },
+   {
+    "epoch": 300,
+    "head_ff_rms": 0.010051024410565854,
+    "head_ct_rms": 0.013241964283119611,
+    "ff_over_baseline": 0.5108935023966142,
+    "ct_over_baseline": 0.8877867003491907
+   },
+   {
+    "epoch": 500,
+    "head_ff_rms": 0.009252794152779477,
+    "head_ct_rms": 0.013724317511557246,
+    "ff_over_baseline": 0.47031946382491047,
+    "ct_over_baseline": 0.9201253150684069
+   }
+  ]
+ }
+}

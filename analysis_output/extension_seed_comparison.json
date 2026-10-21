@@ -1,0 +1,254 @@
+{
+ "base_seeds": [
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48
+ ],
+ "extension_seeds": [
+  49,
+  50,
+  51
+ ],
+ "boundary_tol_px": 0.0001,
+ "note": "Descriptive only. Extension seeds reuse the same data and protocol; values outside the seven-seed range mean that range under-covered the spread, not that the run is invalid.",
+ "rows": [
+  {
+   "tier": "euler005",
+   "metric": "one-step",
+   "base_mean": 0.7065333248606497,
+   "base_sd": 0.38843765814701414,
+   "base_min": 0.4483015182474781,
+   "base_max": 1.5358960630946086,
+   "extension": {
+    "49": {
+     "value": 0.4259431064128876,
+     "status": "outside_min_max",
+     "z_vs_base": -0.7223558595896116
+    },
+    "50": {
+     "value": 0.810845673084259,
+     "status": "inside",
+     "z_vs_base": 0.2685433454655668
+    },
+    "51": {
+     "value": 0.46957799792289734,
+     "status": "inside",
+     "z_vs_base": -0.6100215104480693
+    }
+   }
+  },
+  {
+   "tier": "euler005",
+   "metric": "k=5",
+   "base_mean": 14.626378702498078,
+   "base_sd": 2.6830569807468376,
+   "base_min": 11.923548049528305,
+   "base_max": 19.598921146721697,
+   "extension": {
+    "49": {
+     "value": 17.797367095947266,
+     "status": "inside",
+     "z_vs_base": 1.1818565226917144
+    },
+    "50": {
+     "value": 16.80531883239746,
+     "status": "inside",
+     "z_vs_base": 0.8121110157313423
+    },
+    "51": {
+     "value": 16.995365142822266,
+     "status": "inside",
+     "z_vs_base": 0.8829430225759769
+    }
+   }
+  },
+  {
+   "tier": "euler001x5",
+   "metric": "one-step",
+   "base_mean": 0.1759668038504746,
+   "base_sd": 0.036853731600877744,
+   "base_min": 0.14656742577281914,
+   "base_max": 0.2549309878406795,
+   "extension": {
+    "49": {
+     "value": 0.13527214527130127,
+     "status": "outside_min_max",
+     "z_vs_base": -1.1042208430856462
+    },
+    "50": {
+     "value": 0.20568762719631195,
+     "status": "inside",
+     "z_vs_base": 0.8064535680595633
+    },
+    "51": {
+     "value": 0.14917531609535217,
+     "status": "inside",
+     "z_vs_base": -0.7269681139829093
+    }
+   }
+  },
+  {
+   "tier": "euler001x5",
+   "metric": "k=5",
+   "base_mean": 4.12944409024626,
+   "base_sd": 2.0416135866004597,
+   "base_min": 2.5480897983800745,
+   "base_max": 7.504011400714101,
+   "extension": {
+    "49": {
+     "value": 4.876638412475586,
+     "status": "inside",
+     "z_vs_base": 0.3659822442078756
+    },
+    "50": {
+     "value": 3.370476722717285,
+     "status": "inside",
+     "z_vs_base": -0.3717487836631953
+    },
+    "51": {
+     "value": 12.601707458496094,
+     "status": "outside_min_max",
+     "z_vs_base": 4.149787904946893
+    }
+   }
+  },
+  {
+   "tier": "rk4005",
+   "metric": "one-step",
+   "base_mean": 0.0992504953639377,
+   "base_sd": 0.04405851466615601,
+   "base_min": 0.06330282705734587,
+   "base_max": 0.16906390153750406,
+   "extension": {
+    "49": {
+     "value": 0.06146588921546936,
+     "status": "outside_min_max",
+     "z_vs_base": -0.8576005440667512
+    },
+    "50": {
+     "value": 0.1456184685230255,
+     "status": "inside",
+     "z_vs_base": 1.0524179834574823
+    },
+    "51": {
+     "value": 0.06606094539165497,
+     "status": "inside",
+     "z_vs_base": -0.7533061480571792
+    }
+   }
+  },
+  {
+   "tier": "rk4005",
+   "metric": "k=5",
+   "base_mean": 1.7198385325100871,
+   "base_sd": 0.9381955209583837,
+   "base_min": 1.0018233653097772,
+   "base_max": 3.7369567753616066,
+   "extension": {
+    "49": {
+     "value": 1.6395409107208252,
+     "status": "inside",
+     "z_vs_base": -0.08558730029667638
+    },
+    "50": {
+     "value": 1.7493716478347778,
+     "status": "inside",
+     "z_vs_base": 0.03147863602516681
+    },
+    "51": {
+     "value": 1.4073086977005005,
+     "status": "inside",
+     "z_vs_base": -0.333118020527674
+    }
+   }
+  },
+  {
+   "tier": "rk4001x5",
+   "metric": "one-step",
+   "base_mean": 0.037391079964047405,
+   "base_sd": 0.0006909495875734215,
+   "base_min": 0.036444910787201926,
+   "base_max": 0.038269221768474374,
+   "extension": {
+    "49": {
+     "value": 0.03766753152012825,
+     "status": "inside",
+     "z_vs_base": 0.4001038007008996
+    },
+    "50": {
+     "value": 0.038270361721515656,
+     "status": "at_boundary",
+     "z_vs_base": 1.2725700590635585
+    },
+    "51": {
+     "value": 0.03753400593996048,
+     "status": "inside",
+     "z_vs_base": 0.20685441960392964
+    }
+   }
+  },
+  {
+   "tier": "rk4001x5",
+   "metric": "k=5",
+   "base_mean": 0.49579284750950736,
+   "base_sd": 0.008601825558782196,
+   "base_min": 0.48224109279227323,
+   "base_max": 0.5034958177611388,
+   "extension": {
+    "49": {
+     "value": 0.5023621320724487,
+     "status": "inside",
+     "z_vs_base": 0.7637081824141776
+    },
+    "50": {
+     "value": 0.5025380253791809,
+     "status": "inside",
+     "z_vs_base": 0.7841565518364796
+    },
+    "51": {
+     "value": 0.4953318238258362,
+     "status": "inside",
+     "z_vs_base": -0.053596028019946215
+    }
+   }
+  }
+ ],
+ "outside_range": [
+  {
+   "tier": "euler005",
+   "metric": "one-step",
+   "seed": 49,
+   "value": 0.4259431064128876,
+   "base_min": 0.4483015182474781,
+   "base_max": 1.5358960630946086
+  },
+  {
+   "tier": "euler001x5",
+   "metric": "one-step",
+   "seed": 49,
+   "value": 0.13527214527130127,
+   "base_min": 0.14656742577281914,
+   "base_max": 0.2549309878406795
+  },
+  {
+   "tier": "euler001x5",
+   "metric": "k=5",
+   "seed": 51,
+   "value": 12.601707458496094,
+   "base_min": 2.5480897983800745,
+   "base_max": 7.504011400714101
+  },
+  {
+   "tier": "rk4005",
+   "metric": "one-step",
+   "seed": 49,
+   "value": 0.06146588921546936,
+   "base_min": 0.06330282705734587,
+   "base_max": 0.16906390153750406
+  }
+ ]
+}

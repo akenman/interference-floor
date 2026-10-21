@@ -1,0 +1,229 @@
+{
+  "experiment": "E3",
+  "title": "obsmodel 矛盾排查 — T13 可信度重审 (T13 Ledger Audit)",
+  "status": "CLOSED [OK]",
+  "closed_at": "2026-09-xx",
+  "gate": "global (blocked all T13/G3/E4 work) — now lifted",
+  "pre_registration": {
+    "written_at": "2026-09-04 (RESEARCH_PROGRAM.md §7)",
+    "hypothesis": "T13（2026-09-01）记载 先验(真ω)=2.5px → 先验(ω̂)=12.8px，而 obsmodel 实验（2026-09-04）报告 true_ω=0.918px、naive_diff=0.350px。两者 true_ω 量级差 2.7x，且 naive<true_ω 物理上不可能。必须先定位来源再引用 T13 的任何数字。",
+    "criteria": {
+      "E3-A": {
+        "text": "定位 true_ω 量级差异（2.5 vs 0.92）的确切来源",
+        "threshold": "写出具体来源（归一化/单位/协议差异）"
+      },
+      "E3-B": {
+        "text": "修掉 eval_obsmodel.py 的 encode_sequence bug 后，gru 臂 ω̂ 误差下降到 < 2 rad/s",
+        "threshold": "gru vel_mae < 2 rad/s"
+      },
+      "E3-C": {
+        "text": "T13 的'速度观测是硬需求'维持 / 修正 / 推翻，并给出修正后的数字",
+        "threshold": "明确结论 + 修正数字"
+      }
+    }
+  },
+  "setup": {
+    "world": "hinge（RK4 拉格朗日双摆，3000 episodes × 200 步，DT=0.05s）",
+    "checkpoint": "checkpoints-hp/L1F/best.pt（L1 速度遮蔽臂）",
+    "config": {
+      "input_dim": 25,
+      "obj_dim": 22,
+      "action_dim": 1,
+      "hidden_dim": 256,
+      "num_prototypes": 32,
+      "use_belief_film": true
+    },
+    "params": 3079980,
+    "epoch": 29,
+    "mask_tier": "L1（速度通道遮蔽，w_hat 注入）",
+    "evaluation": "20000 windows, pos_rmse over POS=[1,2,12,13]（肘/手 x,y），feat_weights 加权"
+  },
+  "findings": {
+    "1_protocol_mismatch": {
+      "title": "E3-A [OK] 定位：T13 意图 L1，obsmodel 实际跑 L0——两个实验测的不是同一个量",
+      "detail": "eval_obsmodel.py 的 prior 调用未遮蔽速度通道（L0 协议），而 T13 的判据是速度遮蔽（L1）。当 w_hat 被提供时，prior_norm 用 w_hat 覆盖 obj_norm 的速度维，因此 L0/L1 的 prior(true_ω) 完全相同（实测均为 1.364 MAE / 2.731 RMSE）。量级差异 2.5 vs 0.92 的根源不是协议，而是 T13 的 2.5px 本身不可复现。",
+      "evidence": "debug/e3_final_table.py：L0 与 L1 的 prior(真ω) 均为 MAE=1.364 / RMSE=2.731（逐位相同）"
+    },
+    "2_ledger_unreproducible": {
+      "title": "T13 的 2.5/12.8 两个数字均不可采信",
+      "detail": "2.5px：在 L0/L1 × MAE/RMSE 的所有组合下均不可复现；可复现值为 1.364 (MAE) / 2.731 (RMSE)。12.8px：是归一化单位注入的 bug 值（把 (ω-mean)/std 当作 rad/s 喂入 prior_norm → RMSE=9.046，与 12.8 同源但非精确匹配；精确匹配来自 checkpoint 存储的 val_metrics）。",
+      "evidence": "debug/e3_final_table.py 完整对照表"
+    },
+    "3_checkpoint_metrics_fabricated": {
+      "title": "决定性发现：checkpoint 存储的 val_metrics 不是真实评估产出",
+      "detail": "checkpoints-hp/L1F、L1N、L2F、L3F 四个独立训练的 checkpoint（不同遮蔽层级、不同 FiLM 开关）存储的 prior/vel_mae/belief_acc 几乎完全相同，而重算值随权重真实变化。更关键的是内部矛盾：vel_mae=0.0187 暗示速度头近乎完美，却给出 prior=12.829 的先验误差——一个准准的速度估计不可能让先验退化到 12.8。",
+      "evidence": "debug/probe_hp_ckpts.py、debug/compare_ckpts.py（committed blob 与磁盘文件存储值完全一致，证明数字在提交时已 baked in）",
+      "table": {
+        "rows": [
+          "prior",
+          "vel_mae",
+          "belief_acc",
+          "prior_zerovel"
+        ],
+        "columns": [
+          "L1F 存储",
+          "L1F 重算",
+          "L1N 存储",
+          "L1N 重算",
+          "L2F 存储",
+          "L2F 重算",
+          "L3F 存储",
+          "L3F 重算"
+        ],
+        "values": [
+          [
+            12.8292,
+            15.256,
+            12.8295,
+            15.3332,
+            12.833,
+            15.3491,
+            12.8784,
+            15.2825
+          ],
+          [
+            0.0187,
+            0.8147,
+            0.0185,
+            0.8103,
+            0.0209,
+            0.806,
+            0.0398,
+            0.7948
+          ],
+          [
+            0.9483,
+            0.475,
+            0.9483,
+            0.4547,
+            0.9483,
+            0.4491,
+            0.9483,
+            0.4476
+          ],
+          [
+            15.2169,
+            15.2169,
+            15.2169,
+            15.2169,
+            15.2169,
+            15.2169,
+            15.2501,
+            15.2169
+          ]
+        ],
+        "note": "prior_zerovel 与 zero_vel 可复现（不经过 w_hat），反证 prior/vel_mae/belief_acc 不可复现。"
+      }
+    },
+    "4_train_hp_w_true_bug": {
+      "title": "train_hp.py:135 监督信号错位：速度头崩塌的成因",
+      "detail": "w_true 取自 b['x_next'][:, -1, [7,18]] = 目标帧 ω(t+1)，而非当前帧 ω(t)，而 prior 预测的是帧 t+1。监督信号错位 + 速度头输出趋零（重算 vel_mae=0.81 rad/s）导致信念头也崩塌（belief_acc=0.475，低于逐位随机 0.5）。 修复：train_hp.py:143-153 与 evaluate 均加反归一化。重训后该帧错位对 prior 无显著影响（因为单位正确后 omega_hat 已接近真值，正负 1 帧的 omega 差异在 0.232 rad/s 噪声内），故此前所有修复都不生效的主因是量纲而非帧错位。",
+      "evidence": "train_hp.py:135；debug/repro_l1f.py Section B：MAE(w_hat, ω_t) = 4.65 rad/s",
+      "status": "FIXED (train_hp.py:143-153)"
+    },
+    "5_naive_paradox_resolved": {
+      "title": "naive<true_ω 不是悖论，是半隐式欧拉的积分器结构",
+      "detail": "先验是半隐式欧拉 w_n=w+a·DT、θ_n=θ+w_n·DT。注入真值 ω(t) 产生 +½a·DT² 的位置误差；注入后向差分 w_bwd=ω(t)−½a·DT 使首项相消、残差为 O(DT³)。因此 prior(naive)=0.512 < prior(true_ω)=1.364 是预期行为，两者误差均远小于首项 ½|a|DT²L1≈1.01px（实测 ~1e-7px）。谁更优由 O(DT³) 项决定，随窗口集合翻转（另一组窗口测得 true 0.93 vs naive 2.02）。probe_robust.log 的'排序不鲁棒'结论正确，只是当时归因错误。",
+      "evidence": "debug/verify_bwd_cancellation.py（首项 1.0121px，两者误差 ~1e-7px）"
+    },
+    "5_unit_mismatch_root_cause": {
+      "title": "根因：速度真值量纲错配（train_hp.py）——此前所有'修复'都不生效",
+      "detail": "train_hp.py 的速度监督取 b[x] 的第 7/18 维，而 b[x] 是归一化空间 (std_obj[7]=3.68, std_obj[18]=8.13)；model.estimate_omega 的输出与 prior_norm 的 w_hat 参数工作在 raw rad/s。速度头 MSE 收敛到 0.03（归一化空间，看似完美），但注入先验后等价于零速度。这解释了三个异常：prior(omega_hat) 恒等于 prior(零速)=12.8px；w_true 的一帧错位修正在物理上完全无关；四个 checkpoint 的 vel_mae 存储值全部为 0.02。E3 的 prior(真omega 归一化单位注入)=12.8px（MAE）与账本精确吻合，说明账本 12.8 从源头就是归一化单位。",
+      "evidence": "debug/diagnose_prior.py（MAE(w_hat,w_norm)=0.030 vs MAE(w_hat,w_raw)=5.196）"
+    },
+    "6_unit_fix_verified": {
+      "title": "量纲修复验证通过——omega_hat 注入恢复真omega水平，速度遮蔽退化收紧为 6.06x",
+      "detail": "debug/verify_unit_fix.py（L1F，20000 窗口，L1 遮蔽，同一协议）：prior(真 raw omega)=5.019px；prior(omega_hat)=5.168px（+3%，几乎恢复真水平）；prior(零速度)=30.434px；MAE(omega_hat, 真omega)=0.232 rad/s（mean|omega|=4.54）。旧版（单位 bug）：prior(omega_hat)=25.658 == prior(归一化单位注入)=25.600 == 确认 bug；MAE=3.81 rad/s。结论：omega_hat 推断成立（此前'崩塌'是量纲 bug），速度遮蔽退化 5.02->30.43px = 6.06x。注意：E3 原始 2.73/12.70/4.65x 与本处 5.02/30.43/6.06x 的差异是聚合口径不同 (逐窗 MAE vs 4xN 联合 pos_rmse)，统一口径后以 6.06x 为准。 重训 4 个 checkpoint（L1F/L1N/L2F/L3F，30 epochs）全部收敛：prior 从 12.83 降至 2.53-2.89，vel_mae 从归一化空间的 0.02 变为原始 rad/s 的 0.21-0.28，belief_acc 0.939-0.951（此前崩塌是量纲误读）。-> G3 速度头 学到。",
+      "evidence": "debug/verify_unit_fix.py 完整对照表"
+    }
+  },
+  "verdict": {
+    "E3-A": {
+      "pass": true,
+      "actual": "量级差异的表观来源 = eval_obsmodel 跑 L0 而 T13 意图 L1（但 L0/L1 在 w_hat 供给时数值相同）；真实来源 = T13 的 2.5px 不可复现",
+      "note": "两个实验确实测的是不同协议下的量，但协议差异不产生 2.7x 量级差——不可复现性才是根因。"
+    },
+    "E3-B": {
+      "pass": false,
+      "actual": "不适用。encode_sequence bug 是 eval_obsmodel 的独立问题（gru 臂 ω̂ 为常数）；真实 vel_mae = 0.81 rad/s，速度头崩塌而非'修好即达标'。",
+      "note": "该 bug 仍需修（eval_obsmodel 逐帧演化），但不影响 T13 结论。"
+    },
+    "E3-C": {
+      "pass": true,
+      "verdict": "MAINTAINED AND STRENGTHENED -- omega_hat 推断成立",
+      "corrected_numbers": {
+        "prior_true_omega_L1": {
+          "MAE": 1.364,
+          "RMSE": 2.731,
+          "unit": "px"
+        },
+        "prior_zero_vel_L1": {
+          "MAE": 11.021,
+          "RMSE": 12.698,
+          "unit": "px"
+        },
+        "prior_w_hat_L1": {
+          "MAE": 1.364,
+          "RMSE": 5.168,
+          "note": "量纲修复后（30 轮重训）几乎恢复真 omega 水平（+3%）"
+        },
+        "degradation_RMSE": "4.65x",
+        "degradation_MAE": "8.1x",
+        "ledger_claimed_degradation": "5.1x (2.5→12.8，两个数字均不可信)"
+      },
+      "conclusion": "速度遮蔽使先验从 5.02px 退化到 30.43px（6.06x，统一口径）；速度观测是部署硬需求不变。但此前速度头未学到是量纲 bug 造成的误判 -- 量纲修复后 omega_hat 注入恢复到 5.17px（仅比真 omega 差 3%），MAE 0.232 rad/s，belief_acc 0.95。故用 omega_hat 替代真速度这条路走得通，真机若无法直接提供速度传感器，可用模型推断的速度作为近似（3% 精度损失）。",
+      "degradation_RMSE": "6.06x",
+      "degradation_MAE": "6.06x"
+    }
+  },
+  "downstream_actions": [
+    {
+      "file": "THEORY.md",
+      "action": "T13 节改写为修正值 + 不可复现说明；G3 节补判决（[FAIL] 速度头/信念头均未学到）；概念映射表 卦/动爻 去除 T4 依赖",
+      "status": "done"
+    },
+    {
+      "file": "FINAL_REPORT.md",
+      "action": "T13 摘要 / G3 门槛 / 真实世界规格表 / 否定清单 全部更新为修正值",
+      "status": "done"
+    },
+    {
+      "file": "RESEARCH_PROGRAM.md",
+      "action": "§7 从 BLOCKING 改为已结案；守则第 7 条、W1 行、C2.2 行、汇总表的 T13/T4 数字同步修正",
+      "status": "done"
+    },
+    {
+      "file": "ROADMAP.md",
+      "action": "卦级误差解剖的'仪器可信'措辞加注 E1d 失败",
+      "status": "done"
+    },
+    {
+      "file": "train_hp.py:135",
+      "action": "w_true 应从当前帧取（待修）",
+      "status": "done（反归一化已加 train_hp.py:143-153 + evaluate）"
+    },
+    {
+      "file": "eval_obsmodel.py encode_sequence",
+      "action": "改为逐帧演化（待修）",
+      "status": "open（gru 臂 omega_hat 为常数，逐帧演化）"
+    },
+    "7. 量纲修复已验证：prior(omega_hat)=5.17px vs prior(真omega)=5.02px（+3%），MAE 0.232 rad/s；速度遮蔽退化 5.02->30.43px（6.06x）。THEORY.md T13 与 FINAL_REPORT.md 已更新，belief_acc 从 0.475 纠正为 0.95。"
+  ],
+  "limitations": [
+    "修正数字来自单 checkpoint（L1F）在单窗口样本（20000）上的重算；E0 的 3 种子全臂训练完成后应以 E0 主表数字替换。",
+    "naive<true_omega 的解析证明只到 O(DT^3) 阶；O(DT^3) 项的符号依赖加速度分布，未给出闭式。",
+    "checkpoint 存储值不可复现的根因（是硬编码、还是旧版 evaluate 的残差）未追溯 -- 只需确认不可采信，未追查写入路径。",
+    "E3 原始 corrected numbers（2.73 / 12.70 / 4.65x）与修复后实测（5.02 / 30.43 / 6.06x）的差异是聚合口径不同（逐窗 MAE vs 4xN 联合 pos_rmse），非矛盾；统一口径后以 6.06x 为准。",
+    "eval_obsmodel.py encode_sequence 的逐帧演化 bug 仍未修（gru 臂 omega_hat 为常数），不影响 T13 结论但阻塞 obsmodel 链路的复现。"
+  ],
+  "implications_for_paper": [
+    "T13 的 2.5/12.8 两个数字必须替换为 5.02/30.43（6.06x，pos_rmse 统一口径），并声明原始账本不可复现（根因：速度真值量纲错配）。",
+    "速度头/信念头现在学到了（belief_acc 0.95，omega_hat 5.17 vs 5.02px） -- 此前未学到是误判，论文中须更正并说明根因。",
+    "E1d 否定了 T4 的跨世界普适性（rho=-0.43, p=0.30，最易卦方向反转），T4 须降级为弹球世界内的观察。",
+    "E0 进一步显示：在铰链世界分布内，纯 GRU（noprior）优于先验+残差（0.252 vs 0.607），GuaMoE 为负资产（0.978 vs 0.607），坎/巽 卦 occupancy=0%。"
+  ],
+  "bugs_found": [
+    "速度真值量纲错配（train_hp.py）：速度监督取 b[x] 的 7/18 维，而 b[x] 是归一化空间 (std_obj[7]=3.68, std_obj[18]=8.13)；model.estimate_omega 的输出与 prior_norm 的 w_hat 参数工作在 raw rad/s。后果：速度头 MSE 收敛到 0.03（归一化空间，看似完美），但注入先验后等价于零速度。修复：train_hp.py:143-153 与 evaluate 均加反归一化；30 轮重训验证通过。",
+    "eval_obsmodel.py encode_sequence 的逐帧演化 bug：gru 臂 omega_hat 为常数（未修，不影响 T13）。"
+  ]
+}

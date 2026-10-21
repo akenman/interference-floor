@@ -1,0 +1,133 @@
+{
+  "experiment": "P0-b",
+  "title": "闭环训练配方复跑——P0-a 的排名是否在闭环训练下翻转",
+  "prereg_written_at": "2026-10-01",
+  "status": "PREREGISTERED（A/B 已跑完或在下，C 格开跑前登记）",
+
+  "question": "E0/P0-a 全部结果都用 w_roll=0（纯单步）配方训练，却用闭环 rollout 下结论。换成闭环训练配方后，先说好的排名是否还成立？",
+
+  "motivation_from_prior_results": {
+    "P0a": "同一架构只换先验积分器：单步 0.969→0.037、闭环 k=5 14.26→0.49（26×/29×），P0a-1..4 全 PASS。",
+    "threat": "无先验臂 strong_mlp（k=5 1.362）与 noprior（47.29）都是「单步好、闭环差」的典型——它们最可能被闭环训练救活。若被救到 ≤0.49px，则「先验质量决定闭环可行性」需改写为「闭环训练可替代先验」。",
+    "recipe_calibration": "E1a 超参消融（单种子 V1）：w_roll=0 最佳 1.589px 但退化到 11.7；w_roll=0.05 + lr=5e-4 最佳 1.031px 且全程稳定 ⇒ 闭环配方取 w_roll=0.05 + lr=5e-4。"
+  },
+
+  "design": {
+    "arms": [
+      {"id": "ours_base@rk4001x5", "role": "防守：P0-a 冠军，预期无可学余量（闭环已=先验）"},
+      {"id": "ours_base", "role": "粗先验架构：闭环 14.26px，能否被闭环训练救"},
+      {"id": "strong_mlp", "role": "核心威胁：无先验但架构强，单步 0.270 / 闭环 1.362"},
+      {"id": "noprior", "role": "纯 GRU：单步 0.265 / 闭环 47.29，自救能力上界"}
+    ],
+    "seeds": [42, 43, 44],
+    "recipes": {
+      "A（单步，对照）": {"w_roll": 0.0, "lr": 0.001, "windows_per_epoch": 150000, "detach_prior": false, "epochs": 60, "checkpoint_root": "checkpoints-P0bA"},
+      "B（闭环）": {"w_roll": 0.05, "lr": 0.0005, "windows_per_epoch": 150000, "detach_prior": true, "epochs": 60, "checkpoint_root": "checkpoints-P0bB"}
+    },
+    "n_runs": 24,
+    "cost_measured": {
+      "A": "≈18 ms/batch → 586 批/epoch（150k 窗）→ 10.5 s/epoch → 10.5 min/run → 12 run ≈ 2.1 GPU·h",
+      "B": "精确先验臂 108 s/epoch；其它臂 17–34 s/epoch（rollout 的先验代价差异）→ 12 run ≈ 5–8 GPU·h",
+      "note": "原估算按 euler 先验的 89 s/epoch×12 run≈16.4 GPU·h；实测因只有精确先验臂贵而显著更低"
+    },
+    "cmd_A": [
+      "python run_e0.py --arms ours_base strong_mlp noprior --seeds 42 43 44 --prior_spec euler005 --checkpoint_root checkpoints-P0bA --w_roll 0 --lr 1e-3 --windows_per_epoch 150000 --epochs 60 --max-jobs 1",
+      "python run_e0.py --arms ours_base --seeds 42 43 44 --prior_spec rk4001x5 --checkpoint_root checkpoints-P0bA --w_roll 0 --lr 1e-3 --windows_per_epoch 150000 --epochs 60 --max-jobs 1"
+    ],
+    "cmd_B": [
+      "python run_e0.py --arms ours_base strong_mlp noprior --seeds 42 43 44 --prior_spec euler005 --checkpoint_root checkpoints-P0bB --w_roll 0.05 --lr 5e-4 --windows_per_epoch 150000 --detach_prior --epochs 60 --max-jobs 2",
+      "python run_e0.py --arms ours_base --seeds 42 43 44 --prior_spec rk4001x5 --checkpoint_root checkpoints-P0bB --w_roll 0.05 --lr 5e-4 --windows_per_epoch 150000 --detach_prior --epochs 60 --max-jobs 2"
+    ],
+    "note_arm_spec": "ours_base@rk4001x5 必须单独用 --prior_spec rk4001x5 跑：ours_base@rk4001x5 只是报告里的键，train 侧仍按裸 arm + --prior_spec 构造（ARM_SPECS 里没有带 @ 的 arm）。故每个配方分两次调用 = 3 臂×3 seed + 1 臂×3 seed = 12 run。"
+  },
+
+  "hypotheses": {
+    "H1": "闭环配方（B）会显著改善「单步好、闭环差」的臂（strong_mlp / noprior / ours_base 粗先验）。",
+    "H2": "精确先验臂（ours_base@rk4001x5）在 B 下基本不变——残差余量≈0，闭环训练无对象可优化。",
+    "H3": "若 H1 使 strong_mlp 的闭环 k=5 ≤0.49px，则 C1 须改写为「闭环训练可替代先验质量」；否则 P0-a 结论加固。"
+  },
+
+  "criteria": {
+    "P0b-1 核心威胁": {"test": "strong_mlp 在 B 下闭环 k=5 ≤ 0.49px（= 精确先验水平）", "n": 3, "paired": "同 seed A vs B"},
+    "P0b-2 纯学习自救": {"test": "noprior 在 B 下闭环 k=5 ≤ 1.0px（A 为 ~54px）"},
+    "P0b-3 粗先验自救": {"test": "ours_base 在 B 下闭环 k=5 ≤ 2.19px（= rk4@0.05 档水平）"},
+    "P0b-4 精确档不被损害": {"test": "ours_base@rk4001x5 在 B 下闭环 k=5 ≤ 0.54px（先验 0.49 × 1.10）"},
+    "噪声底": "同配置重跑实测 5–9%（F10）⇒ 臂间差距 <10% 不声称显著"
+  },
+
+  "analysis_convention": {
+    "pairing": "同 seed 配对（配方 A vs B；C vs A；C vs B）",
+    "crash_handling": "ITT 为主（含崩溃 run 的 best.pt），同时报崩溃率；两口径不一致标 DISAGREE",
+    "report": "分 root 各出一份 JSON（build_e0_report.py --checkpoint_root ... --skip_analytic --out ...），再做配对比较；E0 主表（analysis_output/E0_report.json）不被改动"
+  },
+
+  "declared_limitations": [
+    "detach_prior 是成本控制近似：损失数值与不 detach 完全一致（tests/test_prior_spec.py 有 torch.equal 断言），但先验输入上的梯度路径断开（残差路径的跨步梯度完整）。B/C 配方均使用，须在论文 limitation 声明。",
+    "windows_per_epoch=150000（= 全量的 29.6%）：A/B/C 同值，故三者比较有效；但绝对数字不与 E0 主表（全量 507,600/epoch）可比。实测：精确先验臂在 150k 与全量下**逐位相同**（Δ=0.0000），弱臂有 5–30% 欠训代价。",
+    "60 epoch × 150k = 9M 样本（E0 全量 30.4M）⇒ 弱臂可能欠训；三者同欠训，比较仍有效。"
+  ],
+
+  "stop_rule": "任一配方崩溃率 >40% 暂停并先修训练稳定性；不得靠加 seed 掩盖。",
+
+  "what_this_decides": {
+    "if_P0b1_pass": "闭环训练能把无先验臂救到精确先验水平 ⇒ 「先验质量决定闭环可行性」降级为「先验与训练配方可互相替代」，C1 改写。",
+    "if_P0b1_fail": "无先验臂仍显著差于精确先验臂 ⇒ P0-a 结论加固，论文主线维持「先验的价值 = 它的积分器偏差」。"
+  },
+
+  "results_final_2026_10_01": {
+    "status": "全部 27 run 完成（A 12、B 12、C 9），零崩溃零早停",
+    "k5_means_px": {"noprior": {"A": 53.89, "B": 1.66, "C": 1.31},
+                    "ours_base_euler005": {"A": 14.15, "B": 5.21, "C": 4.89},
+                    "strong_mlp": {"A": 1.653, "B": 1.96, "C": 1.650},
+                    "ours_base_rk4001x5": {"A": 0.49, "B": 0.49, "C": null}},
+    "w_roll_net_effect_C_minus_A": {
+      "noprior": "41× 改善（配对 t=-97.3, p<0.001）",
+      "ours_base_euler005": "2.9× 改善（t=-13.8, p=0.005）",
+      "strong_mlp": "0%（t=-0.37, p=0.747）",
+      "ours_base_rk4001x5": "≈0（t=-1.63, p=0.244，A vs B）"},
+    "lr_effect_B_minus_C": {
+      "strong_mlp": "闭环恶化 15.8%（p=0.032）；单步 +0.0897px",
+      "ours_base_euler005": "闭环恶化 6.1%（p=0.203）；单步 +0.0792px",
+      "noprior": "闭环恶化（1.31→1.66）；单步 +0.021px",
+      "conclusion": "B 格的全部劣势来自 lr 减半，与 w_roll 无关"},
+    "verdicts": {
+      "P0b-1": "不成立（strong_mlp@B 1.96 > 0.49；且该劣势归因于 lr）",
+      "P0b-2": "不成立（noprior@B 1.66 > 1.0）",
+      "P0b-3": "不成立（ours_base@B 5.21 > 2.19）",
+      "P0b-4": "PASS（ours_base@rk4001x5@B 0.49 = A，Δone=+0.0002）",
+      "P0c-1": "**不成立（核心威胁否证）**：strong_mlp@C 1.650 ≈ A 的 1.653，仍差精确先验臂 3.4×",
+      "P0c-2": "不成立（noprior@C 1.31 > 1.0）",
+      "P0c-3": "成立：w_roll 净效应显著且与臂的原有不稳定程度成正比（41× / 2.9× / 0% / ≈0）"},
+    "conclusion": "闭环配方（w_roll）买得到稳定性、买不到先验质量；全格最优的非精确先验臂 1.31px 仍是精确先验臂 0.49px 的 2.7×。P0-a 结论加固，C1 维持原表述。",
+    "corrections_credited_to_cell_C": [
+      "若只跑 A/B 会误判『w_roll 让 strong_mlp 变差 15.8%』——实为 lr 效应",
+      "B 格精确先验臂 epoch 12 的中间值 0.60px 曾被误读为『被损害』，跑满后回到 0.49px"]
+  },
+
+  "addendum_cell_C": {
+    "added_at": "2026-10-01（开跑前登记）",
+    "why": "配方 B 同时改了 w_roll(0→0.05) 与 lr(1e-3→5e-4)，无法把 A→B 的差异单独归因给 w_roll；且 B 在单步上全面略差（lr 减半致欠训），使 P0b-1 的『威胁不成立』可能被 lr 混淆污染。故补第三格 C：与 B 只差 lr，提供两个干净对比。",
+    "design": {
+      "arms": ["ours_base(euler005)", "strong_mlp", "noprior"],
+      "seeds": [42, 43, 44],
+      "recipe": {"w_roll": 0.05, "lr": 0.001, "windows_per_epoch": 150000, "detach_prior": true, "epochs": 60},
+      "checkpoint_root": "checkpoints-P0bC",
+      "n_runs": 9,
+      "cost": "≈3.5 GPU·h（noprior/strong_mlp 17–19 s/epoch；ours_base 32–34 s/epoch）",
+      "cmd": "python run_e0.py --arms ours_base strong_mlp noprior --seeds 42 43 44 --prior_spec euler005 --checkpoint_root checkpoints-P0bC --w_roll 0.05 --lr 1e-3 --windows_per_epoch 150000 --detach_prior --epochs 60 --max-jobs 1"
+    },
+    "three_cell_design": {
+      "A": "w_roll=0, lr=1e-3",
+      "B": "w_roll=0.05, lr=5e-4",
+      "C": "w_roll=0.05, lr=1e-3",
+      "C_minus_A": "w_roll 的净效应（lr 固定 1e-3）",
+      "C_minus_B": "lr 减半的效应（w_roll 固定 0.05）"
+    },
+    "excluded": "ours_base@rk4001x5 不加 C 格：其 A→B 差异仅 +0.10px（p=0.26, n=2），单 run 成本 1.8h（108 s/epoch）；如需完整 2×2 再补。",
+    "criteria": {
+      "P0c-1 核心威胁重测（真正的判决）": "strong_mlp@C 闭环 k=5 ≤ 0.49px ⇒ 无先验臂在「w_roll 有、lr 不减」下能追平精确先验 ⇒ C1 须改写；否则 P0-a 结论在干净配方下依然成立。",
+      "P0c-2 纯学习自救": "noprior@C 闭环 k=5 ≤ 1.0px",
+      "P0c-3 w_roll 净效应": "C 相对 A 在三臂上的闭环 k=5 改善（配对、同 seed）；并检验 B 的单步劣势是否由 lr 减半解释——若 C 的单步 ≈ A 而 B 明显更差，则确认是 lr 而非 w_roll。"
+    }
+  }
+}

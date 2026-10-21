@@ -1,0 +1,62 @@
+{
+ "euler001x5_s42": {
+  "paper_protocol_head_rms": 0.01967342384159565,
+  "paper_protocol_target_rms": 1.4457491204211692e-07,
+  "n_paper": 73,
+  "anyff_head_rms": 0.01635117270052433,
+  "anyff_target_rms": 0.011214560829102993,
+  "n_anyff": 915,
+  "clean_head_rms": 0.01967342384159565,
+  "clean_target_rms": 1.4457491204211692e-07,
+  "p50_head": 0.013306137174367905,
+  "p90_head": 0.019788069650530815,
+  "max_head": 0.06721484661102295,
+  "p50_target": 0.012621426023542881,
+  "p90_target": 0.012621426023542881
+ },
+ "wff0_s42": {
+  "paper_protocol_head_rms": 0.021258849650621414,
+  "paper_protocol_target_rms": 1.4457491204211692e-07,
+  "n_paper": 73,
+  "anyff_head_rms": 0.01786918006837368,
+  "anyff_target_rms": 0.011214560829102993,
+  "n_anyff": 915,
+  "clean_head_rms": 0.021258849650621414,
+  "clean_target_rms": 1.4457491204211692e-07,
+  "p50_head": 0.013876521959900856,
+  "p90_head": 0.022061467170715332,
+  "max_head": 0.07404956966638565,
+  "p50_target": 0.012621426023542881,
+  "p90_target": 0.012621426023542881
+ },
+ "wff10_s42": {
+  "paper_protocol_head_rms": 0.008871801197528839,
+  "paper_protocol_target_rms": 1.4457491204211692e-07,
+  "n_paper": 73,
+  "anyff_head_rms": 0.012392297387123108,
+  "anyff_target_rms": 0.011214560829102993,
+  "n_anyff": 915,
+  "clean_head_rms": 0.008871801197528839,
+  "clean_target_rms": 1.4457491204211692e-07,
+  "p50_head": 0.012393333949148655,
+  "p90_head": 0.014519342221319675,
+  "max_head": 0.04934856668114662,
+  "p50_target": 0.012621426023542881,
+  "p90_target": 0.012621426023542881
+ },
+ "parabola005_s42": {
+  "paper_protocol_head_rms": 0.020264271646738052,
+  "paper_protocol_target_rms": 0.0035716902930289507,
+  "n_paper": 73,
+  "anyff_head_rms": 0.01802423596382141,
+  "anyff_target_rms": 0.014205744490027428,
+  "n_anyff": 915,
+  "clean_head_rms": 0.020264271646738052,
+  "clean_target_rms": 0.0035716902930289507,
+  "p50_head": 0.01622687093913555,
+  "p90_head": 0.020615171641111374,
+  "max_head": 0.06370270252227783,
+  "p50_target": 0.015860548242926598,
+  "p90_target": 0.015898708254098892
+ }
+}

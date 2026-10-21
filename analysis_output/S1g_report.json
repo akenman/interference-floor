@@ -1,0 +1,77 @@
+{
+ "prereg": "experiments/prereg_S1g_mechanism_ablation.json",
+ "protocol": "same dataset, seed-42 val split, val_windows=20000 subsample (RandomState(0)) and head-RMS-on-FF definition as tmp_s1c_compare.py",
+ "seed": 42,
+ "arms": {
+  "baseline": {
+   "one_mixed": 0.5609116554260254,
+   "one_ff_clean": 0.9049628973007202,
+   "n_one_clean": 73,
+   "roll_mixed": {
+    "k=1": 0.5609116554260254,
+    "k=2": 1.3290650844573975,
+    "k=3": 2.2737810611724854
+   },
+   "roll_ff_clean": {
+    "k=1": 0.6040714979171753,
+    "k=2": 1.325521469116211,
+    "k=3": 2.1541478633880615
+   },
+   "n_cl_clean": 23,
+   "yao_acc": 0.9015277777777779,
+   "head_rms_ff": 0.01967342384159565,
+   "n_ff": 73,
+   "prior_spec": "euler001x5",
+   "val_windows": 20000
+  },
+  "wff10": {
+   "one_mixed": 0.5427232980728149,
+   "one_ff_clean": 0.4199734926223755,
+   "n_one_clean": 73,
+   "roll_mixed": {
+    "k=1": 0.5427232980728149,
+    "k=2": 1.3283140659332275,
+    "k=3": 2.2871758937835693
+   },
+   "roll_ff_clean": {
+    "k=1": 0.2529527246952057,
+    "k=2": 0.57861328125,
+    "k=3": 1.4729177951812744
+   },
+   "n_cl_clean": 23,
+   "yao_acc": 0.901011111111111,
+   "head_rms_ff": 0.008871801197528839,
+   "n_ff": 73,
+   "prior_spec": "euler001x5",
+   "val_windows": 20000
+  },
+  "wff0": {
+   "one_mixed": 0.5675643086433411,
+   "one_ff_clean": 0.9624648094177246,
+   "n_one_clean": 73,
+   "roll_mixed": {
+    "k=1": 0.5675643086433411,
+    "k=2": 1.3251007795333862,
+    "k=3": 2.2658474445343018
+   },
+   "roll_ff_clean": {
+    "k=1": 0.607793390750885,
+    "k=2": 1.3624343872070312,
+    "k=3": 2.2414517402648926
+   },
+   "n_cl_clean": 23,
+   "yao_acc": 0.9014499999999999,
+   "head_rms_ff": 0.021258851513266563,
+   "n_ff": 73,
+   "prior_spec": "euler001x5",
+   "val_windows": 20000
+  }
+ },
+ "comparison": {
+  "baseline_head_rms_ff": 0.01967342384159565,
+  "wff10_head_rms_ff": 0.008871801197528839,
+  "wff0_head_rms_ff": 0.021258851513266563,
+  "wff0_vs_baseline_shift_pct": 8.058727776295012,
+  "prereg_interpretation": "if ~0.019: gradient crosstalk confirmed; if ~0.010: mixed; if <0.005: FF self-loss drives the noise"
+ }
+}

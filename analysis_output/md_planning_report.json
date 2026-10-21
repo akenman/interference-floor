@@ -1,0 +1,23 @@
+{
+  "episodes": 150,
+  "summary": {
+    "prior": {
+      "success_rate": 0.17391304347826086,
+      "median_success_step": 9.5,
+      "mean_min_dist": 119.8245695679041
+    },
+    "model": {
+      "success_rate": 0.21739130434782608,
+      "median_success_step": 11.0,
+      "mean_min_dist": 109.46261090115144
+    },
+    "reactive": {
+      "success_rate": 0.1956521739130435,
+      "median_success_step": 10.0,
+      "mean_min_dist": 108.62328745786127
+    }
+  },
+  "criterion_A_pp": 4.3478260869565215,
+  "criterion_B_pp": 0.021739130434782594,
+  "pre_registered": "A: model-prior>=10pp; B: model>reactive"
+}

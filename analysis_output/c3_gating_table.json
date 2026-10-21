@@ -1,0 +1,410 @@
+{
+ "source": [
+  "E0_report.json",
+  "E1a_stageB_report.json",
+  "E1a_stageD_report.json",
+  "gate_paired_meta.json",
+  "gate_fidelity.json",
+  "S0b_report.json"
+ ],
+ "units": "px",
+ "sign": "positive = symbolic structure worse",
+ "generation1": {
+  "one_step": {
+   "delta": 0.2724091211954753,
+   "ci_low": 0.18278100790821716,
+   "ci_high": 0.3620372344827334,
+   "n": 3,
+   "seeds": [
+    42,
+    43,
+    44
+   ]
+  },
+  "closed_loop_k5": {
+   "delta": 27.18105920155843,
+   "ci_low": -24.97958772158925,
+   "ci_high": 79.3417061247061,
+   "n": 3,
+   "seeds": [
+    42,
+    43,
+    44
+   ]
+  },
+  "means": {
+   "ours_base_one": 0.969014585018158,
+   "ours_gua_one": 1.2414237062136333
+  },
+  "note": "E0 unified main table, 3 seeds, per-seed paired"
+ },
+ "generation2": {
+  "variants": [
+   {
+    "delta": 0.1597,
+    "ci_low": 0.003170620362331622,
+    "ci_high": 0.3162293796376684,
+    "n": 10,
+    "seeds": [
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51
+    ],
+    "variant": "V1",
+    "control": "V1_nogua",
+    "n_experts": 4,
+    "occupied": {
+     "n_experts": 4,
+     "lo": 3,
+     "hi": 4,
+     "runs": 10
+    },
+    "collapse_gated": 0,
+    "collapse_control": 3
+   },
+   {
+    "delta": 0.12109999999999996,
+    "ci_low": -0.07912396937004901,
+    "ci_high": 0.3213239693700489,
+    "n": 10,
+    "seeds": [
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51
+    ],
+    "variant": "V2a",
+    "control": "V2a_nogua",
+    "n_experts": 16,
+    "occupied": {
+     "n_experts": 16,
+     "lo": 5,
+     "hi": 9,
+     "runs": 10
+    },
+    "collapse_gated": 1,
+    "collapse_control": 1
+   },
+   {
+    "delta": 0.20659999999999998,
+    "ci_low": 0.10439532658726962,
+    "ci_high": 0.3088046734127303,
+    "n": 10,
+    "seeds": [
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51
+    ],
+    "variant": "V2b",
+    "control": "V2b_nogua",
+    "n_experts": 16,
+    "occupied": {
+     "n_experts": 16,
+     "lo": 6,
+     "hi": 9,
+     "runs": 10
+    },
+    "collapse_gated": 3,
+    "collapse_control": 0
+   },
+   {
+    "delta": 0.14933333333333332,
+    "ci_low": -0.05745279150221111,
+    "ci_high": 0.35611945816887774,
+    "n": 3,
+    "seeds": [
+     42,
+     43,
+     44
+    ],
+    "variant": "V2c",
+    "control": "V2c_nogua",
+    "n_experts": 16,
+    "occupied": {
+     "n_experts": 16,
+     "lo": 7,
+     "hi": 9,
+     "runs": 3
+    },
+    "collapse_gated": 0,
+    "collapse_control": 0
+   },
+   {
+    "delta": 0.09100000000000001,
+    "ci_low": -0.08699214541313456,
+    "ci_high": 0.2689921454131346,
+    "n": 10,
+    "seeds": [
+     42,
+     43,
+     44,
+     45,
+     46,
+     47,
+     48,
+     49,
+     50,
+     51
+    ],
+    "variant": "V3",
+    "control": "V3_nogua",
+    "n_experts": 64,
+    "occupied": {
+     "n_experts": 64,
+     "lo": 9,
+     "hi": 15,
+     "runs": 10
+    },
+    "collapse_gated": 1,
+    "collapse_control": 3
+   },
+   {
+    "delta": 0.2459999999999999,
+    "ci_low": -0.010324013701408702,
+    "ci_high": 0.5023240137014086,
+    "n": 3,
+    "seeds": [
+     42,
+     43,
+     44
+    ],
+    "variant": "V4",
+    "control": "V4_nogua",
+    "n_experts": 256,
+    "occupied": {
+     "n_experts": 256,
+     "lo": 13,
+     "hi": 16,
+     "runs": 3
+    },
+    "collapse_gated": 0,
+    "collapse_control": 2
+   }
+  ],
+  "vfree": {
+   "delta": 0.0677,
+   "ci_low": -0.06906192671453755,
+   "ci_high": 0.20446192671453756,
+   "n": 10,
+   "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+   ],
+   "variant": "Vfree",
+   "control": "V3_nogua",
+   "n_experts": 64,
+   "occupied": null
+  },
+  "meta": {
+   "k": 7,
+   "pooled": 0.16051439969251974,
+   "se": 0.022494692902231554,
+   "ci_low": 0.1164248016041459,
+   "ci_high": 0.20460399778089358,
+   "z": 7.135656414166745,
+   "p": 9.632294961647858e-13,
+   "q": 6.48961963522689,
+   "df": 6,
+   "effects": [
+    0.1597,
+    0.12109999999999996,
+    0.20659999999999998,
+    0.14933333333333332,
+    0.09100000000000001,
+    0.2459999999999999,
+    0.0677
+   ],
+   "n_negative": 0,
+   "unit": "variant (7 gating variants, shared seeds and architecture)",
+   "caveat": "fixed-effect combination over non-independent units; z is anticonservative",
+   "source": "analysis_output/E1a_stageB_report.json"
+  },
+  "n_individual_ci_excl_zero": 2
+ },
+ "generation3": {
+  "block": [
+   {
+    "criterion": "E1a-D1",
+    "variant": "A1x64",
+    "control": "V3",
+    "delta": -0.0988954342263692,
+    "ci_low": -0.1581160464027871,
+    "ci_high": -0.039674822049951305,
+    "n": 6,
+    "threshold": 0.05,
+    "verdict": "FAIL",
+    "occupied": {
+     "n_experts": 64,
+     "lo": 2,
+     "hi": 2,
+     "runs": 7
+    }
+   },
+   {
+    "criterion": "E1a-D2",
+    "variant": "A3g1",
+    "control": "V3",
+    "delta": 0.03756455630671744,
+    "ci_low": -0.024509080036603154,
+    "ci_high": 0.09963819265003804,
+    "n": 5,
+    "threshold": 0.03,
+    "verdict": "UNDECIDED",
+    "occupied": {
+     "n_experts": 64,
+     "lo": 2,
+     "hi": 2,
+     "runs": 7
+    }
+   },
+   {
+    "criterion": "E1a-D3",
+    "variant": "A2x64",
+    "control": "V3",
+    "delta": 0.06582016819926566,
+    "ci_low": -0.2021875422552452,
+    "ci_high": 0.33382787865377656,
+    "n": 6,
+    "threshold": 0.05,
+    "verdict": "UNDECIDED",
+    "occupied": {
+     "n_experts": 64,
+     "lo": 6,
+     "hi": 8,
+     "runs": 7
+    }
+   }
+  ],
+  "note": "paired against the coupled gated arm V3; no paired ungated counterpart is stored"
+ },
+ "capacity": {
+  "gen1": {
+   "ours_gua": {
+    "params": 386664,
+    "control": "ours_base",
+    "control_params": 402280,
+    "dev_pct": -3.88
+   }
+  },
+  "gen2": {
+   "V1": {
+    "params": 339076,
+    "control": "V1",
+    "control_params": 402280,
+    "dev_pct": -15.71
+   },
+   "V2a": {
+    "params": 345304,
+    "control": "V2a",
+    "control_params": 402280,
+    "dev_pct": -14.16
+   },
+   "V2b": {
+    "params": 345304,
+    "control": "V2b",
+    "control_params": 402280,
+    "dev_pct": -14.16
+   },
+   "V2c": {
+    "params": 345304,
+    "control": "V2c",
+    "control_params": 402280,
+    "dev_pct": -14.16
+   },
+   "V3": {
+    "params": 370216,
+    "control": "V3",
+    "control_params": 402280,
+    "dev_pct": -7.97
+   },
+   "V4": {
+    "params": 469864,
+    "control": "V4",
+    "control_params": 402280,
+    "dev_pct": 16.8
+   },
+   "Vfree": {
+    "params": 343152,
+    "control": "V3",
+    "control_params": 402280,
+    "dev_pct": -14.7
+   }
+  },
+  "gen3": {
+   "A1x64": {
+    "params": 369960,
+    "control": "V3",
+    "control_params": 370216,
+    "dev_pct": -0.07
+   },
+   "A2x64": {
+    "params": 370088,
+    "control": "V3",
+    "control_params": 370216,
+    "dev_pct": -0.03
+   },
+   "A3g1": {
+    "params": 369960,
+    "control": "V3",
+    "control_params": 370216,
+    "dev_pct": -0.07
+   }
+  },
+  "source": "analysis_output/checkpoints_manifest.json",
+  "note": "参数为清单中的 n_params（每臂所有 seed 须一致，cap_row 断言）；dev_pct = 门控臂/对照臂 - 1，负数表示门控臂参数更少",
+  "summary": {
+   "main_dev_pct": -3.88,
+   "ablation_fewer_abs_range_pct": [
+    7.97,
+    15.71
+   ],
+   "v4_dev_pct": 16.8,
+   "decoupled_max_abs_dev_pct": 0.07
+  }
+ },
+ "occupancy_caveat": "phase-label histogram identical across all arms including ungated ones (data property, not gate routing)",
+ "phase_label_histogram": {
+  "top3_share": 0.893667,
+  "n_empty_classes": 2,
+  "identical_across_arms": true,
+  "n_arms_checked": 15,
+  "histogram": [
+   0.40805,
+   0.31075,
+   0.0,
+   0.0,
+   0.081167,
+   0.174867,
+   0.009617,
+   0.01555
+  ]
+ }
+}

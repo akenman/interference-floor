@@ -1,0 +1,63 @@
+{
+ "prior_control": {
+  "note": "Full-observability control: torque schedule constant within each 0.05 s sample interval, so the action label determines the applied torque. The exact-tier prior should be limited only by float32 storage.",
+  "generator": {
+   "file": "trajectories_hinge_obsgrid.npz",
+   "episodes": 3000,
+   "schedule": "piecewise-constant on the 0.05 s sample grid"
+  },
+  "protocol": {
+   "val_episodes": 300,
+   "window_seed": 0,
+   "n_windows": 30000,
+   "L": 8,
+   "K": 5,
+   "pos_idx": [
+    1,
+    2,
+    12,
+    13
+   ],
+   "prior_impl": "physics_prior_spec.prior_raw_np"
+  },
+  "prior_new": {
+   "one_step": 2.9833641321668964e-06,
+   "one_step_da0": 2.9817028524953664e-06,
+   "one_step_dane0": 3.0016331444404187e-06,
+   "ramp_fraction": 0.0831,
+   "per_window_px": {
+    "median": 2.543809940768094e-06,
+    "p99": 6.135084526938367e-06,
+    "max": 9.957806617352999e-06
+   },
+   "n_over_1e_3": 0
+  },
+  "prior_original_reference": {
+   "source": "analysis_output/torque_granularity.json",
+   "exact_tier": {
+    "one_step": 0.037833567802722984,
+    "one_step_da0": 0.017664758067826938,
+    "one_step_dane0": 0.07923792708364934
+   },
+   "exact_tier_gap_px": 0.061573169015822396
+  }
+ },
+ "trained_arm": {
+  "checkpoint": "checkpoints-M5/ours_base@rk4001x5_s42/best.pt",
+  "best_epoch": 59,
+  "device": "cuda",
+  "validate": {
+   "one_step_model": 0.0002477441157680005,
+   "one_step_prior": 1.2164229701738805e-05,
+   "one_step_zero_vel": 20.792219161987305,
+   "rollout_k5": 0.0011730185942724347,
+   "yao_acc": 0.9640666666666667,
+   "n_windows": 30000
+  },
+  "ff_windows": {
+   "n": 25026,
+   "head_px": 0.00019320649153087288,
+   "target_px": 9.004888852359727e-06
+  }
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "report": {
+  "metabalance2022": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "He, Yun and Feng, Xue and Cheng, Cheng and Ji, Geng and Guo, Yunsong and Caverle",
+   "arxiv_authors": "Yun He, Xue Feng, Cheng Cheng, Geng Ji, Yunsong Guo, James Caverlee",
+   "arxiv_title": "MetaBalance: Improving Multi-Task Recommendations via Adapting Gradient Magnitud",
+   "bib_title": "{MetaBalance"
+  },
+  "nbf2025": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Solinas, Christopher and Haluska, Radovan and Sychrovsky, David and Timbers, Fin",
+   "arxiv_authors": "Christopher Solinas, Radovan Haluska, David Sychrovsky, Finbarr Timbers, Nolan Bard, Michael Buro (+3)",
+   "arxiv_title": "Neural Bayesian Filtering",
+   "bib_title": "Neural {Bayesian"
+  },
+  "hgn2019": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Toth, Peter and Rezende, Danilo J. and Jaegle, Andrew and others",
+   "arxiv_authors": "Peter Toth, Danilo Jimenez Rezende, Andrew Jaegle, Sébastien Racanière, Aleksandar Botev, Irina Higgins",
+   "arxiv_title": "Hamiltonian Generative Networks",
+   "bib_title": "Hamiltonian Generative Networks"
+  },
+  "se3hode2021": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Duong, Thai and Atanasov, Nikolay",
+   "arxiv_authors": "Thai Duong, Nikolay Atanasov",
+   "arxiv_title": "Hamiltonian-based Neural ODE Networks on the SE(3) Manifold For Dynamics Learnin",
+   "bib_title": "Hamiltonian-based Neural ODE Networks on the {SE(3)"
+  },
+  "colas2018": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Colas, C{\\'e",
+   "arxiv_authors": "Cédric Colas, Olivier Sigaud, Pierre-Yves Oudeyer",
+   "arxiv_title": "How Many Random Seeds? Statistical Power Analysis in Deep Reinforcement Learning",
+   "bib_title": "How Many Random Seeds? {S"
+  },
+  "lyle2021": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Lyle, Clare and Rowland, Mark and Dabney, Will",
+   "arxiv_authors": "Clare Lyle, Mark Rowland, Will Dabney",
+   "arxiv_title": "Understanding and Preventing Capacity Loss in Reinforcement Learning",
+   "bib_title": "Understanding and Preventing Capacity Loss in Reinforcement Learning"
+  },
+  "pinwm2025": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Li, Wenxuan and Zhao, Hang and Yu, Zhiyuan and Du, Yu and Zou, Qin and Hu, Ruizh",
+   "arxiv_authors": "Wenxuan Li, Hang Zhao, Zhiyuan Yu, Yu Du, Qin Zou, Ruizhen Hu (+1)",
+   "arxiv_title": "PIN-WM: Learning Physics-INformed World Models for Non-Prehensile Manipulation",
+   "bib_title": "{PIN-WM"
+  },
+  "deepseekv3": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "{DeepSeek-AI",
+   "arxiv_authors": " DeepSeek-AI, Aixin Liu, Bei Feng, Bing Xue, Bingxuan Wang, Bochao Wu (+194)",
+   "arxiv_title": "DeepSeek-V3 Technical Report",
+   "bib_title": "{DeepSeek-V3"
+  },
+  "physcore2026": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Yin, Haocheng and Tao, Shuohan and Chen, Yongsheng and Gan, Lu",
+   "arxiv_authors": "Haocheng Yin, Shuohan Tao, Yongsheng Chen, Lu Gan",
+   "arxiv_title": "PhysCoRe: Physics-Corrected Residual World Models for Material-Aware Deformable ",
+   "bib_title": "{PhysCoRe"
+  },
+  "chnn2020": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Finzi, Marc A. and Wang, K. Alex and Wilson, Andrew Gordon",
+   "arxiv_authors": "Marc Finzi, Ke Alexander Wang, Andrew Gordon Wilson",
+   "arxiv_title": "Simplifying Hamiltonian and Lagrangian Neural Networks via Explicit Constraints",
+   "bib_title": "Simplifying Hamiltonian and Lagrangian Neural Networks via Explicit Constraints"
+  },
+  "mbpo2019": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Janner, Michael and Fu, Justin and Zhang, Marvin and Levine, Sergey",
+   "arxiv_authors": "Michael Janner, Justin Fu, Marvin Zhang, Sergey Levine",
+   "arxiv_title": "When to Trust Your Model: Model-Based Policy Optimization",
+   "bib_title": "When to Trust Your Model: Model-Based Policy Optimization"
+  },
+  "pderefiner": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Lippe, Phillip and Veeling, Bastiaan S. and Perdikaris, Paris and Turner, Richar",
+   "arxiv_authors": "Phillip Lippe, Bastiaan S. Veeling, Paris Perdikaris, Richard E. Turner, Johannes Brandstetter",
+   "arxiv_title": "PDE-Refiner: Achieving Accurate Long Rollouts with Neural PDE Solvers",
+   "bib_title": "{PDE-Refiner"
+  },
+  "neuralsim2021": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Heiden, Eric and Millard, David and Coumans, Erwin and Sheng, Yizhou and Sukhatm",
+   "arxiv_authors": "Eric Heiden, David Millard, Erwin Coumans, Yizhou Sheng, Gaurav S. Sukhatme",
+   "arxiv_title": "NeuralSim: Augmenting Differentiable Simulators with Neural Networks",
+   "bib_title": "{NeuralSim"
+  },
+  "auxlossfree2024": {
+   "status": "OK",
+   "title_ok": true,
+   "authors_ok": true,
+   "bib_authors": "Wang, Lean and Gao, Huazuo and Zhao, Chenggang and Sun, Xu and Dai, Damai",
+   "arxiv_authors": "Lean Wang, Huazuo Gao, Chenggang Zhao, Xu Sun, Damai Dai",
+   "arxiv_title": "Auxiliary-Loss-Free Load Balancing Strategy for Mixture-of-Experts",
+   "bib_title": "Auxiliary-Loss-Free Load Balancing Strategy for Mixture-of-Experts"
+  },
+  "ani2026": {
+   "status": "OK",
+   "nature_authors": [
+    "Wang, Hao",
+    "Wang, Qinghe",
+    "Yuan, Caiyou",
+    "Wu, Kailiang"
+   ],
+   "n_authors": 4
+  },
+  "tossingbot2019": {
+   "status": "OK",
+   "arxiv_authors": [
+    "Andy Zeng",
+    "Shuran Song",
+    "Johnny Lee",
+    "Alberto Rodriguez",
+    "Thomas Funkhouser"
+   ],
+   "arxiv_title": "TossingBot: Learning to Throw Arbitrary Objects with Residual Physics"
+  },
+  "dreamerv3_2025": {
+   "status": "OK",
+   "nature_authors": [
+    "Hafner, Danijar",
+    "Pasukonis, Jurgis",
+    "Ba, Jimmy",
+    "Lillicrap, Timothy"
+   ],
+   "n_authors": 4
+  }
+ },
+ "errors": []
+}

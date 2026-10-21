@@ -1,0 +1,68 @@
+{
+  "experiment": "P0-a",
+  "title": "先验质量阶梯（Prior-Quality Ladder）——粗积分器是否就是「先验=负债」的真凶",
+  "prereg_written_at": "2026-10-01",
+  "status": "PREREGISTERED（代码与解析档位已就绪，训练未启动）",
+
+  "motivation": {
+    "finding": "F1/T5/E0-A 称「先验在分布内是负债」，其比较是 noprior 0.265px vs ours_base(euler@0.05×1) 0.978px。",
+    "audit_2026_10_01": "把先验积分器换成与数据生成器同源的 rk4@0.01×5 后，0 参数解析先验单独达到单步 0.038px / 闭环 k=5 0.49px，优于全部 7 个训练臂（最好单步 0.265、最好闭环 1.36）。",
+    "conclusion": "所谓「负债」是 0.05s 单步半隐式欧拉的离散误差（3.373px 单步 / 15.80px 闭环），不是物理先验本身。本实验把该观察升级为因果检验。"
+  },
+
+  "pilot_calibration": {
+    "note": "阈值不是拍的：下表是 30k 窗口 / E0 val 划分上的**解析先验实测**（脚本 tmp_prior_ladder_pilot.py，已入 analysis_output/E0_report.json 的解析臂）。满足 RESEARCH_PROGRAM 红线「阈值必须先在校准集上标定」——此处的校准集是先验自身，无需 GPU pilot。",
+    "one_step_px": {"zero_vel": 20.628, "euler005": 3.373, "euler001x5": 0.522, "rk4005": 0.147, "rk4001x5": 0.038},
+    "rollout_k5_px": {"zero_vel": 83.59, "euler005": 15.80, "euler001x5": 3.24, "rk4005": 1.68, "rk4001x5": 0.49},
+    "aliasing_floor": "生成器每 0.01s 取 τ、标签每 0.05s 记末步值；18.8% 窗口处过渡段。精确先验在 Δa≠0 帧 0.079px vs Δa=0 帧 0.018px ⇒ 不可约下限 ≤0.06px。"
+  },
+
+  "design": {
+    "arms": [
+      {"id": "ours_base@euler005",   "arm": "ours_base", "prior_spec": "euler005",   "role": "对照（= E0 现行，已有 checkpoint 可复用）"},
+      {"id": "ours_base@euler001x5", "arm": "ours_base", "prior_spec": "euler001x5", "role": "T19 M-F 细化档"},
+      {"id": "ours_base@rk4005",     "arm": "ours_base", "prior_spec": "rk4005",     "role": "RK4 粗步"},
+      {"id": "ours_base@rk4001x5",   "arm": "ours_base", "prior_spec": "rk4001x5",   "role": "精确档（与生成器同积分器）"}
+    ],
+    "reference_arms": ["strong_mlp（无先验学习基线）", "inertia_* （0 参数解析档，已在主表）"],
+    "seeds": [42, 43, 44],
+    "n_runs": 12,
+    "cmd": "python run_e0.py --arms ours_base --seeds 42 43 44 --prior_spec <spec> --checkpoint_dir checkpoints-E0/ours_base@<spec>_s<seed>",
+    "est_cost": "≈9 GPU·h（单卡 5060，ours_base 约 44s/epoch × 60）",
+    "data_path": "trajectories_hinge.npz（不改数据，只换模型先验）"
+  },
+
+  "hypotheses": {
+    "H1": "单步与闭环 k=5 随先验精度单调改善（4 档严格递增）。",
+    "H2": "ours_base@rk4001x5 的单步 ≤0.10px 且闭环 k=5 ≤1.0px（即至少接近其先验自身的 0.038/0.49）。",
+    "H3": "若 H2 不成立，则瓶颈在架构/优化（辅助损失、主干容量、训练配方），而非先验——按此写负结果，不改判据。"
+  },
+
+  "criteria": {
+    "P0a-1 单调性": {"threshold": "4 档单步与 k=5 均严格单调", "basis": "解析档位已单调（3.373>0.522>0.147>0.038）"},
+    "P0a-2 精度达标": {"threshold": "one-step ≤0.10px 且 k=5 ≤1.0px", "basis": "精确先验 0.038 / 0.49，留 ~2× 余量"},
+    "P0a-3 超越无先验基线": {"threshold": "k=5 ≤ strong_mlp 的 1.362px", "basis": "E0 现状 k=5"},
+    "P0a-4 先验消除残差负担": {"threshold": "ours_base@rk4001x5 单步 ≤ 2× 其先验单步（0.076px）", "basis": "残差头若健康，不应把 0.038px 的基座恶化到 2 倍以上"}
+  },
+
+  "analysis_convention": {
+    "pairing": "同 seed 配对（pairwise），不做跨 seed 非配对均值比——E0 的 n=3 非配对口径曾把 0.563px 的差距埋成 p=0.195（配对后 p=0.049）",
+    "crash_handling": "ITT 为主口径（含崩溃 run 的 best.pt，已验证为崩溃前保存）；同时报剔崩溃口径与崩溃率。两口径判定不一致时标 DISAGREE，不给单一 PASS/FAIL",
+    "min_detectable": "配对 SD≈0.18px（Stage B 实测）：δ=0.15px→n=12；δ=0.10px→n=26。本实验效应量预计 0.5–1.0px，n=3 即有足够功效",
+    "multiple_comparison": "4 个判据按预注册顺序报告，不做事后筛选；任一判据的方向性结论以配对 t + 效应量 + CI 同时给出"
+  },
+
+  "stop_rule": "任一档位崩溃率 >40% 则暂停并先查训练稳定性（参照 E1a 的 w_roll=0.05 + lr=5e-4 配方），不得靠加 seed 掩盖。",
+
+  "what_this_decides": {
+    "if_pass": "C1 修正版成立：「先验的价值 = 它的积分器偏差」；T5/F1「先验是负债」改写为「粗积分器是负债」。论文主线从「结构先验有害」升级为「先验质量决定闭环可行性，且 0 参数精确先验即可超越 401k 参数学习模型」。",
+    "if_fail": "闭环瓶颈在架构/优化 → 转入 P0-b（w_roll 公平闭环）与 P0-c（辅助监督分解），如实记录先验不是瓶颈。"
+  },
+
+  "artifacts": {
+    "prior_registry": "physics_prior_spec.py（唯一实现来源；三处旧实现已收敛，对拍 max|Δ| = 0 / 1e-12 / 1e-6）",
+    "guards": "tests/test_prior_spec.py（生成器对拍 / numpy↔torch 一致 / 训练-评估同源 / 阶梯单调）",
+    "pilot": "tmp_prior_ladder_pilot.py",
+    "main_table": "analysis_output/E0_report.json（解析档位已入表）"
+  }
+}

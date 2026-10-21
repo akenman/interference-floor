@@ -1,0 +1,30 @@
+{
+  "experiment": "S1g",
+  "title": "干涉地板机制消融——梯度串扰 vs FF 自身损失 vs GRU 隐状态漂移",
+  "prereg_written_at": "2026-10-04",
+  "status": "PREREGISTERED",
+
+  "question": "S1b 发现头干涉噪声（FF 帧目标 0.0000、头输出 0.0197 RMS）。审稿人问：这个噪声从何而来？三种假说——(a) 接触帧梯度串扰（共享头权重被接触梯度移动，FF 输出被动漂移）；(b) FF 帧自身（零目标）损失不足（头未被教会静默）；(c) GRU 隐状态在 FF 输入上漂移。单变量消融：w_ff=0（FF 窗口完全排除出梯度）隔离假说 (a) vs (b)。",
+
+  "design": {
+    "arm": "w_ff=0（FF 窗口状态损失权重为 0——FF 帧不产生任何梯度，头在 FF 帧上的输出纯由接触帧梯度决定）",
+    "prior_spec": "euler001x5（精确先验）",
+    "seed": [42],
+    "n_runs": 1,
+    "recipe": {"epochs": 60, "windows_per_epoch": 150000, "lr": 0.0003, "batch_size": 1024},
+    "checkpoint_root": "checkpoints-S1g/wff0_s42",
+    "cmd": "python -X utf8 train_v3.py --prior_spec euler001x5 --seed 42 --epochs 60 --windows_per_epoch 150000 --w_ff 0 --checkpoint_dir checkpoints-S1g/wff0_s42",
+    "cost": "1 run ≈ 18 min"
+  },
+
+  "criteria": {
+    "primary": "FF-clean one-step 头输出 RMS 与 baseline (0.0186) 和 wff10 (0.0095) 的对比",
+    "interpretation": {
+      "if ≈ 0.019": "梯度串扰 confirmed——接触帧梯度是噪声的唯一来源，FF 自身零目标不起作用",
+      "if ≈ 0.010": "混合——串扰为主但 FF 零目标有部分抑制效果",
+      "if < 0.005": "FF 帧自身损失是噪声驱动力——排除串扰，静默可通过损失操作达到"
+    }
+  },
+
+  "limitations": ["1 seed（机制探针，非统计声明）", "单世界单档"]
+}

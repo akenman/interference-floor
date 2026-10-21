@@ -1,0 +1,62 @@
+{
+  "experiment": "SLOT-1c",
+  "title": "regime 门控静默——让残差头在先验已精确处闭嘴（SLOT-1b 发现的方法兑现）",
+  "prereg_written_at": "2026-10-03",
+  "status": "PREREGISTERED",
+
+  "question": "SLOT-1b 发现头干涉噪声地板：接触主导的训练混合使残差头在自由飞行帧输出 ~0.85px 的 tier 无关噪声（残差目标为 0.0000 仍不静默），淹没先验阶梯并复合进闭环（2.04px）。两个预注册机制能否让头在 FF regime 静默，从而兑现精确先验？——这直接回应领域综述开放挑战①（预测应反映动作后果而非仅拟合主导 regime）。",
+  "motivation_from_prior_results": {
+    "SLOT-1b": "探针：euler001x5 FF 帧残差目标 RMS=0.0000，头输出 RMS=0.0197（tier 无关）；FF-clean one-step 0.861px、闭环 k=3 2.040px；mixed 0.571px。",
+    "S0b/铰链": "全自由飞行世界（铰链）头能静默（0.037≈先验 0.038）⇒ 静默是可学的，问题在 regime 配比。"
+  },
+
+  "design": {
+    "type": "两机制 × 3 seed，对照臂复用 SLOT-1b 的 euler001x5_s42-44（不重跑）",
+    "arms": [
+      {"id": "W（regime 重加权）", "mechanism": "窗口级损失重加权：末输入帧与目标帧均无接触的窗口，状态损失权重 w_ff=10（先验选定，非调参；FF 损失质量占比 ~6.5%×10/(93.5%+6.5%×10)≈41%）；其余损失项不加权",
+       "cmd_flag": "--w_ff 10"},
+      {"id": "G（静默门控头）", "mechanism": "GatedWorldModelV3：门 g=σ(MLP([h,a])) 逐样本乘在残差输出上（pred = prior + g·head），门偏置初始化 +4（起步 g≈0.98 ≈ 基线行为）；无额外正则——门在接触帧必须开（否则 mixed 恶化自罚）",
+       "cmd_flag": "--gate"}
+    ],
+    "shared_recipe": {"prior_spec": "euler001x5", "seeds": [42, 43, 44], "epochs": 60,
+                      "windows_per_epoch": 150000, "lr": 0.0003, "batch_size": 1024,
+                      "seq_len": 8, "future_steps": 3,
+                      "note": "与 SLOT-1b 逐项一致，只加机制"},
+    "checkpoint_roots": "checkpoints-S1c/wff10_s<seed> 与 checkpoints-S1c/gate_s<seed>",
+    "baseline": "checkpoints-S1b/euler001x5_s<seed>（同 recipe 同 prior_spec 同 seed，机制零点）",
+    "n_new_runs": 6,
+    "cost_estimate": "6 run × ~18 min ≈ 2 GPU·h（2 并发 ≈ 1h 壁钟）"
+  },
+
+  "hypotheses": {
+    "H1": "两机制至少一个使 FF-clean one-step 降到基线的 ~1/2 以下（头静默可学）。",
+    "H2": "G 门的静默更彻底（专用通路）但 mixed 略差；W 的静默弱但 mixed 更稳。",
+    "H3": "静默兑现后闭环 FF 复合显著缓解（干涉噪声不再被反馈放大）。"
+  },
+
+  "criteria": {
+    "R1 静默": {"test": "FF-clean one-step（同 seed 配对均值）≤ 0.50px（基线 0.861 的 ~58%，>6× 噪声底）", "report": "实际值与基线比率"},
+    "R2 不伤接触": {"test": "mixed one-step ≤ 基线 0.571 × 1.10 = 0.628px", "verdict": ">0.628 ⇒ 该机制判负（静默以接触精度为代价不可接受）"},
+    "R3 闭环缓解": {"test": "FF-clean 闭环 k=3 ≤ 1.02px（基线 2.040 的一半）"},
+    "R4 探针复核（只报告）": {"test": "FF-clean 帧头输出 RMS（0.0197 口径）下降倍数"},
+    "统计": "同 seed 配对（3/3 方向一致为准）；两机制分别对同一基线判，不做机制间优劣的事后挑选"
+  },
+
+  "analysis_convention": {
+    "eval": "tmp_s1c_compare.py（复用 tmp_s1b_compare 的评估协议与 FF-clean 掩码，加 R4 探针）",
+    "order": "R1 → R2 → R3 → R4；两机制并列报告",
+    "outputs": "analysis_output/S1c_report.json + figures/S1c_silence.png"
+  },
+
+  "stop_rule": [
+    "冒烟核对 args（w_ff/gate/prior_spec）失败 → 修复重启",
+    "两机制 R2 双双失败 → 实验判'静默不可廉价获得'，如实入册，不追加机制",
+    "中途不改 w_ff=10、门初始化与判据；增补另立预注册"
+  ],
+
+  "limitations": [
+    "w_ff=10 与门初始化为先验选定值，未做超参扫描（扫描属后续）",
+    "n=3；单世界（弹球）；接触/FF 旗用引擎真值（部署时来自输入接触通道，本实验不测通道噪声）",
+    "基线复用 SLOT-1b 检查点（同 recipe），零重训"
+  ]
+}

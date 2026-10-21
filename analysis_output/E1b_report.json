@@ -1,0 +1,97 @@
+{
+  "experiment": "E1b",
+  "title": "相态容量分配（Phase-Aware Capacity Allocation）",
+  "pre_registration": {
+    "written_at": "2026-09-16 21:24:36",
+    "hypothesis": "如果相态结构真的（因果地）是误差的来源（T4：坤 0.06px ↔ 离 0.73px），那么把额外模型容量定向分配给高误差相态，应比均匀分配产生更大的整体误差下降。这是把 T4 从'观察'升级为'因果证据'的关键实验。",
+    "criteria": {
+      "E1b-1": {
+        "text": "B-priority 整体 one-step RMSE < B-uniform",
+        "threshold": "差距 ≥ 3%（(uniform − priority)/uniform ≥ 0.03），3 种子均值",
+        "rationale": "若按卦难度加权损失不能带来整体改善，说明卦级误差结构不可被容量/损失定向利用"
+      },
+      "E1b-2": {
+        "text": "B-priority 的难卦误差下降幅度 > 易卦误差上升幅度（净收益）",
+        "threshold": "(易卦_err_priority − 易卦_err_uniform) + (难卦_err_priority − 难卦_err_uniform) < 0，即总卦级误差变化为负",
+        "rationale": "整体收益可能来自均匀改善；只有难卦降幅超过易卦升幅才是'相态定向'的因果证据"
+      },
+      "E1b-3": {
+        "text": "B-phase 的难卦误差 < B-uniform 的难卦误差",
+        "threshold": "3 种子均值严格更小（不要求幅度门槛，因为 B-phase 与 B-uniform 参数量仅差 ≤4.6%）",
+        "rationale": "相态专用子头若在难卦上无效，则'卦=相态'的构造没有容量分配价值"
+      }
+    },
+    "gua_identity": {
+      "hardest": "离 (g5 = 101：初爻=接触, 中爻=能量降, 上爻=趋靶) — 依据 T4 跨世界观察 + 接触态动力学最复杂",
+      "easiest": "坤 (g0 = 000：无接触、能量降、远离) — 依据 T4 跨世界观察 + 自由低能相最可预测",
+      "note": "身份在预注册时按物理语义固定；评估后将用 B-uniform 的经验卦级排序做交叉核对。若经验排序与预注册身份不一致，两个版本都报告，并以经验排序为准重新计算 E1b-2（这本身是一个可报告的发现）。"
+    }
+  },
+  "setup": {
+    "world": "hinge（铰链，Acrobot 式欠驱动双摆）",
+    "data": "trajectories_hinge.npz（3000 episodes × 200 帧 @ 20Hz，RK4 真值）+ 评估用前 300 片段作为验证集",
+    "model_config": {
+      "input_dim": 25,
+      "obj_dim": 22,
+      "action_dim": 1,
+      "hidden_dim": 256,
+      "num_prototypes": 32,
+      "epochs": 60,
+      "batch_size": 256,
+      "windows_per_epoch": 120000,
+      "windows_per_epoch_note": "完整训练集 507,600 窗口/epoch。此处取 120,000（23.6%）是文档化偏差：RTX 5060 上全数据 60 epochs 约 4 h/臂、9 臂共 36 h，不可接受。三臂使用完全相同值，因此相对比较有效；绝对数值低于全数据水平。",
+      "lr": "1e-3 (AdamW, weight_decay=1e-5)",
+      "loss_weights": "w_state=1.0, w_yao=0.1, w_proto=0.05, w_commit=0.01, w_usage=0.02, w_roll=0.3",
+      "scheduled_sampling": "ss_max=0.5, 线性升温 20 epochs (0.025 × epoch)",
+      "amp": "bf16",
+      "output_init": "全部 state head 末层零初始化（起步=物理先验）",
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "arms": {
+      "B-uniform": "WorldModelH 标准状态主头 256 维（= ours-base）。基线，均匀容量分配。",
+      "B-phase": "PhaseCapacityWorldModelH（定义在 model_h_e1b.py，与 model_h.py 解耦以防并发覆盖）：状态主头拆为 8 个相态专用子头（sub_head_dim=60，总参数量 399 318 vs 基线 402 236，−0.73%），输入经预测爻 logits 的 8 卦软概率门控加权求和。子头末层零初始化 → 公平起步。",
+      "B-priority": "WorldModelH + PriorityHLoss：状态 Huber 损失按卦加权，w_g = max(1, err_g/mean_err) 后按全数据集均值归一化（保持总损失量级不变，避免有效 LR 漂移）。卦索引由真值爻标签（手端三爻）给出。"
+    },
+    "param_budget_note": "B-phase 总参数量与 B-uniform 差距 −0.73%，满足'同参数量、仅分配方式不同'的设计要求。",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "compute": "RTX 5060 (8GB) 单卡；因 windows_per_epoch 降为 120,000（见上注），单臂 60 epochs ≈ 50 min；3 臂 × 3 种子 ≈ 7.5 h（串行，run_e1b.py 自动执行）"
+  },
+  "results": null,
+  "criteria_verdict": {
+    "E1b-1": {
+      "pass": null,
+      "note": "待跑"
+    },
+    "E1b-2": {
+      "pass": null,
+      "note": "待跑；且难/易卦身份需按 E0 经验排序重定义"
+    },
+    "E1b-3": {
+      "pass": null,
+      "note": "待跑"
+    }
+  },
+  "summary": "E1b 未运行。判据悬空，等待 E0 产出卦级误差经验排序后重定义最难/最易卦身份再跑。",
+  "limitations": [
+    "120,000 windows/epoch（23.6%）是文档化偏差；绝对数值低于全数据水平，三臂相同故相对比较仍有效。",
+    "预注册的卦身份（离/坤）被 E1d 否定，必须用 E0 经验排序替换。",
+    "B-phase 与 B-uniform 参数量差 −0.73%，满足'同参数量、仅分配方式不同'。"
+  ],
+  "bugs_found": [
+    "train_e1b.py 的 --no_amp 缺失（与 train_e1a 同类 bug）——调度器需补该 flag。",
+    "E1b_report.json 原始模板 setup.compute 行末尾含非法 trailing comma，JSON 解析失败；已修正。"
+  ],
+  "implications_for_paper": "若 E1b 通过：'卦=相态'从相关性升级为因果证据——容量可定向改善，支撑 R2 'Do Phases Causally Matter?'。若 E1b 未通过（更可能，因 E1d 已显示卦级结构是引擎指纹）：'卦'仍是有效的相态分类学（T3 成立），但'卦=误差解剖坐标系'的容量分配价值不成立；须把容量分配论证从卦级误差转向其他可学维度（如接触态/能量趋势的显式编码），并在 Discussion 中诚实记录。",
+  "status": "PENDING — 未运行",
+  "status_note": "截至 2026-09-xx，E1b 尚未产出任何训练指标。`logs/e1b-uniform-s42.log` 为 0 字节，`logs/alone_b_s42.log` 停在 epoch 20/60。`checkpoints-e1b/` 无产出。",
+  "blocking_dependency": "E0 统一主表（卦级误差经验排序）",
+  "blocking_reason": "预注册的'最难卦=离 / 最易卦=坤'来自 T4 的跨世界观察。E1d（2026-09-05）已否定 T4 的跨世界普适性：ρ=−0.429, p=0.299，且铰链世界最易卦是乾(0.218)、最难是坤(1.015)，方向与预注册相反。因此 E1b-2 的'难卦/易卦'身份必须用 E0 的经验排序重定义，否则测的是预注册假设而非真实相态结构。"
+}

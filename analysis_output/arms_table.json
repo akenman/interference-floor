@@ -1,0 +1,79 @@
+{
+ "source": [
+  "S1c_report.json",
+  "S1d_report.json",
+  "S1e_report.json",
+  "S1f_report.json"
+ ],
+ "seeds": [
+  "42",
+  "43",
+  "44"
+ ],
+ "units": "px",
+ "aggregation": "mean over seeds",
+ "rows": [
+  {
+   "family": "---",
+   "arm": "baseline (unmodified exact-prior arm)",
+   "prereg": "",
+   "ff_one_step": 0.8558171391487122,
+   "mixed_one_step": 0.5703358054161072,
+   "ff_closed_k3": 2.0417526165644326
+  },
+  {
+   "family": "loss reweighting",
+   "arm": "reweight $\\times10$ on free-flight windows",
+   "prereg": "S1c",
+   "ff_one_step": 0.46091995636622113,
+   "mixed_one_step": 0.5468770464261373,
+   "ff_closed_k3": 1.4064031442006428
+  },
+  {
+   "family": "dedicated pathway",
+   "arm": "end-to-end gate between head and prior",
+   "prereg": "S1c",
+   "ff_one_step": 0.8817697167396545,
+   "mixed_one_step": 0.5690150260925293,
+   "ff_closed_k3": 2.0254077116648355
+  },
+  {
+   "family": "supervised gate",
+   "arm": "gate trained on the contact flag (BCE)",
+   "prereg": "S1d",
+   "ff_one_step": 0.5451142390569051,
+   "mixed_one_step": 0.5620762507120768,
+   "ff_closed_k3": 1.5960664749145508
+  },
+  {
+   "family": "loss-mass dose",
+   "arm": "closed-loop term $\\times10$",
+   "prereg": "S1e",
+   "ff_one_step": 0.8715771834055582,
+   "mixed_one_step": 0.6019861896832784,
+   "ff_closed_k3": 1.5333836078643799
+  },
+  {
+   "family": "",
+   "arm": "both terms $\\times10$",
+   "prereg": "S1e",
+   "ff_one_step": 0.6128844817479452,
+   "mixed_one_step": 0.5883042017618815,
+   "ff_closed_k3": 1.3293644587198894
+  },
+  {
+   "family": "",
+   "arm": "single-step term $\\times100$",
+   "prereg": "S1e",
+   "ff_one_step": 0.3062509596347809,
+   "mixed_one_step": 0.6738287409146627,
+   "ff_closed_k3": 2.7268103758494058
+  }
+ ],
+ "decode_rule": {
+  "ff_closed_max": 0.00010337070125387982,
+  "damage_min": 1.1221339269015747,
+  "damage_max": 1.210282761234083,
+  "n_points": 9
+ }
+}

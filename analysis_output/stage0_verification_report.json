@@ -1,0 +1,24 @@
+{
+  "checkpoint": "checkpoints/best_model.pt",
+  "data_path": "trajectories_v2.npz",
+  "hypothesis_a_precision_collision": {
+    "passed": false,
+    "passed_statistical": false,
+    "passed_effect_size": false,
+    "mean_collision_alpha": 0.5252614617347717,
+    "mean_smooth_alpha": 0.5260885953903198,
+    "diff": -0.0008271336555480957,
+    "cohen_d": -0.11090072244405746,
+    "p_value": 0.08225294202566147
+  },
+  "hypothesis_b_void_anomaly": {
+    "passed": false,
+    "passed_statistical": true,
+    "passed_effect_size": false,
+    "mean_normal_void": 0.5581197738647461,
+    "mean_perturbed_void": 0.5591970682144165,
+    "increase_pct": 0.1930220716264176,
+    "p_value": 0.0006600737106055021
+  },
+  "stage0_overall_passed": false
+}

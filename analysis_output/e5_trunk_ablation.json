@@ -1,0 +1,67 @@
+{
+ "protocol": {
+  "spec": "rk4001x5",
+  "L": 8,
+  "K": 5,
+  "epochs": 60,
+  "seed": 42,
+  "lr": 0.0003,
+  "batch": 1024,
+  "design": "full vs trunk-frozen (matched) vs trunk-frozen (mismatched)"
+ },
+ "conditions": {
+  "matched_full": {
+   "note": "matched 数据，trunk+头一起训（E5 的 matched）",
+   "prior_one": 0.03774667322404969,
+   "hybrid_one": 0.042758107659521115,
+   "hybrid_roll_k5": 0.4959495622299292,
+   "n_train": 507600
+  },
+  "g1125": {
+   "data": "hinge",
+   "g_prior": 1125.0,
+   "prior_one": 0.2123319339736692,
+   "variants": {
+    "full": {
+     "hybrid_one": 0.051573296984678836,
+     "hybrid_roll_k5": 0.5409937258261931,
+     "gain_one": 0.7571100304155176
+    },
+    "frozen_match": {
+     "hybrid_one": 0.04428988804093148,
+     "hybrid_roll_k5": 0.3648650153728632,
+     "gain_one": 0.7914120254449161
+    },
+    "frozen_mis": {
+     "hybrid_one": 0.04844306694504789,
+     "hybrid_roll_k5": 0.38186802622442095,
+     "gain_one": 0.7718521842736326
+    }
+   },
+   "n_train": 507600
+  },
+  "drag": {
+   "data": "drag",
+   "g_prior": 900.0,
+   "prior_one": 0.23353316387889322,
+   "variants": {
+    "full": {
+     "hybrid_one": 0.017711396177436965,
+     "hybrid_roll_k5": 0.15691531456522706,
+     "gain_one": 0.9241589679030691
+    },
+    "frozen_match": {
+     "hybrid_one": 0.02751310478631316,
+     "hybrid_roll_k5": 0.19050696358077532,
+     "gain_one": 0.8821875902791219
+    },
+    "frozen_mis": {
+     "hybrid_one": 0.019327706396746438,
+     "hybrid_roll_k5": 0.20498322979990233,
+     "gain_one": 0.9172378514652013
+    }
+   },
+   "n_train": 101520
+  }
+ }
+}

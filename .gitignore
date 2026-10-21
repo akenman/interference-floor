@@ -1,0 +1,92 @@
+# ===== 大体积数据（生成脚本在库，可随时再生成；metadata json 入库） =====
+trajectories.npy
+*.npz
+*.npy
+*.zip
+
+# ===== 训练产物：best.pt 模型资产入库，训练中间产物不入库 =====
+checkpoints*/checkpoint_latest.pt
+# E0/E1a/E1b 消融网格体积过大（e1a-corrected 单目录 1.2GB）：
+# 这些目录只入库清单 analysis_output/checkpoints_manifest.json（含 sha256 前 16 位），不入库权重。
+checkpoints-E0/
+checkpoints-e1a/
+checkpoints-e1a-corrected/
+checkpoints-e1b/
+# P0-b 的三格（A 单步 / B 闭环 / C 闭环·lr 解耦），共 101MB：同样只入清单
+checkpoints-P0bA/
+checkpoints-P0bB/
+checkpoints-P0bC/
+checkpoint_latest.pt
+*.bak
+*.err
+
+# ===== 评估产物：json 报告与轻量图入库存档，媒体与缓存不入库 =====
+analysis_output/audit_videos/
+analysis_output/audit_animations/
+analysis_output/prototype_videos/
+analysis_output/prototype_animations/
+analysis_output/decoded_prototypes/
+analysis_output_final/
+runs/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# ===== IDE / 临时 =====
+.vscode/
+.idea/
+*.log
+
+# P0-c 的四格（损失权重 2x2），共 ~50MB：只入清单
+checkpoints-P0c/
+
+# SLOT-0b（减法x地板耦合判决）：只入清单
+checkpoints-S0b/
+
+# SLOT-1b（弹球训练臂阶梯）：只入清单
+checkpoints-S1b/
+
+# SLOT-1c（regime 静默）与 SLOT-2 多种子数据：只入清单/可再生成
+checkpoints-S1c/
+g4_seed*/
+
+# SLOT-1d（监督式静默门）：只入清单
+checkpoints-S1d/
+
+# SLOT-1e���ջ���ʧ��������ֻ���嵥
+checkpoints-S1e/
+
+# SLOT-1f�������Ծ�Ĭ + ָʾ��ѵ������ֻ���嵥
+checkpoints-S1f/
+
+# --- LaTeX build artefacts (paper/build_pdf.py) ---
+paper/latex/*.aux
+paper/latex/*.out
+paper/latex/*.blg
+paper/latex/*.fls
+paper/latex/*.fdb_latexmk
+paper/latex/*.synctex.gz
+paper/latex/_text.txt
+paper/latex/_build_stdout.txt
+paper/latex/_pg*.png
+
+# --- checkpoint weights: only the manifest is versioned (iron rule 7) ---
+# S1g is one of the 17 manifest roots (analysis_output/checkpoints_manifest.json)
+checkpoints-S1g/
+# E5 / REPRO are experiment artefacts, not paper-claimed roots; not in the manifest
+checkpoints-E5/
+checkpoints-REPRO/
+
+# --- LaTeX build outputs written by paper/build_pdf.py (figs/*.pdf stay tracked) ---
+paper/latex/main.pdf
+paper/latex/main.txt
+paper/latex/main.log
+paper/latex/main.bbl
+paper/main.pdf
+paper/_review_text.txt
+
+# seed-extension training root (E0 recipe, seeds 49-51); weights stay out, manifest covers the referenced roots
+checkpoints-E0-extra/

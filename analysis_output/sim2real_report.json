@@ -1,0 +1,25 @@
+{
+  "source": "synthetic_with_drag",
+  "n_steps": 99,
+  "prior_mae": 71.46902465820312,
+  "model_mae": 79.42263793945312,
+  "zero_vel_mae": 3.529916763305664,
+  "results": [
+    [
+      "SR-1 优雅退化（model ≤ prior × 2）",
+      true
+    ],
+    [
+      "SR-2 先验有效（prior < 零速度）",
+      false
+    ],
+    [
+      "SR-3 残差补偿（model < prior）",
+      false
+    ],
+    [
+      "SR-4 速度推断（CV 噪声下）",
+      false
+    ]
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "experiment": "SLOT-1b",
+  "title": "弹球世界训练臂先验阶梯——训练级跨引擎证据 + 接触帧余量测量",
+  "prereg_written_at": "2026-10-03",
+  "prereg_commit": "先于任何 SLOT-1b 训练 run 提交（冒烟除外）",
+  "status": "PREREGISTERED",
+
+  "question": "解析阶梯（SLOT-1，4/4）证明 0 参数先验的地板跨引擎成立；训练臂（先验+残差头）在弹球世界是否继承同一阶梯？与铰链的根本差异：弹球的精确先验只在自由飞行段逐位命中引擎，接触帧所有先验同错（混合窗口失配 ~1.1px）——**残差头在精确档是否存在可学余量**（铰链答案：无；本实验测世界的接触密度如何改变答案）？",
+
+  "motivation_from_prior_results": {
+    "SLOT-1": "解析阶梯 4/4：euler001x5 与引擎逐位相同（0.00003px），parabola/rk4 平价 0.1591px，euler005 0.6364px——理论万分位命中。",
+    "P0a/S0b": "铰链训练臂继承阶梯（26×/29×）；精确档残差余量耗尽（0.037 vs 0.038）且减法被地板吸收。",
+    "v3历史": "legacy 档同架构 mixed one-step ≈0.45-0.5px vs 先验 ≈1.2px ⇒ 残差头在弹球 mixed 上历史改进 ~60%——接触帧余量的存在性已有先验证据，本实验把它归到先验档位轴上。"
+  },
+
+  "design": {
+    "type": "4 档先验 × 3 seed 训练臂（同架构同容量，只换先验积分器档位）",
+    "arm": "WorldModelV3 默认配置（hidden 256, use_gua=False, use_innov=True, 497k 参数级）",
+    "tiers": ["parabola005（legacy 对照，逐位兼容现行管线）", "euler005", "rk4005", "euler001x5"],
+    "seeds": [42, 43, 44],
+    "n_runs": 12,
+    "recipe": {"epochs": 60, "windows_per_epoch": 150000, "batch_size": 1024, "lr": 0.0003,
+               "seq_len": 8, "future_steps": 3,
+               "note": "lr/epochs 沿 v3 原生默认口径（3e-4），不引入铰链侧配方；wpe=150k 与 P0-b/P0-c 成本口径同值"},
+    "checkpoint_roots": "checkpoints-S1b/<tier>_s<seed>（每 run 一个目录，铁律 4；assert_dir_not_foreign_v3 拒绝异档/异 seed 覆盖）",
+    "cmd": "python -X utf8 train_v3.py --prior_spec <tier> --seed <s> --epochs 60 --windows_per_epoch 150000 --checkpoint_dir checkpoints-S1b/<tier>_s<seed>",
+    "wiring": "physics_prior_spec_v3（numpy 目标 + torch prior_norm，测试断言默认档逐位兼容 legacy、numpy/torch ≤1e-4、显式欧拉解析锚）；训练期残差目标与评估期先验同档",
+    "cost_estimate": "12 run × ~35–50 min ≈ 7–9 GPU·h（2 并发 ≈ 4–5 h 壁钟）",
+    "launch": "双后台链各 6 run（链 A: parabola005×3 → rk4005×3；链 B: euler005×3 → euler001x5×3），全局并发 2"
+  },
+
+  "hypotheses": {
+    "H1（训练臂继承地板）": "FF-clean 子集（接触标志+速度关系双过滤，同 SLOT-1 定义）one-step 排序 = 解析阶梯：euler001x5 < {parabola, rk4} < euler005——先验的阶梯经残差训练后仍成立。",
+    "H2（接触帧余量存在）": "精确档（euler001x5）mixed one-step ≤ 0.80px（其先验 mixed 1.107px 的 ~28% 改进，>3× 噪声底）——残差头在接触帧学到真实修正；与铰链'精确档余量耗尽'（0.037 vs 0.038）形成世界依赖的对照：**余量存在性由接触密度决定，不由架构决定**。",
+    "H3（精确档不劣化接触学习）": "mixed 上 euler001x5 ≤ parabola005 × 1.10——精确先验不因残差目标变小而伤害接触帧学习（防反转）。"
+  },
+
+  "criteria": {
+    "S1b-1 FF 继承地板": {
+      "test": "FF-clean one-step（统一评估协议，同 seed 配对）：euler001x5 < min(parabola, rk4) < euler005，3 seed 方向一致",
+      "verdict": "全 ⇒ H1 [OK]；任一反序 ⇒ 训练臂不继承阶梯，报告并查残差头补偿"
+    },
+    "S1b-2 接触帧余量": {
+      "test": "euler001x5 的 mixed one-step（3 seed 均值）≤ 0.80px",
+      "verdict": "[OK] ⇒ H2（余量存在性=接触密度的函数）；>1.00px ⇒ 余量不存在（反常，须查）"
+    },
+    "S1b-3 闭环 FF 贴地": {
+      "test": "euler001x5 的 FF-clean 闭环 k=3 ≤ 0.50px",
+      "note": "解析地板 ~0；门槛放宽到 0.5px 容许模型反馈在自由飞行段的小扰动；报告实际值"
+    },
+    "S1b-4 精确档不劣化": {
+      "test": "mixed one-step：euler001x5 ≤ parabola005 × 1.10（同 seed 配对均值比）"
+    },
+    "secondary": [
+      "mixed 闭环 k=1..3 全档曲线",
+      "yao_acc（四档同监督，应同水平）",
+      "崩溃率（ITT；任何 run 崩溃 ⇒ 该配对缺失，判 UNDECIDED 不补 seed）",
+      "每档模型 mixed one-step 对其自身先验 mixed 误差的比率（残差头贡献谱）"
+    ],
+    "噪声底": "同配置重跑 5–9%（F10）⇒ S1b-2/S1b-4 门槛均 ≥10% 量级；排序判据（S1b-1）以方向一致性为准（3/3）"
+  },
+
+  "analysis_convention": {
+    "pairing": "同 seed 配对（每 seed 的 val 划分随 seed 而异，故只在同 seed 内配对；跨 seed 报均值）",
+    "itt": "含崩溃 run 的 best.pt",
+    "order": "按预注册顺序报告（S1b-1 → S1b-2 → S1b-3 → S1b-4 → 次口径）",
+    "eval_protocol": "tmp_s1b_compare.py：从 12 个 best.pt 加载，固定 held-out 窗口集（val_windows=20000）评 mixed/FF-clean one-step 与闭环；FF-clean 定义同 SLOT-1（contact 标志 + 速度关系 <1px/s）",
+    "outputs": "analysis_output/S1b_report.json + figures/S1b_ball_trained_ladder.png"
+  },
+
+  "stop_rule": [
+    "冒烟（1 epoch）核对 best.pt 的 args.prior_spec/seed 失败 → 修复后重启",
+    "启动核验失败（目录互串 / 显存超 6GB / 并发超 2）→ 停止修复重启，scratch 重训",
+    "任何 run 崩溃 → ITT 记缺失，配对判 UNDECIDED，不补 seed（铁律 3）",
+    "中途不改门槛；S1b-1/2/3/4 之外的发现作次口径报告"
+  ],
+
+  "limitations": [
+    "n=3（同 seed 配对 + 方向一致性为主判据）",
+    "单世界对照对（铰链-弹球）；第三引擎未测",
+    "wpe=150k（全量 855 万窗的 1.8%）——所有档同值，配对有效；绝对数字偏保守",
+    "接触帧的'余量'测量限于本场景分布（障碍布局/接触密度固定）",
+    "v3 管线的先验档位经由 physics_prior_spec_v3 接入，默认档逐位兼容历史（测试断言）；非默认档的行为由测试与冒烟背书"
+  ]
+}

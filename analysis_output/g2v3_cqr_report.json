@@ -1,0 +1,15 @@
+{
+  "cqr_offset_px": [
+    0.03500000014901161,
+    0.03799999877810478,
+    0.041999999433755875,
+    0.04699999839067459
+  ],
+  "coverage_before": 0.746,
+  "coverage_after_cqr": 0.902,
+  "band_width_before_px": 0.3,
+  "band_width_after_px": 0.4,
+  "median_point_rmse_px": 1.013,
+  "baseline_point_rmse_px": 0.667,
+  "verdict": "G2 [OK] CQR 后覆盖达标"
+}

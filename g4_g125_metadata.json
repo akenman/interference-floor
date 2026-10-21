@@ -1,0 +1,18 @@
+{
+  "version": "g4-hinge-v2",
+  "world": "g125",
+  "g": 1125.0,
+  "cd": 0.0,
+  "cf": 0.0,
+  "episodes": 600,
+  "seq_length": 200,
+  "physics": {
+    "L1": 80.0,
+    "L2": 80.0,
+    "M1": 2.0,
+    "M2": 1.0,
+    "tau_max": 28000.0,
+    "integrator": "RK4@0.01s(+drag/friction)"
+  },
+  "seed": 42
+}

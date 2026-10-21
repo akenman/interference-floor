@@ -1,0 +1,20 @@
+{
+ "rk4001x5": {
+  "spec": "rk4001x5",
+  "n": 28200,
+  "paper_prior_vs_target": 0.03778401092708761,
+  "paper_target_is_next_frame": 21.25433859828876,
+  "correct_prior_vs_target": 0.029732084135751694,
+  "e0data_residual_target_rms_norm": 0.00040324125438928604,
+  "ratio_paper_over_correct": 1.2708160906101358
+ },
+ "euler005": {
+  "spec": "euler005",
+  "n": 28200,
+  "paper_prior_vs_target": 4.483056246214878,
+  "paper_target_is_next_frame": 21.759636393573043,
+  "correct_prior_vs_target": 4.4810538986731805,
+  "e0data_residual_target_rms_norm": 0.040049679577350616,
+  "ratio_paper_over_correct": 1.0004468474575345
+ }
+}

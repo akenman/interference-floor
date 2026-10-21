@@ -1,0 +1,113 @@
+{
+  "experiment": "E1a",
+  "title": "爻轴消融（Yao-Axis Ablation）",
+  "status": "RUNNING/RETRAIN (w_roll=0.05, lr=5e-4)",
+  "pre_registration": {
+    "written_at": "2026-09-16 21:24:36",
+    "hypothesis": "三爻（接触/能量趋势/趋靶）各自携带独立的预测信息。砍掉某爻应使 one-step RMSE 上升；若某爻可砍，则该轴冗余。",
+    "criteria": {
+      "E1a-1": {
+        "text": "砍初爻 → one-step RMSE 上升",
+        "threshold": "(V1 − V3)/V3 ≥ 0.05"
+      },
+      "E1a-2": {
+        "text": "砍中爻 → one-step RMSE 上升",
+        "threshold": "(V2a − V3)/V3 ≥ 0.05"
+      },
+      "E1a-3": {
+        "text": "砍上爻 → one-step RMSE 上升",
+        "threshold": "(V2b − V3)/V3 ≥ 0.05"
+      },
+      "E1a-4": {
+        "text": "自由 MoE 门控（Vfree）劣于固定爻门控（V3）",
+        "threshold": "(Vfree − V3)/V3 ≥ 0.03"
+      }
+    }
+  },
+  "variants": {
+    "V1": "仅初爻（接触轴）",
+    "V2a": "初爻 + 中爻（砍上爻）",
+    "V2b": "初爻 + 上爻（砍中爻）",
+    "V2c": "中爻 + 上爻（砍初爻）",
+    "V3": "三爻全（= ours-base）",
+    "V4": "三爻 + 能量轴",
+    "Vfree": "三爻全 + 自由 MoE 门控"
+  },
+  "summary": {
+    "V1": {
+      "n": 3,
+      "mean": 1.2023333333333335,
+      "std": 0.031030450993965383,
+      "min": 1.159,
+      "n_collapse": 1,
+      "n_done": 2,
+      "collapse_rate": 0.3333333333333333,
+      "seeds": {
+        "42": 1.23,
+        "43": 1.218,
+        "44": 1.159
+      }
+    },
+    "V2a": {
+      "n": 1,
+      "mean": 1.117,
+      "std": 0.0,
+      "min": 1.117,
+      "n_collapse": 0,
+      "n_done": 1,
+      "collapse_rate": 0.0,
+      "seeds": {
+        "42": 1.117
+      }
+    }
+  },
+  "gating_gain": {},
+  "criteria": {},
+  "runs": [
+    {
+      "variant": "V1",
+      "seed": 42,
+      "no_gua": false,
+      "best": 1.23,
+      "best_epoch": 4,
+      "final": 3.454,
+      "collapse": false,
+      "done": true,
+      "n_vals": 30
+    },
+    {
+      "variant": "V1",
+      "seed": 43,
+      "no_gua": false,
+      "best": 1.218,
+      "best_epoch": 2,
+      "final": 2.643,
+      "collapse": false,
+      "done": true,
+      "n_vals": 30
+    },
+    {
+      "variant": "V1",
+      "seed": 44,
+      "no_gua": false,
+      "best": 1.159,
+      "best_epoch": 2,
+      "final": 76.097,
+      "collapse": true,
+      "done": false,
+      "n_vals": 24
+    },
+    {
+      "variant": "V2a",
+      "seed": 42,
+      "no_gua": false,
+      "best": 1.117,
+      "best_epoch": 6,
+      "final": 3.123,
+      "collapse": false,
+      "done": true,
+      "n_vals": 30
+    }
+  ],
+  "note": "崩溃定义: best<5px 后出现 val>10px，或日志含 [EARLY-STOP]。best checkpoint 在崩溃前保存，数值有效。"
+}

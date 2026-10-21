@@ -1,0 +1,13 @@
+{
+  "version": "hinge-v1-obsgrid",
+  "episodes": 3000,
+  "seq_length": 200,
+  "sample_rate_hz": 20.0,
+  "schedule": "piecewise-constant on the 0.05 s sample grid (instant switch)",
+  "physics": {
+    "tau_max": 28000.0,
+    "integrator": "RK4@0.01s",
+    "dt_sample": 0.05
+  },
+  "seed": 42
+}

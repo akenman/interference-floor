@@ -1,0 +1,182 @@
+{
+ "note": "CPU recompute of stored verdict_B robustness readings (W13); taus taken from S1f_report.json, not reselected",
+ "cells": {
+  "baseline_s42": {
+   "tau_star": 0.75,
+   "n_B": 10000,
+   "cpu": {
+    "n_ff": [
+     15.0,
+     15.0
+    ],
+    "ff_rms": [
+     7.860086770961061e-05,
+     7.860086770961061e-05
+    ],
+    "ff_median": [
+     8.02598733571358e-05,
+     8.02598733571358e-05
+    ],
+    "ff_all_silenced": [
+     1.0,
+     1.0
+    ],
+    "false_silence": [
+     0.020073398576512455,
+     0.020073398576512455
+    ],
+    "contact_rms": [
+     2.5714924335479736,
+     2.5714921951293945
+    ],
+    "protect_free": [
+     0.17859520639147802,
+     0.17859520639147802
+    ]
+   },
+   "rel_diff": {
+    "n_ff": 0.0,
+    "ff_rms": 0.0,
+    "ff_median": 0.0,
+    "ff_all_silenced": 0.0,
+    "false_silence": 0.0,
+    "contact_rms": 9.271604228593257e-08,
+    "protect_free": 0.0
+   },
+   "ok": true
+  },
+  "baseline_s43": {
+   "tau_star": 0.8,
+   "n_B": 10000,
+   "cpu": {
+    "n_ff": [
+     4.0,
+     4.0
+    ],
+    "ff_rms": [
+     0.00010337070125387982,
+     0.00010337070125387982
+    ],
+    "ff_median": [
+     8.94829208846204e-05,
+     8.94829208846204e-05
+    ],
+    "ff_all_silenced": [
+     1.0,
+     1.0
+    ],
+    "false_silence": [
+     0.01993836557383136,
+     0.01993836557383136
+    ],
+    "contact_rms": [
+     2.498239278793335,
+     2.498239278793335
+    ],
+    "protect_free": [
+     0.17509824541982622,
+     0.17509824541982622
+    ]
+   },
+   "rel_diff": {
+    "n_ff": 0.0,
+    "ff_rms": 0.0,
+    "ff_median": 0.0,
+    "ff_all_silenced": 0.0,
+    "false_silence": 0.0,
+    "contact_rms": 0.0,
+    "protect_free": 0.0
+   },
+   "ok": true
+  },
+  "baseline_s44": {
+   "tau_star": 0.75,
+   "n_B": 10000,
+   "cpu": {
+    "n_ff": [
+     11.0,
+     11.0
+    ],
+    "ff_rms": [
+     9.977778245229274e-05,
+     9.977778245229274e-05
+    ],
+    "ff_median": [
+     9.244903776561841e-05,
+     9.244903776561841e-05
+    ],
+    "ff_all_silenced": [
+     1.0,
+     1.0
+    ],
+    "false_silence": [
+     0.01917401392111369,
+     0.01917401392111369
+    ],
+    "contact_rms": [
+     2.500516176223755,
+     2.500516414642334
+    ],
+    "protect_free": [
+     0.17577854671280277,
+     0.17577854671280277
+    ]
+   },
+   "rel_diff": {
+    "n_ff": 0.0,
+    "ff_rms": 0.0,
+    "ff_median": 0.0,
+    "ff_all_silenced": 0.0,
+    "false_silence": 0.0,
+    "contact_rms": 9.534773605382036e-08,
+    "protect_free": 0.0
+   },
+   "ok": true
+  },
+  "F1_s42": {
+   "tau_star": 0.85,
+   "n_B": 10000,
+   "cpu": {
+    "n_ff": [
+     15.0,
+     15.0
+    ],
+    "ff_rms": [
+     7.860086770961061e-05,
+     7.860086770961061e-05
+    ],
+    "ff_median": [
+     8.02598733571358e-05,
+     8.02598733571358e-05
+    ],
+    "ff_all_silenced": [
+     1.0,
+     1.0
+    ],
+    "false_silence": [
+     0.017997479240806642,
+     0.017997479240806642
+    ],
+    "contact_rms": [
+     2.4619293212890625,
+     2.4619290828704834
+    ],
+    "protect_free": [
+     0.1816189525077674,
+     0.1816189525077674
+    ]
+   },
+   "rel_diff": {
+    "n_ff": 0.0,
+    "ff_rms": 0.0,
+    "ff_median": 0.0,
+    "ff_all_silenced": 0.0,
+    "false_silence": 0.0,
+    "contact_rms": 9.684217988260598e-08,
+    "protect_free": 0.0
+   },
+   "ok": true
+  }
+ },
+ "all_ok": true
+}

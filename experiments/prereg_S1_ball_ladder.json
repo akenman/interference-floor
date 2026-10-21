@@ -1,0 +1,83 @@
+{
+  "experiment": "SLOT-1 解析版",
+  "title": "弹球世界先验阶梯——地板定律的跨引擎判决（0 参数，免训练）",
+  "prereg_written_at": "2026-10-03",
+  "prereg_commit": "先于任何评估运行提交（对齐探针属协议标定，允许在预注册前）",
+  "status": "PREREGISTERED",
+
+  "question": "「闭环地板 = 先验计算类与数据生成过程的失配」（P0-a 在铰链世界确立）是否跨引擎成立？弹球世界（pymunk 冲量引擎，半隐式欧拉 @0.01，恒力逐子步施加，源码 verify generate_trajectories_v3.py L180-184）提供比铰链更锐的检验：闭式抛物线对常加速度是**数学精确**的连续解，却与引擎差 0.225px（T1 已记录）——若阶梯按「计算类距离」而非「教科书积分器质量」排序，则地板定律的表述被跨引擎收紧为最强形式。",
+
+  "motivation_from_prior_results": {
+    "P0a": "铰链世界 4 档阶梯严格单调（26×/29×），精确档与数据生成器同积分器。",
+    "T1": "弹球模型学会「半隐式欧拉 vs ½gτ²」的 ≈0.23px 系统差——阶梯的解析预测值已存在于账本。",
+    "T19": "采样器-物理混叠：辨识到的是先验计算类的有效参数——本实验是它的第二引擎对照。",
+    "S0b": "减法被地板吸收——本实验只跑 0 参数解析臂，无训练参与，纯净测地板。"
+  },
+
+  "design": {
+    "type": "0 参数解析先验 × 4 档，确定性评估（无训练、无 seed 方差）",
+    "tiers": [
+      {"id": "parabola005", "impl": "layout.physics_prior（现行 legacy，逐位复用）", "class": "闭式连续精确解（力按冲量瞬时施加处理，缺力位移项 ½(F/m)τ²）", "predicted_one_step_vs_engine": "重力维 −2.5·a·dt²（a=900 时 0.225px）；动作维另加 −15·(F/m)·dt²"},
+      {"id": "euler005", "impl": "半隐式欧拉 @0.05×1，恒力 a=g+F/m", "class": "与引擎同族但粗 5×", "predicted": "+10·a·dt²（a=900 时 0.9px，最差）"},
+      {"id": "rk4005", "impl": "RK4 @0.05×1，恒力", "class": "连续精确解（含力位移项）", "predicted": "−2.5·a·dt²（a=900 时 0.225px）；零动作子集与 parabola005 逐位平价"},
+      {"id": "euler001x5", "impl": "半隐式欧拉 @0.01×5，恒力每子步（=引擎复现）", "class": "与数据生成器同积分器同 dt", "predicted": "≈0（float32 存储噪声 ~1e-4px）"}
+    ],
+    "analytic_basis": "引擎位置增益 = 15·a·dt²（SI@0.01×5）；连续精确 = 12.5·a·dt²；SI@0.05 = 25·a·dt²（dt=0.01, τ=0.05, a=g+F/m, g=900 px/s²）。三档对引擎的差 2.5/−2.5/+10 个 a·dt² = 0.225/−0.225/0.9 px @a=900——即 T1 的 0.23px 与本预注册的全部量值预言。",
+    "action_alignment": "A[t+1] 驱动 t→t+1 转移（源码 L211-214：actions[sample_idx] 与该帧状态同时落盘、之后清零；与铰链管线 a0=act[i0+L] 同约定）。",
+    "data": "trajectories_v3.npz（50,000 episodes × 200 帧）；held-out = RandomState(0) 抽 10% episodes（与 e0_common.make_datasets 同构）",
+    "slices": {
+      "FF（自由飞行）": "contact[t]=0 且 contact[t+1]=0（contact 语义=采样间隔内接触并集，源码 L186-192）；one-step 用全部 FF 转移（cap 500k，固定 seed 抽样）",
+      "FF-0（零动作子集）": "FF 且 |A[t+1]| 全维 < 1e-6——解析量值判据在此做（a=900 纯重力）",
+      "closed-loop": "起点 t 满足 contact[t..t+5] 全 0（cap 50k 窗口）；k=1..5 自回归用录制动作",
+      "mixed（全体窗口）": "30k 随机窗口（含接触）——只报告，接触=所有档位共同的不可约失配"
+    },
+    "metric": "pos_rmse px，位置维 = 3 物体 (x,y) 共 6 维，v3 feat_weights 位置权重 1.0；确定性计算，唯一随机性是固定 seed 的窗口子采样",
+    "cost": "0 GPU；纯 numpy，分钟级"
+  },
+
+  "hypotheses": {
+    "H1（核心，计算类距离排序）": "自由飞行 one-step 排序 = euler001x5(≈0) < {parabola005, rk4005}(≈0.16px) < euler005(≈0.64px)——**数学精确的连续解（parabola/rk4）仍带 0.225px 系统差，只有与引擎同积分器的档位归零**。地板由计算类 vs 生成过程的失配决定，不由教科书积分器质量决定。",
+    "H2（T1 数字复现）": "parabola005 在 FF-0 子集 ≈0.159px（=0.225px/√2 的 pos_rmse 形式）——T1 的 0.23px 从模型学得的差变成先验阶梯的直接测量。",
+    "H3（跨引擎外推）": "铰链的「精确档登顶」模式在第二引擎复现 ⇒ C1 升格为跨引擎规律；若不成立（如 euler001x5 不归零），则地板定律限拉格朗日类引擎，须降格表述。"
+  },
+
+  "criteria": {
+    "S1-1 引擎对拍（兼动作对齐自校验）": {
+      "test": "euler001x5 在 FF one-step pos_rmse ≤ 0.01px",
+      "note": "不命中 ⇒ 先查动作对齐/实现（协议修复，记录于 DEEP_DIVE，非阈值更改），修复后重判"
+    },
+    "S1-2 排序判据": {
+      "test": "FF one-step：euler001x5 严格最小；euler005 严格最大（> parabola005 且 > rk4005）；parabola005 与 rk4005 在 FF-0 子集平价（|Δ| ≤ 0.02px）",
+      "verdict": "全 ⇒ 计算类距离排序成立（H1 [OK]）；parabola/rk4 不平价 ⇒ 检查力位移项实现"
+    },
+    "S1-3 量值判据（FF-0 子集）": {
+      "test": "parabola005 与 rk4005 ∈ [0.12, 0.20]px；euler005 ∈ [0.50, 0.80]px",
+      "note": "理论 0.159/0.636 px 的 float32+有限样本包络；FF-0 < 5k 样本时改用低冲量十分位（|I|≤10% IMPULSE_MAX）并在记录注明",
+      "verdict": "命中 ⇒ 解析预测定量成立（H2 [OK]）；偏出 ⇒ 报告偏差并查 a 的实际分布"
+    },
+    "S1-4 闭环同序": {
+      "test": "k=5 排序与 S1-2 一致（euler001x5 最小、euler005 最大）"
+    },
+    "mixed 只报告": "含接触窗口的四档数字与档间跨度（预期被接触失配压平）"
+  },
+
+  "analysis_convention": {
+    "deterministic": "无训练、无 seed 方差——判决不涉及配对 t；报告每档均值与样本数；子采样固定 seed 可复现",
+    "order": "按预注册顺序报告（S1-1 → S1-2 → S1-3 → S1-4 → mixed），不做事后筛选",
+    "analysis_script": "tmp_s1_ball_ladder.py；产物 analysis_output/S1_ball_ladder.json + figures/S1_ball_ladder.png"
+  },
+
+  "stop_rule": [
+    "S1-1 不命中且对齐/实现修复后仍不命中 → 停止，判定引擎对拍失败（H3 [FAIL]），不进入排序判据",
+    "数据/内存异常（npz 装载失败等）→ 修复协议后重启，不改判据",
+    "中途不得改门槛、加档、换切片；增补另立预注册"
+  ],
+
+  "limitations": [
+    "解析阶梯只覆盖自由飞行段；接触段是所有档位共同的不可约失配（mixed 口径如实报告）",
+    "pymunk 内部还有碰撞求解器/枚举细节，本实验只在 FF 段宣称『逐位复现』，不宣称复现全引擎",
+    "0 参数评估不涉及训练配方与结构先验——本实验只测地板轴，不测乘法/减法轴",
+    "单引擎对照（pymunk）；第三引擎（如带阻力重仿真）留待后续",
+    "float32 数据存储噪声是 euler001x5 的理论下限（~1e-4px），门槛 0.01px 已留 100× 裕度"
+  ]
+}

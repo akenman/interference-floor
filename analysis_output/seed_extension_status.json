@@ -1,0 +1,92 @@
+{
+ "seeds": [
+  50,
+  51
+ ],
+ "max_concurrent": 4,
+ "n_jobs": 8,
+ "n_complete": 8,
+ "elapsed_min": 107.0,
+ "jobs": [
+  {
+   "name": "ours_base_s50",
+   "seed": 50,
+   "spec": "euler005",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.811,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=50 最佳 val one-step = 0.811px (epoch 40)"
+  },
+  {
+   "name": "ours_base@rk4005_s50",
+   "seed": 50,
+   "spec": "rk4005",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.146,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=50 最佳 val one-step = 0.146px (epoch 26)"
+  },
+  {
+   "name": "ours_base@euler001x5_s50",
+   "seed": 50,
+   "spec": "euler001x5",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.206,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=50 最佳 val one-step = 0.206px (epoch 30)"
+  },
+  {
+   "name": "ours_base@rk4001x5_s50",
+   "seed": 50,
+   "spec": "rk4001x5",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.038,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=50 最佳 val one-step = 0.038px (epoch 60)"
+  },
+  {
+   "name": "ours_base_s51",
+   "seed": 51,
+   "spec": "euler005",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.47,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=51 最佳 val one-step = 0.470px (epoch 60)"
+  },
+  {
+   "name": "ours_base@euler001x5_s51",
+   "seed": 51,
+   "spec": "euler001x5",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.149,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=51 最佳 val one-step = 0.149px (epoch 60)"
+  },
+  {
+   "name": "ours_base@rk4005_s51",
+   "seed": 51,
+   "spec": "rk4005",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.066,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=51 最佳 val one-step = 0.066px (epoch 60)"
+  },
+  {
+   "name": "ours_base@rk4001x5_s51",
+   "seed": 51,
+   "spec": "rk4001x5",
+   "complete": true,
+   "returncode": 0,
+   "val_one_step_px": 0.038,
+   "stderr_bytes": 0,
+   "last_log_line": "[OK] ours_base seed=51 最佳 val one-step = 0.038px (epoch 60)"
+  }
+ ]
+}

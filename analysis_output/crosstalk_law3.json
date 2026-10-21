@@ -1,0 +1,108 @@
+{
+ "probe": {
+  "n_clean": 73,
+  "n_contact_ctrl": 73
+ },
+ "euler001x5": {
+  "prior_spec": "euler001x5",
+  "w_ff": 1.0,
+  "clean_ff": {
+   "head_rms": 0.01967342382149285,
+   "target_rms": 1.4457492338856183e-07,
+   "n": 73,
+   "jac_frob_mean": 1.182957649230957
+  },
+  "contact_ctrl": {
+   "head_rms": 0.014915704359413494,
+   "target_rms": 0.015363687435932829,
+   "n": 73,
+   "jac_frob_mean": 0.41506412625312805
+  },
+  "jac_ratio_ff_over_ct": 2.8500599652149337
+ },
+ "wff0": {
+  "prior_spec": "euler001x5",
+  "w_ff": 0.0,
+  "clean_ff": {
+   "head_rms": 0.021258849586189676,
+   "target_rms": 1.4457492338856183e-07,
+   "n": 73,
+   "jac_frob_mean": 1.4165030717849731
+  },
+  "contact_ctrl": {
+   "head_rms": 0.015657934110161798,
+   "target_rms": 0.015363687435932829,
+   "n": 73,
+   "jac_frob_mean": 0.4356054663658142
+  },
+  "jac_ratio_ff_over_ct": 3.251802792105959
+ },
+ "wff10": {
+  "prior_spec": "euler001x5",
+  "w_ff": 10.0,
+  "clean_ff": {
+   "head_rms": 0.00887180084292714,
+   "target_rms": 1.4457492338856183e-07,
+   "n": 73,
+   "jac_frob_mean": 0.6391951441764832
+  },
+  "contact_ctrl": {
+   "head_rms": 0.015445502428897142,
+   "target_rms": 0.015363687435932829,
+   "n": 73,
+   "jac_frob_mean": 0.4131128787994385
+  },
+  "jac_ratio_ff_over_ct": 1.5472651107708628
+ },
+ "parabola005": {
+  "prior_spec": "parabola005",
+  "w_ff": 1.0,
+  "clean_ff": {
+   "head_rms": 0.020264272939431067,
+   "target_rms": 0.003571690477174061,
+   "n": 73,
+   "jac_frob_mean": 1.1958540678024292
+  },
+  "contact_ctrl": {
+   "head_rms": 0.01867559373257186,
+   "target_rms": 0.01868875591876397,
+   "n": 73,
+   "jac_frob_mean": 0.42132315039634705
+  },
+  "jac_ratio_ff_over_ct": 2.8383298346588965
+ },
+ "euler005": {
+  "prior_spec": "euler005",
+  "w_ff": 1.0,
+  "clean_ff": {
+   "head_rms": 0.02420101189146776,
+   "target_rms": 0.014322419444668843,
+   "n": 73,
+   "jac_frob_mean": 1.2380176782608032
+  },
+  "contact_ctrl": {
+   "head_rms": 0.007283410240299548,
+   "target_rms": 0.006144021748057686,
+   "n": 73,
+   "jac_frob_mean": 0.4210294485092163
+  },
+  "jac_ratio_ff_over_ct": 2.9404538866447085
+ },
+ "rk4005": {
+  "prior_spec": "rk4005",
+  "w_ff": 1.0,
+  "clean_ff": {
+   "head_rms": 0.026994178999720425,
+   "target_rms": 0.003580611084305952,
+   "n": 73,
+   "jac_frob_mean": 1.2197656631469727
+  },
+  "contact_ctrl": {
+   "head_rms": 0.018083293857527712,
+   "target_rms": 0.018700165042965254,
+   "n": 73,
+   "jac_frob_mean": 0.42158088088035583
+  },
+  "jac_ratio_ff_over_ct": 2.893313521713383
+ }
+}

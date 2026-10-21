@@ -1,0 +1,84 @@
+{
+  "experiment": "SLOT-1f",
+  "title": "构造性静默：解码时判决式硬静默 + 指示器训练（把 R3 兑现到工程强度）",
+  "prereg_written_at": "2026-10-03",
+  "status": "PREREGISTERED",
+
+  "question": "SLOT-1e 判定：静默只能构造性下达，其上限由 **regime 指示器误差**决定（硬静默探针中位 0.0001px = 解析恒等，而 RMS 0.33–0.68 全来自'该关没关'的窗）。本槽位回答两问：①**方法**——解码时判决式硬静默（用模型自身的接触头判决 + 在 val 上校准阈值 τ）能否把闭环 FF 从 1.3–2.7px 兑现到 R3（≤0.20px）而不伤接触？②**指示器可训吗**——把接触位监督施加在它被使用的**闭环步分布**上（--w_ct_roll），能否把 ROC 曲线外推？",
+
+  "calibration_from_diagnostics": {
+    "note": "0 GPU 标定（tmp_s1f_threshold_diag.py，20000 窗 × 3 seed × 4 臂；修掉三个度量 bug 后：轴序错位、反掩码、标签错）",
+    "indicator_quality": "爻头接触位是强判别器：自由单元 p̄=0.040 / 接触单元 p̄=0.973（k=1..3 稳定，分离度 +0.92）",
+    "key_arithmetic": "POS6 误差覆盖 3 物体 ⇒ 一个 FF 窗要'完全静默'需 9 个单元全对：单元正确率 r ⇒ 完美窗 ≈ r⁹。r=0.948 ⇒ 63%；要 96% 完美窗需 r≥0.995",
+    "window_vs_object": "逐物体判决在同等 FF 收益下接触损伤 ×2.3（接触 RMS 4.5–5.8 vs 2.3–3.3）⇒ **窗口级 max 判决支配逐物体**，本槽位用窗口级",
+    "window_rule_curve_3seed_mean": {
+      "τ=0.5": {"FF全关窗": "36–82%", "FF闭环RMS": "0.33–2.35", "接触单元误关": "0.5–0.7%", "接触RMS": "2.26–2.43"},
+      "τ=0.7": {"FF全关窗": "60–96%", "FF闭环RMS": "0.12(sgate)/0.21(baseline)/0.30(W2)/2.12(S)", "接触单元误关": "1.2–1.5%", "接触RMS": "2.40–2.54（×1.06）"},
+      "τ=0.9": {"FF全关窗": "85–100%", "FF闭环RMS": "0.0001(baseline/sgate/W2)/0.88(S)", "接触单元误关": "3.1–3.5%", "接触RMS": "3.07–3.31（×1.36）"}
+    },
+    "无掩码基线（SLOT-1e 判决）": {"FF闭环k=3": "baseline 2.042 / wff10 1.406 / sgate 1.596 / W1 1.533 / W2 1.329 / S 2.727"}
+  },
+
+  "design": {
+    "type": "两训练臂 × 3 seed + 参照臂零重训（baseline/wff10/sgate/W1/W2/S）；方法在全部臂上评估",
+    "arms": {
+      "F1 闭环接触监督": {
+        "args": "--w_ct_roll 1.0",
+        "参照": "baseline（S1b euler001x5，零重训）",
+        "归因": "把接触位训在闭环步分布上的独立效应（单步爻 BCE 只覆盖 k=1）"
+      },
+      "F2 闭环+类别平衡": {
+        "args": "--w_ct_roll 1.0 --ct_pos_weight 0.67",
+        "参照": "F1（与 F1 只差一个旋钮）",
+        "归因": "接触类偏置（单元类比约 60:40）是否是假阳性（自由单元被误判接触）的来源"
+      }
+    },
+    "method_decode_time": "判决式窗口级硬静默：g = 1[ max_o σ(接触位logits_o) ≥ τ ]；g=1 时用残差头，g=0 时该步用纯解析先验（残差置零，接触反馈通道取 0）。τ 由下述预注册规则在 val-A 上选定。部署可得（只用模型自身预测，不需 oracle）。",
+    "tau_rule_preregistered": "在 **val-A（val 窗的前半 10000 窗）** 上，取满足『接触单元误关率 ≤ 2%』的最大 τ（网格 0.50→0.99 步长 0.01）；**判决指标只在 val-B（后半 10000 窗）上计算**（选择与判决分离，避免阈值在测试指标上调优）。",
+    "shared_recipe": {"prior_spec": "euler001x5", "seeds": [42, 43, 44], "epochs": 60,
+                      "windows_per_epoch": 150000, "lr": 0.0003, "batch_size": 1024,
+                      "w_roll": 0.3, "w_ff": 1.0, "w_ff_roll": 1.0},
+    "cmd": "python -X utf8 train_v3.py --prior_spec euler001x5 --seed <s> --epochs 60 --windows_per_epoch 150000 --w_ct_roll 1.0 [--ct_pos_weight 0.67] --checkpoint_dir checkpoints-S1f/<F1|F2>_s<s>",
+    "checkpoint_roots": "checkpoints-S1f/{F1,F2}_s<seed>",
+    "n_new_runs": 6,
+    "cost_estimate": "6 run × ~14 min；3 路并行 ≈ 30 min ≈ 1.5 GPU·h"
+  },
+
+  "hypotheses": {
+    "H1f": "方法成立：在规则选定的 τ 下，FF-clean 闭环 k=3 ≤0.20px（R3 兑现）。",
+    "H2f": "指示器可训：F1/F2 在规则 τ 下的自由单元保护率高于同臂参照（方向 3/3），即 ROC 曲线外推。",
+    "H3f": "类别平衡有效：F2 的自由单元假阳性低于 F1（接触偏置是假阳性来源）。",
+    "H4f": "不伤接触：接触 regime 闭环 k=3 ≤ 该臂无掩码 ×1.10，且 mixed 不劣化。"
+  },
+
+  "criteria": {
+    "R1f 方法兑现（主判据）": {"test": "在 val-B、规则 τ 下：FF-clean 闭环 k=3 ≤ 0.20px，且 3/3 seed 均满足"},
+    "R2f 不伤接触": {"test": "接触 regime 闭环 k=3 ≤ 该臂无掩码同 seed ×1.10"},
+    "R3f 指示器可训": {"test": "F1/F2 自由单元保护率 ≥ 同臂参照（方向性 3/3）"},
+    "R4f 曲线外推（ROC 支配）": {"test": "训练臂在『同等接触误关率（±0.5pp）』下 FF RMS ≤ 参照臂"},
+    "R5f mixed 不劣化": {"test": "mixed 闭环 k=3 ≤ 该臂无掩码 ×1.10"},
+    "统计": "同 seed 配对；ITT 崩溃率照记；noise floor <10% 不声称显著（本槽位主判据为绝对门槛，非显著性）"
+  },
+
+  "reporting": {
+    "eval": "tmp_s1f_compare.py（解码时方法 + τ 规则 + 单元级指示器统计 + ROC 曲线）",
+    "order": "R1f → R2f → R3f → R4f → R5f",
+    "outputs": "analysis_output/S1f_report.json + figures/S1f_constructive_silence.png",
+    "extra": "全部九臂的 (τ → FF RMS / 接触 RMS / 误关率) 曲线作为附件报告（方法对架构的普适性）"
+  },
+
+  "stop_rule": [
+    "冒烟核对 w_ct_roll/ct_pos_weight 入 args 且默认 0.0/1.0 时训练损失与历史逐位一致 → 失败则修复重启",
+    "R1f 在规则 τ 下全部臂均不达标 → 判'解码时方法不足'，如实入册并记录需要的指示器精度（r≥0.995），不追加机制",
+    "训练臂的指示器判据（R3f）反向 → 如实记录'闭环步监督无效'，不调参救",
+    "中途不改 τ 规则、2% 约束与门槛；增补另立预注册"
+  ],
+
+  "limitations": [
+    "n=3；单世界（弹球）；只测 euler001x5 精确档",
+    "val-A/B 各半 ⇒ FF-clean 子集每 seed 仅约 10–13 窗，逐 seed 判据噪声大（故 R1f 要求 3/3 同时满足，并在报告中给中位数与全关窗占比作为稳健口径）",
+    "τ 规则用『接触单元误关率』而非任务损失，是代理指标（接触 RMS 由 R2f 兜底）",
+    "方法依赖模型自身的接触头判决；真实部署的判决误差（OOD 观测、噪声）未测——本槽位只测同分布",
+    "判决式静默是解码时行为，不改变训练；'静默是否能被学到'已由 SLOT-1c/1d/1e 三次判负（本槽位不重复声称）"
+  ]
+}

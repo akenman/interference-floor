@@ -1,0 +1,27 @@
+{
+  "version": "hinge-v1",
+  "episodes": 300,
+  "seq_length": 200,
+  "sample_rate_hz": 20.0,
+  "layout": {
+    "obj_dims": 22,
+    "contact_dims": 3,
+    "action_dim": 1
+  },
+  "physics": {
+    "L1": 80.0,
+    "L2": 80.0,
+    "M1": 2.0,
+    "M2": 1.0,
+    "g": 900.0,
+    "tau_max": 28000.0,
+    "integrator": "RK4@0.01s",
+    "dt_sample": 0.05
+  },
+  "contact_channels": [
+    "手触地",
+    "手在靶区",
+    "手速警戒"
+  ],
+  "seed": 42
+}

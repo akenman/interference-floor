@@ -1,0 +1,293 @@
+{
+  "note": "SHA-256 and introduction commits of the preregistration files. Report artifacts are mapped by the report JSON's embedded `prereg` field, else by slot filename prefix; dates are git author dates of each file's first commit.",
+  "generated_by": "tmp_prereg_manifest.py",
+  "n_files": 13,
+  "slots_before_first_report": 12,
+  "ordering_granularity": "day (git author date)",
+  "slots_after_first_report": 0,
+  "slots_unknown": 0,
+  "entries": [
+    {
+      "file": "experiments/prereg_P0a_prior_ladder.json",
+      "role": "slot",
+      "sha256": "bf850def87bb51118b77af992a8db060f9c82ddcaa2f01bc8e0ea55e38de2bce",
+      "bytes": 5473,
+      "declared_written_at": "2026-10-01",
+      "intro_commit": "e0911cd",
+      "intro_date": "2026-10-01T11:25:52+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/E0_report.json",
+          "intro_commit": "f6ad128",
+          "intro_date": "2026-10-01T10:59:29+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": true
+    },
+    {
+      "file": "experiments/prereg_P0b_rollout_recipe.json",
+      "role": "slot",
+      "sha256": "8b4683c5ec1502ae8c7328e50f9d4381a794ce62041bc382083a9c206ccfc3a8",
+      "bytes": 10218,
+      "declared_written_at": "2026-10-01",
+      "intro_commit": "e19a993",
+      "intro_date": "2026-10-02T15:14:52+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/P0bA_report.json",
+          "intro_commit": "e04583f",
+          "intro_date": "2026-10-02T21:07:50+08:00"
+        },
+        {
+          "file": "analysis_output/P0bB_report.json",
+          "intro_commit": "e04583f",
+          "intro_date": "2026-10-02T21:07:50+08:00"
+        },
+        {
+          "file": "analysis_output/P0bC_report.json",
+          "intro_commit": "e04583f",
+          "intro_date": "2026-10-02T21:07:50+08:00"
+        }
+      ],
+      "report_artifacts_total": 3,
+      "artifact_matching": "filename-prefix",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_P0c_aux_supervision.json",
+      "role": "slot",
+      "sha256": "a47a51efea8415b087b836ae0b55f7558d2aabb6a7f4bc284d4a020fbd69ce82",
+      "bytes": 7420,
+      "declared_written_at": "2026-10-02",
+      "intro_commit": "b825c28",
+      "intro_date": "2026-10-02T22:12:26+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/P0c_compare.json",
+          "intro_commit": "f0dba34",
+          "intro_date": "2026-10-03T01:02:01+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "prereg-earlier",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S0b_floor_absorption.json",
+      "role": "slot",
+      "sha256": "5326c59650bb6216f6fc4f917c42c865007c8608021097ba4398138785a60a1c",
+      "bytes": 7315,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "05e9822",
+      "intro_date": "2026-10-03T12:01:18+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S0b_compare.json",
+          "intro_commit": "18b9930",
+          "intro_date": "2026-10-03T13:12:40+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1_ball_ladder.json",
+      "role": "slot",
+      "sha256": "f2cae9ddb4a91d587f8492d42d79bc447dd4b1b4f255559071a3e8590f3fe88a",
+      "bytes": 7306,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "12f4fab",
+      "intro_date": "2026-10-03T14:52:46+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1_ball_ladder.json",
+          "intro_commit": "286f51f",
+          "intro_date": "2026-10-03T15:09:16+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1b_ball_trained.json",
+      "role": "slot",
+      "sha256": "8f86039bcfbb45e4640cb57fce76bf578513995f416991a1563fa1785936bec2",
+      "bytes": 6421,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "115a39e",
+      "intro_date": "2026-10-03T15:30:12+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1b_report.json",
+          "intro_commit": "dc2a719",
+          "intro_date": "2026-10-03T16:36:02+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1c_regime_silence.json",
+      "role": "slot",
+      "sha256": "f829f4470cff37a4e0ed1bcadfcfb4414a8591f4d92a3dcc005c703949de3bab",
+      "bytes": 4300,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "cb8616f",
+      "intro_date": "2026-10-03T17:05:53+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1c_report.json",
+          "intro_commit": "28ba7c3",
+          "intro_date": "2026-10-03T17:47:00+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1d_supervised_gate.json",
+      "role": "slot",
+      "sha256": "cec17e33af76663bbb403f1ad84a7e5b7bd25fc99b6dc71682aef2589dd21153",
+      "bytes": 4447,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "a8a5cfd",
+      "intro_date": "2026-10-03T18:10:42+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1d_gate_diag.json",
+          "intro_commit": "8a05bb7",
+          "intro_date": "2026-10-03T18:27:16+08:00"
+        },
+        {
+          "file": "analysis_output/S1d_report.json",
+          "intro_commit": "8a05bb7",
+          "intro_date": "2026-10-03T18:27:16+08:00"
+        }
+      ],
+      "report_artifacts_total": 2,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1e_closed_loop_loss.json",
+      "role": "slot",
+      "sha256": "867af00c596d8dd8d5e7383632b04cc10bf38584c716144fd2203c72888a5da7",
+      "bytes": 5949,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "f6428c8",
+      "intro_date": "2026-10-03T18:33:26+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1e_report.json",
+          "intro_commit": "a84ef6e",
+          "intro_date": "2026-10-03T21:25:41+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1f_constructive_silence.json",
+      "role": "slot",
+      "sha256": "6683a5be88cdcf0c23767a5c926c2a96be665464ef7956773e67a8908327cb3d",
+      "bytes": 6902,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "3ccaec0",
+      "intro_date": "2026-10-04T16:09:35+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1f_report.json",
+          "intro_commit": "cdfdaf6",
+          "intro_date": "2026-10-04T17:05:29+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S1g_mechanism_ablation.json",
+      "role": "slot",
+      "sha256": "8b45310a224bf225d218b31bfbde0ff0f7a91be689e813b92892d05946503ee2",
+      "bytes": 1797,
+      "declared_written_at": "2026-10-04",
+      "intro_commit": "4ab4946",
+      "intro_date": "2026-10-06T23:35:49+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S1g_report.json",
+          "intro_commit": "04e62e7",
+          "intro_date": "2026-10-16T12:22:07+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "prereg-earlier",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "experiments/prereg_S2_multiseed.json",
+      "role": "slot",
+      "sha256": "7865d58531b94261216b82f8cd9985ee3656691c615aa7de47c7a73ed59f21dc",
+      "bytes": 3061,
+      "declared_written_at": "2026-10-03",
+      "intro_commit": "cb8616f",
+      "intro_date": "2026-10-03T17:05:53+08:00",
+      "report_artifacts": [
+        {
+          "file": "analysis_output/S2_multiseed_verdict.json",
+          "intro_commit": "515765d",
+          "intro_date": "2026-10-03T17:53:26+08:00"
+        }
+      ],
+      "report_artifacts_total": 1,
+      "artifact_matching": "embedded-prereg-ref",
+      "ordering": "same-day",
+      "prereg_before_first_report": true,
+      "pilot_calibration_declared": false
+    },
+    {
+      "file": "paper/PREREG_CRITERIA_EN.md",
+      "role": "criteria-summary",
+      "sha256": "799ec1f5f1c9b5457baa63f4e1c06067c2630f1b789a2818faf881a81eae5296",
+      "bytes": 33598,
+      "declared_written_at": null,
+      "intro_commit": "7bbdf02",
+      "intro_date": "2026-10-12T21:56:45+08:00",
+      "report_artifacts": [],
+      "report_artifacts_total": 0,
+      "artifact_matching": null,
+      "ordering": null,
+      "prereg_before_first_report": null,
+      "pilot_calibration_declared": false
+    }
+  ]
+}

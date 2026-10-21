@@ -1,0 +1,995 @@
+{
+ "arms": {
+  "V1": {
+   "n": 3,
+   "one": 0.835,
+   "k5_at_best": 4.256666666666667,
+   "k5_min": 4.17,
+   "acc_at_best": 0.9983333333333333,
+   "acc_max": 0.999,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "V1_nogua": {
+   "n": 3,
+   "one": 0.632,
+   "k5_at_best": 3.9366666666666665,
+   "k5_min": 3.5966666666666667,
+   "acc_at_best": 0.998,
+   "acc_max": 0.9986666666666667,
+   "n_early": 1,
+   "n_collapse": 1,
+   "n_patience": 0
+  },
+  "V2a": {
+   "n": 3,
+   "one": 0.8233333333333333,
+   "k5_at_best": 4.38,
+   "k5_min": 4.363333333333333,
+   "acc_at_best": 0.9783333333333333,
+   "acc_max": 0.9786666666666667,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "V2a_nogua": {
+   "n": 3,
+   "one": 0.7256666666666667,
+   "k5_at_best": 4.216666666666667,
+   "k5_min": 4.203333333333333,
+   "acc_at_best": 0.977,
+   "acc_max": 0.9773333333333333,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "V2b": {
+   "n": 3,
+   "one": 0.8646666666666667,
+   "k5_at_best": 4.826666666666667,
+   "k5_min": 4.82,
+   "acc_at_best": 0.957,
+   "acc_max": 0.958,
+   "n_early": 2,
+   "n_collapse": 2,
+   "n_patience": 0
+  },
+  "V2b_nogua": {
+   "n": 3,
+   "one": 0.6816666666666666,
+   "k5_at_best": 4.133333333333333,
+   "k5_min": 4.003333333333333,
+   "acc_at_best": 0.959,
+   "acc_max": 0.9593333333333333,
+   "n_early": 1,
+   "n_collapse": 0,
+   "n_patience": 1
+  },
+  "V2c": {
+   "n": 3,
+   "one": 0.8283333333333334,
+   "k5_at_best": 4.503333333333333,
+   "k5_min": 4.49,
+   "acc_at_best": 0.9406666666666667,
+   "acc_max": 0.9413333333333332,
+   "n_early": 1,
+   "n_collapse": 0,
+   "n_patience": 1
+  },
+  "V2c_nogua": {
+   "n": 3,
+   "one": 0.679,
+   "k5_at_best": 3.9633333333333334,
+   "k5_min": 3.94,
+   "acc_at_best": 0.9423333333333332,
+   "acc_max": 0.9423333333333332,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "V3": {
+   "n": 3,
+   "one": 0.8046666666666666,
+   "k5_at_best": 4.473333333333334,
+   "k5_min": 4.423333333333334,
+   "acc_at_best": 0.9576666666666667,
+   "acc_max": 0.9576666666666667,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "V3_nogua": {
+   "n": 3,
+   "one": 0.7946666666666667,
+   "k5_at_best": 4.323333333333333,
+   "k5_min": 4.293333333333333,
+   "acc_at_best": 0.954,
+   "acc_max": 0.9543333333333333,
+   "n_early": 1,
+   "n_collapse": 1,
+   "n_patience": 0
+  },
+  "V4": {
+   "n": 3,
+   "one": 0.9196666666666666,
+   "k5_at_best": 4.633333333333334,
+   "k5_min": 4.616666666666667,
+   "acc_at_best": 0.954,
+   "acc_max": 0.9553333333333333,
+   "n_early": 1,
+   "n_collapse": 0,
+   "n_patience": 1
+  },
+  "V4_nogua": {
+   "n": 3,
+   "one": 0.6736666666666667,
+   "k5_at_best": 3.9333333333333336,
+   "k5_min": 3.9033333333333333,
+   "acc_at_best": 0.9576666666666667,
+   "acc_max": 0.958,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  },
+  "Vfree": {
+   "n": 3,
+   "one": 0.8343333333333334,
+   "k5_at_best": 4.28,
+   "k5_min": 4.256666666666667,
+   "acc_at_best": 0.9573333333333333,
+   "acc_max": 0.9576666666666667,
+   "n_early": 0,
+   "n_collapse": 0,
+   "n_patience": 0
+  }
+ },
+ "runs": {
+  "V1": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.83,
+    "best_one_ep": 52,
+    "one_final": 0.837,
+    "k5_at_best": 4.21,
+    "k5_min": 4.14,
+    "k5_final": 4.28,
+    "acc_at_best": 0.998,
+    "acc_max": 0.999,
+    "roll_at_best": [
+     0.83,
+     1.92,
+     2.65,
+     3.29,
+     4.21
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.881,
+    "best_one_ep": 56,
+    "one_final": 0.882,
+    "k5_at_best": 4.77,
+    "k5_min": 4.6,
+    "k5_final": 4.78,
+    "acc_at_best": 0.998,
+    "acc_max": 0.999,
+    "roll_at_best": [
+     0.88,
+     2.18,
+     3.02,
+     3.67,
+     4.77
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.794,
+    "best_one_ep": 56,
+    "one_final": 0.796,
+    "k5_at_best": 3.79,
+    "k5_min": 3.77,
+    "k5_final": 3.8,
+    "acc_at_best": 0.999,
+    "acc_max": 0.999,
+    "roll_at_best": [
+     0.79,
+     1.87,
+     2.37,
+     2.84,
+     3.79
+    ]
+   }
+  ],
+  "V1_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.572,
+    "best_one_ep": 56,
+    "one_final": 0.572,
+    "k5_at_best": 3.12,
+    "k5_min": 3.06,
+    "k5_final": 3.12,
+    "acc_at_best": 0.999,
+    "acc_max": 0.999,
+    "roll_at_best": [
+     0.57,
+     1.46,
+     1.98,
+     2.4,
+     3.12
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.531,
+    "best_one_ep": 54,
+    "one_final": 0.533,
+    "k5_at_best": 3.19,
+    "k5_min": 3.17,
+    "k5_final": 3.2,
+    "acc_at_best": 0.999,
+    "acc_max": 0.999,
+    "roll_at_best": [
+     0.53,
+     1.53,
+     2.02,
+     2.46,
+     3.19
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": true,
+    "collapsed": true,
+    "best_one": 0.793,
+    "best_one_ep": 32,
+    "one_final": 22.441,
+    "k5_at_best": 5.5,
+    "k5_min": 4.56,
+    "k5_final": 77.66,
+    "acc_at_best": 0.996,
+    "acc_max": 0.998,
+    "roll_at_best": [
+     0.79,
+     2.15,
+     3.19,
+     4.34,
+     5.5
+    ]
+   }
+  ],
+  "V2a": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.824,
+    "best_one_ep": 52,
+    "one_final": 0.837,
+    "k5_at_best": 4.32,
+    "k5_min": 4.29,
+    "k5_final": 4.33,
+    "acc_at_best": 0.978,
+    "acc_max": 0.978,
+    "roll_at_best": [
+     0.82,
+     2.0,
+     2.79,
+     3.45,
+     4.32
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.823,
+    "best_one_ep": 58,
+    "one_final": 0.823,
+    "k5_at_best": 4.33,
+    "k5_min": 4.32,
+    "k5_final": 4.32,
+    "acc_at_best": 0.979,
+    "acc_max": 0.979,
+    "roll_at_best": [
+     0.82,
+     1.98,
+     2.67,
+     3.29,
+     4.33
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.823,
+    "best_one_ep": 48,
+    "one_final": 0.829,
+    "k5_at_best": 4.49,
+    "k5_min": 4.48,
+    "k5_final": 4.48,
+    "acc_at_best": 0.978,
+    "acc_max": 0.979,
+    "roll_at_best": [
+     0.82,
+     1.99,
+     2.81,
+     3.4,
+     4.49
+    ]
+   }
+  ],
+  "V2a_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.872,
+    "best_one_ep": 58,
+    "one_final": 0.873,
+    "k5_at_best": 4.61,
+    "k5_min": 4.6,
+    "k5_final": 4.6,
+    "acc_at_best": 0.977,
+    "acc_max": 0.977,
+    "roll_at_best": [
+     0.87,
+     1.95,
+     2.93,
+     3.55,
+     4.61
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.698,
+    "best_one_ep": 54,
+    "one_final": 0.706,
+    "k5_at_best": 4.29,
+    "k5_min": 4.27,
+    "k5_final": 4.28,
+    "acc_at_best": 0.976,
+    "acc_max": 0.976,
+    "roll_at_best": [
+     0.7,
+     1.86,
+     2.56,
+     3.17,
+     4.29
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.607,
+    "best_one_ep": 52,
+    "one_final": 0.612,
+    "k5_at_best": 3.75,
+    "k5_min": 3.74,
+    "k5_final": 3.74,
+    "acc_at_best": 0.978,
+    "acc_max": 0.979,
+    "roll_at_best": [
+     0.61,
+     1.62,
+     2.31,
+     2.82,
+     3.75
+    ]
+   }
+  ],
+  "V2b": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.758,
+    "best_one_ep": 56,
+    "one_final": 0.76,
+    "k5_at_best": 4.23,
+    "k5_min": 4.22,
+    "k5_final": 4.23,
+    "acc_at_best": 0.959,
+    "acc_max": 0.96,
+    "roll_at_best": [
+     0.76,
+     2.0,
+     2.75,
+     3.37,
+     4.23
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": true,
+    "collapsed": true,
+    "best_one": 0.908,
+    "best_one_ep": 24,
+    "one_final": 13.333,
+    "k5_at_best": 5.36,
+    "k5_min": 5.36,
+    "k5_final": 38.35,
+    "acc_at_best": 0.956,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.91,
+     2.22,
+     3.15,
+     4.09,
+     5.36
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": true,
+    "collapsed": true,
+    "best_one": 0.928,
+    "best_one_ep": 22,
+    "one_final": 14.933,
+    "k5_at_best": 4.89,
+    "k5_min": 4.88,
+    "k5_final": 53.61,
+    "acc_at_best": 0.956,
+    "acc_max": 0.956,
+    "roll_at_best": [
+     0.93,
+     2.16,
+     3.07,
+     3.93,
+     4.89
+    ]
+   }
+  ],
+  "V2b_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.622,
+    "best_one_ep": 56,
+    "one_final": 0.622,
+    "k5_at_best": 3.59,
+    "k5_min": 3.57,
+    "k5_final": 3.57,
+    "acc_at_best": 0.96,
+    "acc_max": 0.96,
+    "roll_at_best": [
+     0.62,
+     1.61,
+     2.21,
+     2.73,
+     3.59
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": true,
+    "collapsed": false,
+    "best_one": 0.754,
+    "best_one_ep": 24,
+    "one_final": 0.879,
+    "k5_at_best": 4.89,
+    "k5_min": 4.55,
+    "k5_final": 5.48,
+    "acc_at_best": 0.957,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.75,
+     1.89,
+     2.91,
+     3.76,
+     4.89
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.669,
+    "best_one_ep": 56,
+    "one_final": 0.671,
+    "k5_at_best": 3.92,
+    "k5_min": 3.89,
+    "k5_final": 3.89,
+    "acc_at_best": 0.96,
+    "acc_max": 0.96,
+    "roll_at_best": [
+     0.67,
+     1.71,
+     2.47,
+     3.08,
+     3.92
+    ]
+   }
+  ],
+  "V2c": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.818,
+    "best_one_ep": 58,
+    "one_final": 0.818,
+    "k5_at_best": 4.26,
+    "k5_min": 4.25,
+    "k5_final": 4.26,
+    "acc_at_best": 0.943,
+    "acc_max": 0.943,
+    "roll_at_best": [
+     0.82,
+     1.82,
+     2.64,
+     3.25,
+     4.26
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": true,
+    "collapsed": false,
+    "best_one": 0.898,
+    "best_one_ep": 42,
+    "one_final": 0.903,
+    "k5_at_best": 4.8,
+    "k5_min": 4.8,
+    "k5_final": 4.87,
+    "acc_at_best": 0.936,
+    "acc_max": 0.938,
+    "roll_at_best": [
+     0.9,
+     1.99,
+     3.08,
+     3.65,
+     4.8
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.769,
+    "best_one_ep": 54,
+    "one_final": 0.77,
+    "k5_at_best": 4.45,
+    "k5_min": 4.42,
+    "k5_final": 4.42,
+    "acc_at_best": 0.943,
+    "acc_max": 0.943,
+    "roll_at_best": [
+     0.77,
+     1.69,
+     2.55,
+     3.3,
+     4.45
+    ]
+   }
+  ],
+  "V2c_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.676,
+    "best_one_ep": 58,
+    "one_final": 0.677,
+    "k5_at_best": 4.11,
+    "k5_min": 4.09,
+    "k5_final": 4.11,
+    "acc_at_best": 0.942,
+    "acc_max": 0.942,
+    "roll_at_best": [
+     0.68,
+     1.58,
+     2.3,
+     3.05,
+     4.11
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.662,
+    "best_one_ep": 60,
+    "one_final": 0.662,
+    "k5_at_best": 3.88,
+    "k5_min": 3.84,
+    "k5_final": 3.88,
+    "acc_at_best": 0.942,
+    "acc_max": 0.942,
+    "roll_at_best": [
+     0.66,
+     1.62,
+     2.37,
+     2.94,
+     3.88
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.699,
+    "best_one_ep": 56,
+    "one_final": 0.7,
+    "k5_at_best": 3.9,
+    "k5_min": 3.89,
+    "k5_final": 3.89,
+    "acc_at_best": 0.943,
+    "acc_max": 0.943,
+    "roll_at_best": [
+     0.7,
+     1.64,
+     2.49,
+     3.05,
+     3.9
+    ]
+   }
+  ],
+  "V3": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.769,
+    "best_one_ep": 58,
+    "one_final": 0.769,
+    "k5_at_best": 4.4,
+    "k5_min": 4.32,
+    "k5_final": 4.4,
+    "acc_at_best": 0.958,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.77,
+     1.98,
+     2.86,
+     3.49,
+     4.4
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.878,
+    "best_one_ep": 52,
+    "one_final": 0.886,
+    "k5_at_best": 4.8,
+    "k5_min": 4.8,
+    "k5_final": 4.84,
+    "acc_at_best": 0.957,
+    "acc_max": 0.957,
+    "roll_at_best": [
+     0.88,
+     2.09,
+     2.98,
+     3.72,
+     4.8
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.767,
+    "best_one_ep": 56,
+    "one_final": 0.769,
+    "k5_at_best": 4.22,
+    "k5_min": 4.15,
+    "k5_final": 4.21,
+    "acc_at_best": 0.958,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.77,
+     1.92,
+     2.6,
+     3.18,
+     4.22
+    ]
+   }
+  ],
+  "V3_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.679,
+    "best_one_ep": 56,
+    "one_final": 0.681,
+    "k5_at_best": 3.97,
+    "k5_min": 3.92,
+    "k5_final": 3.94,
+    "acc_at_best": 0.958,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.68,
+     1.78,
+     2.51,
+     3.04,
+     3.97
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": true,
+    "collapsed": true,
+    "best_one": 1.032,
+    "best_one_ep": 16,
+    "one_final": 275.334,
+    "k5_at_best": 5.39,
+    "k5_min": 5.39,
+    "k5_final": 151.65,
+    "acc_at_best": 0.946,
+    "acc_max": 0.946,
+    "roll_at_best": [
+     1.03,
+     2.21,
+     3.3,
+     4.18,
+     5.39
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.673,
+    "best_one_ep": 46,
+    "one_final": 0.689,
+    "k5_at_best": 3.61,
+    "k5_min": 3.57,
+    "k5_final": 3.57,
+    "acc_at_best": 0.958,
+    "acc_max": 0.959,
+    "roll_at_best": [
+     0.67,
+     1.65,
+     2.31,
+     2.84,
+     3.61
+    ]
+   }
+  ],
+  "V4": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": true,
+    "collapsed": false,
+    "best_one": 1.031,
+    "best_one_ep": 18,
+    "one_final": 1.266,
+    "k5_at_best": 5.03,
+    "k5_min": 5.03,
+    "k5_final": 6.53,
+    "acc_at_best": 0.948,
+    "acc_max": 0.951,
+    "roll_at_best": [
+     1.03,
+     2.23,
+     3.34,
+     3.92,
+     5.03
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.845,
+    "best_one_ep": 54,
+    "one_final": 0.858,
+    "k5_at_best": 4.36,
+    "k5_min": 4.36,
+    "k5_final": 4.36,
+    "acc_at_best": 0.957,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.85,
+     2.04,
+     2.76,
+     3.38,
+     4.36
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.883,
+    "best_one_ep": 58,
+    "one_final": 0.883,
+    "k5_at_best": 4.51,
+    "k5_min": 4.46,
+    "k5_final": 4.51,
+    "acc_at_best": 0.957,
+    "acc_max": 0.957,
+    "roll_at_best": [
+     0.88,
+     1.91,
+     2.63,
+     3.46,
+     4.51
+    ]
+   }
+  ],
+  "V4_nogua": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.668,
+    "best_one_ep": 56,
+    "one_final": 0.671,
+    "k5_at_best": 4.15,
+    "k5_min": 4.12,
+    "k5_final": 4.14,
+    "acc_at_best": 0.958,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.67,
+     1.8,
+     2.73,
+     3.33,
+     4.15
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.677,
+    "best_one_ep": 54,
+    "one_final": 0.684,
+    "k5_at_best": 3.99,
+    "k5_min": 3.98,
+    "k5_final": 3.99,
+    "acc_at_best": 0.957,
+    "acc_max": 0.957,
+    "roll_at_best": [
+     0.68,
+     1.73,
+     2.54,
+     3.13,
+     3.99
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.676,
+    "best_one_ep": 46,
+    "one_final": 0.689,
+    "k5_at_best": 3.66,
+    "k5_min": 3.61,
+    "k5_final": 3.63,
+    "acc_at_best": 0.958,
+    "acc_max": 0.959,
+    "roll_at_best": [
+     0.68,
+     1.65,
+     2.29,
+     2.82,
+     3.66
+    ]
+   }
+  ],
+  "Vfree": [
+   {
+    "seed": 42,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.893,
+    "best_one_ep": 58,
+    "one_final": 0.894,
+    "k5_at_best": 4.56,
+    "k5_min": 4.51,
+    "k5_final": 4.56,
+    "acc_at_best": 0.957,
+    "acc_max": 0.957,
+    "roll_at_best": [
+     0.89,
+     2.03,
+     2.94,
+     3.69,
+     4.56
+    ]
+   },
+   {
+    "seed": 43,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.79,
+    "best_one_ep": 54,
+    "one_final": 0.802,
+    "k5_at_best": 4.23,
+    "k5_min": 4.22,
+    "k5_final": 4.25,
+    "acc_at_best": 0.958,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.79,
+     1.88,
+     2.6,
+     3.25,
+     4.23
+    ]
+   },
+   {
+    "seed": 44,
+    "done": true,
+    "early": false,
+    "collapsed": false,
+    "best_one": 0.82,
+    "best_one_ep": 56,
+    "one_final": 0.823,
+    "k5_at_best": 4.05,
+    "k5_min": 4.04,
+    "k5_final": 4.14,
+    "acc_at_best": 0.957,
+    "acc_max": 0.958,
+    "roll_at_best": [
+     0.82,
+     1.77,
+     2.58,
+     3.19,
+     4.05
+    ]
+   }
+  ]
+ },
+ "note": "one-step 与 k5/acc 均取 best-one epoch 处的值；k5_min/acc_max 为整个训练过程最优。"
+}

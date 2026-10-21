@@ -1,0 +1,80 @@
+{
+  "experiment": "SLOT-1e",
+  "title": "闭环损失质量——把 regime 重加权延伸到 rollout 项，兑现闭环静默（R3）",
+  "prereg_written_at": "2026-10-03",
+  "status": "PREREGISTERED",
+
+  "question": "误差预算判定（tmp_s1e_error_budget.py，0 GPU，20000 窗 × 3 seed）：闭环 FF k=3 误差 = 解析恒等 0.00003 + **闭环步分布上的头噪声**（baseline 0.832 / wff10 0.757 / sgate 0.695）+ **自回归复合**（1.210 / 0.650 / 0.901）；**接触反馈通道贡献仅 0.002–0.154px**（不是主因）。零头噪声下闭环 k=3 = **0.00009px**（3 seed 全一致）⇒ R3 原则上可达，1.4 只是静默不彻底。而 wff10 把**单步** FF 噪声压了 46%，**闭环步分布上的头噪声只动 9%**（0.832→0.757）——故正确杠杆是**在闭环项上买静默**：把 regime 重加权从单步状态损失延伸到 rollout 损失，能否使训练臂的闭环 FF 从 1.406 压到 R3（≤0.20px）？",
+
+  "motivation_from_prior_results": {
+    "S1c": "wff10（单步重加权 ×10）：单步 FF 0.461、闭环 1.406（R3 未达）；regime 配比是因果变量。",
+    "S1d": "监督门：门学到 regime（99.34%）但闭环 1.596，劣于重加权；机制 = 门与头共适应（乘法模块买不到静默）。",
+    "S1e 预算": "闭环误差主项 = 闭环步分布头噪声 ⊕ 自回归复合；接触反馈通道 ≈ 0；完美静默上限 0.00009px。"
+  },
+
+  "design": {
+    "type": "三臂 × 3 seed（单变量归因，各臂相对既有零重训参照只差一个旋钮）",
+    "arms": {
+      "W1 闭环-only": {
+        "args": "--w_ff 1.0 --w_ff_roll 10",
+        "参照": "baseline（S1b euler001x5，零重训）",
+        "归因": "rollout 项重加权的独立效应（单步项不动）"
+      },
+      "W2 单步+闭环": {
+        "args": "--w_ff 10 --w_ff_roll 10",
+        "参照": "wff10（S1c，零重训）",
+        "归因": "在已证明的单步重加权之上加闭环项"
+      },
+      "S 强剂量": {
+        "args": "--w_ff 100 --w_ff_roll 1",
+        "参照": "wff10（S1c，零重训）",
+        "归因": "同一通道只改剂量（10→100），检验'单靠剂量能否兑现 R3'"
+      }
+    },
+    "mechanism": "train_v3.py 新增 --w_ff_roll：同一 win_ff 掩码（末输入帧与目标帧均无接触）施加在 rollout 损失的逐样本权重上（sw_r = 1 + (w_ff_roll−1)·win_ff）；默认 1.0 时逐位等价历史行为（权重为 None，不改计算图）。单步项由 --w_ff 独立登记（SLOT-1c 机制不变）。",
+    "shared_recipe": {"prior_spec": "euler001x5", "seeds": [42, 43, 44], "epochs": 60,
+                      "windows_per_epoch": 150000, "lr": 0.0003, "batch_size": 1024,
+                      "w_roll": 0.3, "snapshot_on": false, "gate": false},
+    "cmd": "python -X utf8 train_v3.py --prior_spec euler001x5 --seed <s> --epochs 60 --windows_per_epoch 150000 --w_ff <10|1|100> --w_ff_roll <10|1> --checkpoint_dir checkpoints-S1e/<arm>_s<s>",
+    "checkpoint_roots": "checkpoints-S1e/{W1,W2,S}_s<seed>",
+    "n_new_runs": 9,
+    "cost_estimate": "9 run × ~14 min；3 路并行 ≈ 45 min 壁钟 ≈ 2 GPU·h"
+  },
+
+  "hypotheses": {
+    "H1e": "闭环项重加权有效：W1/W2 的闭环 FF k=3 显著低于其参照（方向 3/3）。",
+    "H2e": "通道优于剂量：W2 的闭环改善幅度 > S（同强度下，rollout 项的边际收益大于再上单步权）。",
+    "H3e": "R3 兑现：至少一臂闭环 FF k=3 ≤ 0.20px（完美静默上限 0.00009 提供 ~2000× 裕度）。",
+    "H4e": "不伤接触：各臂 mixed one-step ≤ 0.628px，mixed 闭环不劣化。"
+  },
+
+  "criteria": {
+    "R1e 单步静默": {"test": "FF-clean one-step ≤ 0.10px", "partial": "0.10–0.25px 记部分兑现"},
+    "R2e 不伤接触": {"test": "mixed one-step ≤ 0.628px（baseline 0.570 × 1.10）"},
+    "R3e 闭环兑现（主判据）": {"test": "FF-clean 闭环 k=3 ≤ 0.20px", "标定依据": "完美静默上限 0.00009px（3 seed）；现状 1.406 ⇒ 需 7× 改善；0.20 = 解析恒等 + 头残余 0.2px 级"},
+    "R4e 通道归因": {"test": "W2 的闭环相对改善 ≥ S 臂（方向性；对应 H2e）"},
+    "R5e mixed 闭环不劣化": {"test": "mixed 闭环 k=3 ≤ baseline ×1.10（2.278×1.10≈2.51px）"},
+    "统计": "同 seed 配对 vs 各自参照（3/3 方向一致）+ 效应量与 CI；ITT 崩溃率照记"
+  },
+
+  "analysis_convention": {
+    "eval": "tmp_s1e_compare.py（S1d 协议 + 硬静默掩码上限探针）",
+    "ceiling_probe": "硬静默掩码（爻头预测接触=0 时跳过残差头，部署可得，不需 oracle）× baseline/wff10/sgate/wff10+ 的 checkpoint——作为'上限探针'报告，**不作为本槽位声称的方法**；预算里的 zero-self-soft（0.00009px）是其理想版",
+    "order": "R1e → R2e → R3e → R4e → R5e",
+    "outputs": "analysis_output/S1e_report.json + figures/S1e_closed_loop_loss.png"
+  },
+
+  "stop_rule": [
+    "冒烟核对 w_ff_roll 入 args 且加载后默认 1.0 时训练损失与历史一致 → 失败则修复重启",
+    "三臂全部 R3e 不达标且 R1e 也不达标 → 判'损失质量在闭环项同样买不到静默'，如实入册，不追加机制",
+    "若上限探针（硬掩码）也不达 R3e → 停止该线（说明预算模型有遗漏），先重测预算再谈方法",
+    "中途不改 w_ff/w_ff_roll 与门槛；增补另立预注册"
+  ],
+
+  "limitations": [
+    "n=3；单世界（弹球）；只测 euler001x5 精确档",
+    "win_ff 标签来自接触旗；漏记的持续接触帧被标为接触（该处置权重不变，R2e/R5e 捕捉其量级）",
+    "复合因子在不同臂不同（1.86–2.45×），故'按头噪声线性外推'仅作指示，不作判据",
+    "硬静默掩码用爻头预测接触判决（部署可得），但在本数据上该判决近乎完美（FF 窗 98%+）——真实部署的判决误差是后续槽位"
+  ]
+}

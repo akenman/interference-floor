@@ -1,0 +1,392 @@
+{
+ "protocol": "per-seed own held-out split via e0_common.make_datasets(seed); same e0_common E0 evaluation convention",
+ "seeds": [
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51
+ ],
+ "tiers": {
+  "euler005": {
+   "label": "coarse Euler@.05x1",
+   "n": 10,
+   "per_seed": {
+    "42": {
+     "head_rms": 0.03661973401904106,
+     "target_rms": 0.038604144006967545,
+     "ratio": 0.9485959334425775,
+     "n_free_flight": 25103,
+     "n_val_episodes": 300,
+     "best_epoch": 35
+    },
+    "43": {
+     "head_rms": 0.03759625181555748,
+     "target_rms": 0.04391596093773842,
+     "ratio": 0.856095392489745,
+     "n_free_flight": 24984,
+     "n_val_episodes": 300,
+     "best_epoch": 31
+    },
+    "44": {
+     "head_rms": 0.03417537733912468,
+     "target_rms": 0.03476005420088768,
+     "ratio": 0.9831796331966574,
+     "n_free_flight": 24844,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "45": {
+     "head_rms": 0.032534677535295486,
+     "target_rms": 0.032746847718954086,
+     "ratio": 0.9935208974775366,
+     "n_free_flight": 25222,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "46": {
+     "head_rms": 0.03472207114100456,
+     "target_rms": 0.03528948128223419,
+     "ratio": 0.9839212671704732,
+     "n_free_flight": 25138,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "47": {
+     "head_rms": 0.03409074619412422,
+     "target_rms": 0.03432054445147514,
+     "ratio": 0.9933043528002352,
+     "n_free_flight": 25123,
+     "n_val_episodes": 300,
+     "best_epoch": 37
+    },
+    "48": {
+     "head_rms": 0.03485356271266937,
+     "target_rms": 0.03552154824137688,
+     "ratio": 0.9811949207796802,
+     "n_free_flight": 25018,
+     "n_val_episodes": 300,
+     "best_epoch": 35
+    },
+    "49": {
+     "head_rms": 0.03173526003956795,
+     "target_rms": 0.03184061497449875,
+     "ratio": 0.996691177761008,
+     "n_free_flight": 24746,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "50": {
+     "head_rms": 0.036329057067632675,
+     "target_rms": 0.03809932619333267,
+     "ratio": 0.9535354216839197,
+     "n_free_flight": 24723,
+     "n_val_episodes": 300,
+     "best_epoch": 39
+    },
+    "51": {
+     "head_rms": 0.0337483212351799,
+     "target_rms": 0.03400179371237755,
+     "ratio": 0.9925453204221583,
+     "n_free_flight": 24885,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    }
+   },
+   "ratio_mean": 0.9682584317223991,
+   "ratio_sd": 0.04279539435061036,
+   "ratio_cv_pct": 4.419831828831401,
+   "head_mean": 0.03464050590991974,
+   "target_mean": 0.03591003157198429,
+   "descriptive_only": true
+  },
+  "euler001x5": {
+   "label": "Euler@.01x5",
+   "n": 10,
+   "per_seed": {
+    "42": {
+     "head_rms": 0.0056053646840155125,
+     "target_rms": 0.005903039593249559,
+     "ratio": 0.9495726050059948,
+     "n_free_flight": 25103,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "43": {
+     "head_rms": 0.005727823358029127,
+     "target_rms": 0.006388687063008547,
+     "ratio": 0.8965571957960002,
+     "n_free_flight": 24984,
+     "n_val_episodes": 300,
+     "best_epoch": 43
+    },
+    "44": {
+     "head_rms": 0.005532155279070139,
+     "target_rms": 0.005815998185425997,
+     "ratio": 0.9511961838180891,
+     "n_free_flight": 24844,
+     "n_val_episodes": 300,
+     "best_epoch": 57
+    },
+    "45": {
+     "head_rms": 0.005535225383937359,
+     "target_rms": 0.005647995509207249,
+     "ratio": 0.9800336021715927,
+     "n_free_flight": 25222,
+     "n_val_episodes": 300,
+     "best_epoch": 37
+    },
+    "46": {
+     "head_rms": 0.005483520217239857,
+     "target_rms": 0.005831113085150719,
+     "ratio": 0.940389962802123,
+     "n_free_flight": 25138,
+     "n_val_episodes": 300,
+     "best_epoch": 35
+    },
+    "47": {
+     "head_rms": 0.005577366333454847,
+     "target_rms": 0.0057562850415706635,
+     "ratio": 0.9689176774910028,
+     "n_free_flight": 25123,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "48": {
+     "head_rms": 0.005443194881081581,
+     "target_rms": 0.005666789598762989,
+     "ratio": 0.9605429646214116,
+     "n_free_flight": 25018,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "49": {
+     "head_rms": 0.005293513648211956,
+     "target_rms": 0.005452058743685484,
+     "ratio": 0.9709201417433088,
+     "n_free_flight": 24746,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "50": {
+     "head_rms": 0.005624176003038883,
+     "target_rms": 0.005968690384179354,
+     "ratio": 0.9422797365978904,
+     "n_free_flight": 24723,
+     "n_val_episodes": 300,
+     "best_epoch": 29
+    },
+    "51": {
+     "head_rms": 0.0054565113969147205,
+     "target_rms": 0.00563868647441268,
+     "ratio": 0.9676919299690387,
+     "n_free_flight": 24885,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    }
+   },
+   "ratio_mean": 0.9528102000016453,
+   "ratio_sd": 0.02369349766754492,
+   "ratio_cv_pct": 2.486696476119169,
+   "head_mean": 0.005527885118499398,
+   "target_mean": 0.005806934367865324,
+   "descriptive_only": true
+  },
+  "rk4005": {
+   "label": "RK4@.05x1",
+   "n": 10,
+   "per_seed": {
+    "42": {
+     "head_rms": 0.0015245546819642186,
+     "target_rms": 0.0017209388315677643,
+     "ratio": 0.8858854562398124,
+     "n_free_flight": 25103,
+     "n_val_episodes": 300,
+     "best_epoch": 33
+    },
+    "43": {
+     "head_rms": 0.0013088996056467295,
+     "target_rms": 0.002030528150498867,
+     "ratio": 0.6446104208528971,
+     "n_free_flight": 24984,
+     "n_val_episodes": 300,
+     "best_epoch": 37
+    },
+    "44": {
+     "head_rms": 0.000773447856772691,
+     "target_rms": 0.0010029549011960626,
+     "ratio": 0.7711691281934258,
+     "n_free_flight": 24844,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "45": {
+     "head_rms": 0.0006619181949645281,
+     "target_rms": 0.0008606355404481292,
+     "ratio": 0.769103951505268,
+     "n_free_flight": 25222,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "46": {
+     "head_rms": 0.00090878113405779,
+     "target_rms": 0.00116392457857728,
+     "ratio": 0.7807903972340168,
+     "n_free_flight": 25138,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "47": {
+     "head_rms": 0.0008009524899534881,
+     "target_rms": 0.0010200290707871318,
+     "ratio": 0.7852251596470798,
+     "n_free_flight": 25123,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "48": {
+     "head_rms": 0.00094042212003842,
+     "target_rms": 0.0012546270154416561,
+     "ratio": 0.7495631039854269,
+     "n_free_flight": 25018,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "49": {
+     "head_rms": 0.0007575954659841955,
+     "target_rms": 0.0009388246689923108,
+     "ratio": 0.8069616095594953,
+     "n_free_flight": 24746,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "50": {
+     "head_rms": 0.0013149623991921544,
+     "target_rms": 0.0015085336053743958,
+     "ratio": 0.8716825362772082,
+     "n_free_flight": 24723,
+     "n_val_episodes": 300,
+     "best_epoch": 25
+    },
+    "51": {
+     "head_rms": 0.0009580588666722178,
+     "target_rms": 0.001123185851611197,
+     "ratio": 0.8529833823119243,
+     "n_free_flight": 24885,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    }
+   },
+   "ratio_mean": 0.7917975145806555,
+   "ratio_sd": 0.06973002243070092,
+   "ratio_cv_pct": 8.806547273343071,
+   "head_mean": 0.0009949592815246433,
+   "target_mean": 0.0012624182214494794,
+   "descriptive_only": true
+  },
+  "rk4001x5": {
+   "label": "exact RK4@.01x5",
+   "n": 10,
+   "per_seed": {
+    "42": {
+     "head_rms": 4.5283042709343135e-05,
+     "target_rms": 0.000397453986806795,
+     "ratio": 0.11393279275710352,
+     "n_free_flight": 25103,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "43": {
+     "head_rms": 5.4710457334294915e-05,
+     "target_rms": 0.000391902809496969,
+     "ratio": 0.13960210544170149,
+     "n_free_flight": 24984,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "44": {
+     "head_rms": 5.08007979078684e-05,
+     "target_rms": 0.00038647506153211,
+     "ratio": 0.13144650965699545,
+     "n_free_flight": 24844,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "45": {
+     "head_rms": 4.598460509441793e-05,
+     "target_rms": 0.0004023875226266682,
+     "ratio": 0.11427940109634578,
+     "n_free_flight": 25222,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "46": {
+     "head_rms": 4.742306191474199e-05,
+     "target_rms": 0.0004008044779766351,
+     "ratio": 0.11831969082318118,
+     "n_free_flight": 25138,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "47": {
+     "head_rms": 5.025607242714614e-05,
+     "target_rms": 0.00038828590186312795,
+     "ratio": 0.129430587579926,
+     "n_free_flight": 25123,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "48": {
+     "head_rms": 5.200785744818859e-05,
+     "target_rms": 0.0004086148110218346,
+     "ratio": 0.1272784442593529,
+     "n_free_flight": 25018,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "49": {
+     "head_rms": 5.151338336872868e-05,
+     "target_rms": 0.000402429694077,
+     "ratio": 0.12800592035554967,
+     "n_free_flight": 24746,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "50": {
+     "head_rms": 5.303918806021102e-05,
+     "target_rms": 0.00040215658373199403,
+     "ratio": 0.13188690725391058,
+     "n_free_flight": 24723,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    },
+    "51": {
+     "head_rms": 4.938006532029249e-05,
+     "target_rms": 0.00039680214831605554,
+     "ratio": 0.12444505537545865,
+     "n_free_flight": 24885,
+     "n_val_episodes": 300,
+     "best_epoch": 59
+    }
+   },
+   "ratio_mean": 0.12586274145995252,
+   "ratio_sd": 0.008239275968188992,
+   "ratio_cv_pct": 6.546239079664886,
+   "head_mean": 5.003985315852333e-05,
+   "target_mean": 0.00039773129974491895,
+   "descriptive_only": true
+  }
+ },
+ "split_warning": "Descriptive extension only: splits across seeds overlap in episodes; the ten values are not independent replications.",
+ "shared_split_legacy": {
+  "source": "analysis_output/m4_floor_partial.json",
+  "warning": "Legacy common-split ratios reuse seed-42 validation episodes; most overlap training data for seeds 43-51 and are not used for the revised inferential wording."
+ },
+ "coarse_vs_exact_descriptive_standardized_gap": 19.329283550357967,
+ "standardized_gap_is_inferential": false
+}

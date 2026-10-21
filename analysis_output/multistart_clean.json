@@ -1,0 +1,178 @@
+{
+  "summary": {
+    "protocol": "same data/windows/objective/NM as eval_nmmulti clean arm; only start g varies",
+    "H": 5,
+    "true_g": 900.0,
+    "bounds_g": [
+      499.99999999999983,
+      1500.0
+    ],
+    "starts": [
+      600.0,
+      700.0,
+      800.0,
+      900.0,
+      1000.0,
+      1100.0,
+      1200.0,
+      1300.0,
+      1400.0
+    ],
+    "n_starts": 9,
+    "end_g_min": 705.4207763671875,
+    "end_g_max": 705.929931640625,
+    "end_g_median": 705.76904296875,
+    "n_within_20pct_of_true": 0,
+    "best_objective_index": 0,
+    "best_start_g": 600.0,
+    "best_end_g": 705.8026733398438,
+    "distinct_end_basins": 2,
+    "note": "A single basin would show all starts converging to one end_g. Multiple distinct end values indicate local minima; the lowest objective is the best candidate found, not a certificate of global optimality."
+  },
+  "rows": [
+    {
+      "start_g": 600.0,
+      "end_g": 705.8026733398438,
+      "rel_err_vs_true": -0.21577480740017363,
+      "objective": 0.02245732843875885,
+      "n_eval": 189,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.8026733398438,
+        "M1": 4.257888317108154,
+        "M2": 1.4997178316116333,
+        "L1": 77.52306365966797,
+        "L2": 80.25695037841797
+      }
+    },
+    {
+      "start_g": 700.0,
+      "end_g": 705.4207763671875,
+      "rel_err_vs_true": -0.21619913736979168,
+      "objective": 0.022457333281636238,
+      "n_eval": 192,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.4207763671875,
+        "M1": 4.189687252044678,
+        "M2": 1.47525954246521,
+        "L1": 77.51836395263672,
+        "L2": 80.2564926147461
+      }
+    },
+    {
+      "start_g": 800.0,
+      "end_g": 705.76904296875,
+      "rel_err_vs_true": -0.21581217447916667,
+      "objective": 0.02245733216404915,
+      "n_eval": 168,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.76904296875,
+        "M1": 3.892967700958252,
+        "M2": 1.371183156967163,
+        "L1": 77.52997589111328,
+        "L2": 80.25971221923828
+      }
+    },
+    {
+      "start_g": 900.0,
+      "end_g": 705.70947265625,
+      "rel_err_vs_true": -0.2158783637152778,
+      "objective": 0.02245733104646206,
+      "n_eval": 173,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.70947265625,
+        "M1": 3.5925452709198,
+        "M2": 1.265650987625122,
+        "L1": 77.52268981933594,
+        "L2": 80.24420928955078
+      }
+    },
+    {
+      "start_g": 1000.0,
+      "end_g": 705.6280517578125,
+      "rel_err_vs_true": -0.21596883138020828,
+      "objective": 0.02245732918381691,
+      "n_eval": 177,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.6280517578125,
+        "M1": 3.7677271366119385,
+        "M2": 1.3272686004638672,
+        "L1": 77.52520751953125,
+        "L2": 80.2545394897461
+      }
+    },
+    {
+      "start_g": 1100.0,
+      "end_g": 705.6650390625,
+      "rel_err_vs_true": -0.215927734375,
+      "objective": 0.022457330301404,
+      "n_eval": 197,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.6650390625,
+        "M1": 4.19167947769165,
+        "M2": 1.4766653776168823,
+        "L1": 77.51925659179688,
+        "L2": 80.249755859375
+      }
+    },
+    {
+      "start_g": 1200.0,
+      "end_g": 705.77001953125,
+      "rel_err_vs_true": -0.21581108940972227,
+      "objective": 0.02245732955634594,
+      "n_eval": 207,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.77001953125,
+        "M1": 4.466925144195557,
+        "M2": 1.5737086534500122,
+        "L1": 77.52513122558594,
+        "L2": 80.25155639648438
+      }
+    },
+    {
+      "start_g": 1300.0,
+      "end_g": 705.786865234375,
+      "rel_err_vs_true": -0.21579237196180556,
+      "objective": 0.02245732955634594,
+      "n_eval": 208,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.786865234375,
+        "M1": 4.303224086761475,
+        "M2": 1.515969157218933,
+        "L1": 77.52354431152344,
+        "L2": 80.25370025634766
+      }
+    },
+    {
+      "start_g": 1400.0,
+      "end_g": 705.929931640625,
+      "rel_err_vs_true": -0.2156334092881944,
+      "objective": 0.02245733104646206,
+      "n_eval": 207,
+      "success": true,
+      "message": "Optimization terminated successfully.",
+      "params": {
+        "g": 705.929931640625,
+        "M1": 4.225218296051025,
+        "M2": 1.4883289337158203,
+        "L1": 77.51925659179688,
+        "L2": 80.25653076171875
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+ "source_log": "tmp_unified_log.txt",
+ "source_encoding": "utf-16",
+ "status": "partial: w120k cells never ran (run stopped by hand)",
+ "baseline": {
+  "head_ff_rms": 0.01967342384159565,
+  "head_ct_rms": 0.014915704727172852
+ },
+ "w_ff": 100.0,
+ "w_roll": 0.3,
+ "epochs": 1200,
+ "lr": 0.001,
+ "seed": 42,
+ "head_architecture": "cloned from model.state_head (no extra GELU)",
+ "cells": {
+  "w400k_no_roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.00469,
+    "head_ff_rms": 0.00522,
+    "head_ct_rms": 0.01733,
+    "ff_over_baseline": 0.265,
+    "ct_over_baseline": 1.162
+   },
+   {
+    "epoch": 600,
+    "train_huber": 0.0032,
+    "head_ff_rms": 0.00614,
+    "head_ct_rms": 0.01541,
+    "ff_over_baseline": 0.312,
+    "ct_over_baseline": 1.033
+   },
+   {
+    "epoch": 1200,
+    "train_huber": 0.00269,
+    "head_ff_rms": 0.00665,
+    "head_ct_rms": 0.01499,
+    "ff_over_baseline": 0.338,
+    "ct_over_baseline": 1.005
+   }
+  ],
+  "w400k_roll": [
+   {
+    "epoch": 200,
+    "train_huber": 0.00315,
+    "head_ff_rms": 0.01027,
+    "head_ct_rms": 0.01493,
+    "ff_over_baseline": 0.522,
+    "ct_over_baseline": 1.001
+   },
+   {
+    "epoch": 600,
+    "train_huber": 0.00256,
+    "head_ff_rms": 0.01075,
+    "head_ct_rms": 0.01634,
+    "ff_over_baseline": 0.546,
+    "ct_over_baseline": 1.095
+   }
+  ]
+ },
+ "matched_fit": {
+  "no_roll_epoch": 1200,
+  "roll_epoch": 600,
+  "no_roll_huber": 0.00269,
+  "roll_huber": 0.00256,
+  "no_roll_ff_over": 0.338,
+  "roll_ff_over": 0.546,
+  "ratio": 1.6165413533834585,
+  "no_roll_ct_over": 1.005,
+  "roll_ct_over": 1.095
+ }
+}

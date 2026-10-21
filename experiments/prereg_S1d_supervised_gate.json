@@ -1,0 +1,60 @@
+{
+  "experiment": "SLOT-1d",
+  "title": "监督式静默门——把闭环 FF 静默从 1.41px 压到先验恒等（SLOT-1c R3 的方法兑现）",
+  "prereg_written_at": "2026-10-03",
+  "status": "PREREGISTERED",
+
+  "question": "SLOT-1c 判决：静默门控头在梯度饥饿下无效（FF 帧仅 0.4%，关门梯度被淹没），重加权买到单步静默（0.461px）但闭环只到 1.41px（R3 未达）。既然 regime 标签就在训练数据里（接触旗），把门从端到端自学改为**监督式**（BCE 教门开合）能否实现构造性静默，使训练臂的闭环 FF 兑现解析先验的恒等（0.00003px）？——这把'发现定律→兑现方法'走通，是论文从判决集升级为判决+方法的关键件。",
+
+  "motivation_from_prior_results": {
+    "S1b": "头干涉噪声地板：基线 FF one-step 0.856px / 闭环 k=3 2.042px / 头输出 RMS 0.0186（目标 0.0000）。",
+    "S1c": "wff10 重加权：FF 0.461 / 闭环 1.406（R3 未达）/ 头 RMS 0.0095；gate 端到端自学：门全开（梯度饥饿判负）。",
+    "S0b/铰链": "解析先验闭环 FF 恒等 0.00003px——静默若成立，训练臂应逼近此值。"
+  },
+
+  "design": {
+    "type": "单臂（监督式门）× 3 seed；对照臂复用 SLOT-1b baseline 与 SLOT-1c wff10（零重训）",
+    "mechanism": "GatedWorldModelV3 + 门监督：g=σ(gate_head([h,a]))；训练时加 BCE(g_logits, 1−win_ff)（win_ff=1 即 FF → 目标门关 g=0；win_ff=0 即接触 → 目标门开 g=1），w_gate_bce=1.0。状态损失不重加权（单变量归因：监督门替代重加权）。",
+    "self_consistency": "闭环时接触通道由爻头预测反馈（model_v3.rollout soft 模式）——FF 窗上爻头预测无接触，门输入自洽保持关门，无需改 rollout。",
+    "shared_recipe": {"prior_spec": "euler001x5", "seeds": [42, 43, 44], "epochs": 60,
+                      "windows_per_epoch": 150000, "lr": 0.0003, "batch_size": 1024},
+    "cmd": "python -X utf8 train_v3.py --prior_spec euler001x5 --seed <s> --epochs 60 --windows_per_epoch 150000 --gate --gate_supervise --checkpoint_dir checkpoints-S1d/sgate_s<s>",
+    "checkpoint_roots": "checkpoints-S1d/sgate_s<seed>",
+    "n_new_runs": 3,
+    "cost_estimate": "3 run × ~18 min ≈ 1 GPU·h"
+  },
+
+  "hypotheses": {
+    "H1": "监督门近乎完美学习 regime（门准确率 ≥99%）——输入接触通道使 regime 线性可分。",
+    "H2": "FF 帧构造性静默：头输出 RMS 降到门泄漏水平（≤0.10px 等效），显著低于重加权的 0.461。",
+    "H3": "闭环 FF 贴地兑现：闭环 k=3 逼近解析恒等（≤0.20px 门槛）——训练臂最终兑现精确先验。"
+  },
+
+  "criteria": {
+    "R1d 完全静默": {"test": "FF-clean one-step ≤ 0.10px", "partial": "0.10–0.25px 记部分兑现"},
+    "R2d 不伤接触": {"test": "mixed one-step ≤ 0.628px（基线 0.571 × 1.10）"},
+    "R3d 闭环贴地": {"test": "FF-clean 闭环 k=3 ≤ 0.20px", "note": "解析 0.00003 + 门泄漏裕度"},
+    "R4d 门准确率": {"test": "报告 FF 帧关门/接触帧开门准确率（预期 ≥99%）"},
+    "R5d 混合闭环不劣化": {"test": "mixed 闭环 k=3 ≤ 基线 ×1.10（2.33×1.10≈2.57px）"},
+    "统计": "同 seed 配对 vs SLOT-1b baseline（3/3 方向一致）；与 wff10 的比较为次口径报告"
+  },
+
+  "analysis_convention": {
+    "eval": "tmp_s1d_compare.py（S1c 协议 + 门准确率；对照 baseline=checkpoints-S1b、wff10=checkpoints-S1c）",
+    "order": "R1d → R2d → R3d → R4d → R5d",
+    "outputs": "analysis_output/S1d_report.json + figures/S1d_supervised_gate.png"
+  },
+
+  "stop_rule": [
+    "冒烟核对 gate_supervise/w_gate_bce 入 args 失败 → 修复重启",
+    "门准确率 <95%（H1 证伪）→ 停止，判'regime 不可从 h,a 分辨'，如实入册",
+    "R1d 达标但 R3d 不达标 → 如实记录（静默未被闭环继承=反馈通路问题），不追加机制",
+    "中途不改 w_gate_bce 与门槛；增补另立预注册"
+  ],
+
+  "limitations": [
+    "n=3；单世界；门标签来自接触旗——漏记的持续接触帧旗=0 被标为接触（门开）→ 头在这些帧照常修正，R2d 捕捉其量级",
+    "门监督用引擎真值 regime；部署时 regime 来自模型输入的接触通道（本实验不测通道噪声）",
+    "只测 euler001x5 精确档；门对粗档的作用（FF 帧关门→纯粗先验）未测"
+  ]
+}

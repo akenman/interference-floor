@@ -1,0 +1,41 @@
+{
+  "prereg": {
+    "written": "2026-09-21",
+    "ALARM_RATE": 0.2,
+    "TH_SUCCESS_DROP": 0.02,
+    "TH_EVENT_RED": 0.3,
+    "TH_PREC": 0.5
+  },
+  "model": "checkpoints-v3-calib2/best.pt",
+  "alpha_star": 0.9937736473119985,
+  "alpha_star_source": "held-out trajectories（trajectories_v3.npz），报警率 20%，obj0 通道，标定后冻结",
+  "episodes_requested": 100,
+  "episodes_effective": 29,
+  "skipped": 71,
+  "arms": {
+    "ungated": {
+      "success_rate": 0.034482758620689655,
+      "hit_episode_rate": 0.10344827586206896,
+      "barrier_frames": 8,
+      "mean_min_dist": 220.93006612914365
+    },
+    "gated": {
+      "success_rate": 0.034482758620689655,
+      "hit_episode_rate": 0.10344827586206896,
+      "barrier_frames": 6,
+      "mean_min_dist": 227.85019883786717,
+      "alarm_steps": 2097,
+      "alarm_rate": 0.361551724137931,
+      "alarm_precision": 0.4601812112541726,
+      "err_q80_ungated": 0.7127206921577454
+    }
+  },
+  "criteria": {
+    "E4_1_task_cost": true,
+    "E4_2_safety_gain": false,
+    "E4_3_alarm_precision": false
+  },
+  "verdict": "E4-2 不过 → 路线判死入册",
+  "bugs_found": "eval_planning.run_episode 忽略 select_scene 返回的靶点（env.reset 内部另行随机生成）——本脚本显式 env.target=target；M-D v2 / T8 二审 +4.3pp 的受影响幅度待复核（POST-HOC 观察）",
+  "note": "撞板安全事件 = obj0 与隔板几何接触（wall 反弹是任务允许路径，不计）"
+}

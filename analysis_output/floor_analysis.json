@@ -1,0 +1,307 @@
+{
+ "reproduction": {
+  "clean_ff_head_rms_exact": 0.01967342384159565,
+  "clean_ff_head_rms_legacy": 0.020264271646738052,
+  "n_clean": 73
+ },
+ "prior_dependence": {
+  "by_prior": {
+   "euler001x5": {
+    "head_rms_per_seed": [
+     0.01967342382149285,
+     0.018870332275145577,
+     0.017178126916743006
+    ],
+    "head_rms_mean": 0.018573961004460477,
+    "head_rms_sd": 0.0012737753366583767,
+    "target_rms": 1.3809448089752756e-07,
+    "ratio_per_seed": [
+     136077.705319741,
+     128256.33527837934,
+     140139.58245363337
+    ]
+   },
+   "parabola005": {
+    "head_rms_per_seed": [
+     0.020264272939431067,
+     0.020530562469459473,
+     0.017445563618353366
+    ],
+    "head_rms_mean": 0.019413466342414636,
+    "head_rms_sd": 0.0017094468043716692,
+    "target_rms": 0.0035757263103629714,
+    "ratio_per_seed": [
+     5.67358035891852,
+     5.759071853828717,
+     4.858703156328899
+    ]
+   },
+   "rk4005": {
+    "head_rms_per_seed": [
+     0.026994178999720425,
+     0.02067255299450918,
+     0.018475336188878498
+    ],
+    "head_rms_mean": 0.022047356061036038,
+    "head_rms_sd": 0.004422695254339488,
+    "target_rms": 0.003579100545495548,
+    "ratio_per_seed": [
+     7.538986604280382,
+     5.79750677374906,
+     5.145008291040994
+    ]
+   },
+   "euler005": {
+    "head_rms_per_seed": [
+     0.02420101189146776,
+     0.020770244390998296,
+     0.022986371828832283
+    ],
+    "head_rms_mean": 0.022652542703766113,
+    "head_rms_sd": 0.0017395754723857784,
+    "target_rms": 0.014316410728962987,
+    "ratio_per_seed": [
+     1.6897293076049362,
+     1.4562277214890595,
+     1.6003026082275889
+    ]
+   }
+  },
+  "spread_max_over_min": 1.2195859945181418,
+  "z_coarse_vs_exact": 2.6752344008659663,
+  "z_rk4_vs_exact": 1.067279440326348,
+  "within_prior_cv_pct": 8.24242602205487,
+  "clean_ff_jac_seed42": {
+   "euler001x5": 1.182957649230957,
+   "wff0": 1.4165030717849731,
+   "wff10": 0.6391951441764832,
+   "parabola005": 1.1958540678024292,
+   "euler005": 1.2380176782608032,
+   "rk4005": 1.2197656631469727
+  },
+  "contact_control_seed42": {
+   "euler001x5": {
+    "jac_frob": 0.41506412625312805,
+    "head_rms": 0.014915704359413494
+   },
+   "wff0": {
+    "jac_frob": 0.4356054663658142,
+    "head_rms": 0.015657934110161798
+   },
+   "wff10": {
+    "jac_frob": 0.4131128787994385,
+    "head_rms": 0.015445502428897142
+   },
+   "parabola005": {
+    "jac_frob": 0.42132315039634705,
+    "head_rms": 0.01867559373257186
+   },
+   "euler005": {
+    "jac_frob": 0.4210294485092163,
+    "head_rms": 0.007283410240299548
+   },
+   "rk4005": {
+    "jac_frob": 0.42158088088035583,
+    "head_rms": 0.018083293857527712
+   }
+  }
+ },
+ "silence_ceiling": {
+  "baseline": {
+   "head_ff_rms": 0.01967342384159565,
+   "head_ct_rms": 0.014915704727172852,
+   "target_ff_rms": 1.4457491204211692e-07,
+   "target_ct_rms": 0.01536368764936924,
+   "head_train_fit": 0.007172193378210068,
+   "n_clean": 73,
+   "n_contact": 73
+  },
+  "n_train": 400000,
+  "epochs": 1200,
+  "head_architecture": "cloned from model.state_head (no extra GELU)",
+  "rows": [
+   {
+    "w_ff": 0.0,
+    "head_ff_rms": 0.02765284664928913,
+    "ff_over_baseline": 1.4055940070188766,
+    "head_ct_rms": 0.01548147015273571,
+    "ct_over_baseline": 1.0379308544860217,
+    "train_huber": 0.007223733700811863
+   },
+   {
+    "w_ff": 0.1,
+    "head_ff_rms": 0.018919555470347404,
+    "ff_over_baseline": 0.961680875819168,
+    "head_ct_rms": 0.01545032113790512,
+    "ct_over_baseline": 1.0358425177027222,
+    "train_huber": 0.001306579913944006
+   },
+   {
+    "w_ff": 1.0,
+    "head_ff_rms": 0.017848718911409378,
+    "ff_over_baseline": 0.9072502608148824,
+    "head_ct_rms": 0.015625327825546265,
+    "ct_over_baseline": 1.0475755662473425,
+    "train_huber": 0.0008313492289744318
+   },
+   {
+    "w_ff": 3.0,
+    "head_ff_rms": 0.017507515847682953,
+    "ff_over_baseline": 0.889906911407393,
+    "head_ct_rms": 0.015940211713314056,
+    "ct_over_baseline": 1.0686864620130752,
+    "train_huber": 0.0007635346264578402
+   },
+   {
+    "w_ff": 10.0,
+    "head_ff_rms": 0.014672140590846539,
+    "ff_over_baseline": 0.7457848063957803,
+    "head_ct_rms": 0.016141444444656372,
+    "ct_over_baseline": 1.0821777944725948,
+    "train_huber": 0.0007608989253640175
+   },
+   {
+    "w_ff": 30.0,
+    "head_ff_rms": 0.01258478406816721,
+    "ff_over_baseline": 0.6396844885514599,
+    "head_ct_rms": 0.016285190358757973,
+    "ct_over_baseline": 1.0918150135467783,
+    "train_huber": 0.0007754774997010827
+   },
+   {
+    "w_ff": 100.0,
+    "head_ff_rms": 0.011405758559703827,
+    "ff_over_baseline": 0.5797546299789748,
+    "head_ct_rms": 0.01729518361389637,
+    "ct_over_baseline": 1.1595284252569493,
+    "train_huber": 0.000797984073869884
+   }
+  ],
+  "monotone_decreasing": true,
+  "best_ff_over_baseline": 0.5797546299789748,
+  "best_w_ff": 100.0,
+  "ff_dynamic_range": 2.4244636167370524,
+  "contact_max_deviation_pct": 15.952842525694933
+ },
+ "unified_2x2": {
+  "baseline_ff": 0.01967342384159565,
+  "baseline_ct": 0.014915704727172852,
+  "epochs": 1200,
+  "w_ff": 100.0,
+  "status": "partial: w120k cells never ran (run stopped by hand)",
+  "cells": {
+   "w400k_no_roll": {
+    "ff_over_baseline": 0.338,
+    "ct_over_baseline": 1.005,
+    "train_huber": 0.00269,
+    "ff_over_baseline_measured": 0.3380194547499079
+   },
+   "w400k_roll": {
+    "ff_over_baseline": 0.546,
+    "ct_over_baseline": 1.095,
+    "train_huber": 0.00256,
+    "ff_over_baseline_measured": 0.5464224268513548
+   }
+  },
+  "matched_fit": {
+   "no_roll_epoch": 1200,
+   "roll_epoch": 600,
+   "no_roll_huber": 0.00269,
+   "roll_huber": 0.00256,
+   "no_roll_ff_over": 0.338,
+   "roll_ff_over": 0.546,
+   "ratio": 1.6165413533834585,
+   "no_roll_ct_over": 1.005,
+   "roll_ct_over": 1.095
+  },
+  "sample_size_effect": {
+   "w400k_no_roll": 0.338,
+   "w400k_sweep_no_roll": 0.5797546299789748,
+   "note": "同配置、同轮数，只有训练窗口数与 RNG 执行顺序不同",
+   "w120k_no_roll": 0.36322738806688715,
+   "ratio_120k_over_400k": 1.0746372428014412
+  },
+  "cells_120k": {
+   "w120k_no_roll": {
+    "ff_over_baseline": 0.36322738806688715,
+    "ct_over_baseline": 0.9514673678489795,
+    "train_huber": 0.0021538164000958204
+   },
+   "w120k_roll": {
+    "ff_over_baseline": 1.020923323028238,
+    "ct_over_baseline": 1.078940204360544,
+    "train_huber": 0.0016901472117751837
+   }
+  },
+  "matched_fit_120k": {
+   "no_roll_epoch": 1200,
+   "roll_epoch": 600,
+   "no_roll_huber": 0.0021538164000958204,
+   "roll_huber": 0.002071252791211009,
+   "no_roll_ff_over": 0.36322738806688715,
+   "roll_ff_over": 0.9985818146391305,
+   "ratio": 2.7491919592121863
+  }
+ },
+ "rollout_contrast": {
+  "no_roll_ff_over_baseline": 0.2779790531967682,
+  "roll_ff_over_baseline": 1.3105184968617478,
+  "ratio": 4.714450537875938,
+  "no_roll_ct_over": 0.953390990393376,
+  "roll_ct_over": 1.27138987348348
+ },
+ "run_spread": {
+  "no_roll_runs": [
+   0.5797546299789748,
+   0.338,
+   0.2779790531967682,
+   0.36322738806688715
+  ],
+  "roll_runs": [
+   1.3105184968617478,
+   0.546,
+   1.020923323028238
+  ],
+  "no_roll_min": 0.2779790531967682,
+  "no_roll_max": 0.5797546299789748,
+  "roll_min": 0.546,
+  "roll_max": 1.3105184968617478,
+  "note": "同一配置（冻结主干、w_ff=100）在不同 RNG 执行顺序 / 训练窗口数下的终值不同，说明该点在目标函数下欠定；论文因此报区间而非单点。"
+ },
+ "trunk_freedom_control": {
+  "free_trunk_ff_over_baseline": 0.47031946382491047,
+  "free_trunk_ct_over_baseline": 0.9201253150684069,
+  "free_trunk_epoch": 500,
+  "frozen_trunk_ff_over_baseline": 0.2779790531967682,
+  "frozen_trunk_ct_over_baseline": 0.953390990393376,
+  "note": "冻结主干与自由主干在同一 w_ff 下的可达静默不可区分 -> 终点不是缓存特征的假象；自由主干反而把接触练得更好（0.92x），说明它在优化接触而不是静默。",
+  "pooled_no_roll_range": [
+   0.2779790531967682,
+   0.5797546299789748
+  ]
+ },
+ "falsified_predictions": {
+  "P1": {
+   "median_ratio": 0.53,
+   "loglog_r": 0.301,
+   "note": "Lip x rep_mismatch x target_contact_rms"
+  },
+  "P2": {
+   "median_ratio": 1.96,
+   "loglog_r": 0.26,
+   "note": "contact-fit ridge extrapolated to free flight"
+  },
+  "directional_leverage_r": -0.042928531672142334
+ },
+ "protocol": {
+  "window_definition": "clean-FF mask (contact-free at both frames AND velocity-consistent); the paper's head_rms_on_ff protocol",
+  "position_dims": [
+   1,
+   2,
+   12,
+   13,
+   23,
+   24
+  ]
+ }
+}

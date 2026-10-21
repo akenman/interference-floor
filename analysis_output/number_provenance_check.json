@@ -1,0 +1,2240 @@
+{
+ "checks": [
+  {
+   "name": "E0 ours_base@rk4001x5 one-step",
+   "value": 0.036981,
+   "claimed": 0.037,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "E0 ours_base@rk4001x5 closed k=5",
+   "value": 0.492429,
+   "claimed": 0.49,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "E0 ladder coarse one-step",
+   "value": 0.969015,
+   "claimed": 0.969,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "E0 ladder coarse closed k=5",
+   "value": 14.257656,
+   "claimed": 14.26,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "E0 analytic exact one-step",
+   "value": 0.037827,
+   "claimed": 0.038,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "E0 analytic coarse one-step",
+   "value": 3.37273,
+   "claimed": 3.373,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "pendulum ramp-window fraction",
+   "value": 0.1876,
+   "claimed": 0.188,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "pendulum exact tier one-step, da=0 (px)",
+   "value": 0.017665,
+   "claimed": 0.018,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "pendulum exact tier one-step, da!=0 (px)",
+   "value": 0.079238,
+   "claimed": 0.079,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "pendulum exact tier granularity gap (px)",
+   "value": 0.061573,
+   "claimed": 0.06,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "pendulum exact tier one-step overall (px)",
+   "value": 0.037834,
+   "claimed": 0.038,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "pendulum obsgrid prior one-step (px)",
+   "value": 3e-06,
+   "claimed": 3e-06,
+   "tol": 5e-08,
+   "ok": true
+  },
+  {
+   "name": "pendulum obsgrid trained arm one-step (px)",
+   "value": 0.000248,
+   "claimed": 0.00025,
+   "tol": 5e-06,
+   "ok": true
+  },
+  {
+   "name": "pendulum obsgrid arm vs plateau ratio",
+   "value": 152.712276,
+   "claimed": 150,
+   "tol": 5,
+   "ok": true
+  },
+  {
+   "name": "ball repro one-step rel diff (%)",
+   "value": 1.365087,
+   "claimed": 1.4,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "ball repro mixed k=3 rel diff (%)",
+   "value": 0.502688,
+   "claimed": 0.5,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "ball repro contact damage at tau*",
+   "value": 1.13623,
+   "claimed": 1.14,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "ball repro contact damage rel diff (%)",
+   "value": 6.118671,
+   "claimed": 6,
+   "tol": 0.15,
+   "ok": true
+  },
+  {
+   "name": "ball repro rule-selected tau*",
+   "value": 0.7,
+   "claimed": 0.7,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "ball repro free-flight at tau* (px)",
+   "value": 0.145947,
+   "claimed": 0.146,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "ball ladder parabola FF-clean",
+   "value": 0.159111,
+   "claimed": 0.1591,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "ball ladder euler005 FF-clean",
+   "value": 0.636397,
+   "claimed": 0.6364,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "ball ladder exact FF-clean",
+   "value": 3.1e-05,
+   "claimed": 3e-05,
+   "tol": 0.0001,
+   "ok": true
+  },
+  {
+   "name": "ball ladder exact FF-unfiltered",
+   "value": 0.435489,
+   "claimed": 0.4355,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "ball ladder coarse FF-unfiltered",
+   "value": 0.464663,
+   "claimed": 0.4647,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "ball ladder exact/coarse ratio, unfiltered",
+   "value": 0.937216,
+   "claimed": 0.937,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "ball unfiltered exact-vs-coarse improvement (%)",
+   "value": 6.278381,
+   "claimed": 6.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "ball filter retention (n_ff_clean/n_ff)",
+   "value": 0.102338,
+   "claimed": 0.1023,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "ball mixed windows: exact tier (px)",
+   "value": 1.107098,
+   "claimed": 1.1071,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "ball mixed windows: coarse tier (px)",
+   "value": 0.904906,
+   "claimed": 0.9049,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "ball mixed windows: exact/coarse penalty",
+   "value": 1.22344,
+   "claimed": 1.224,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1g wff0 head RMS (normalised)",
+   "value": 0.021259,
+   "claimed": 0.0213,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "S1g same-seed baseline head RMS",
+   "value": 0.019673,
+   "claimed": 0.0197,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "S1g wff0 vs same-seed baseline (%)",
+   "value": 8.058728,
+   "claimed": 8.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "S1g wff10 head RMS (seed 42)",
+   "value": 0.008872,
+   "claimed": 0.0089,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "S1c baseline head RMS (3-seed mean)",
+   "value": 0.018574,
+   "claimed": 0.0186,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "S1c wff10 head RMS (3-seed mean)",
+   "value": 0.009493,
+   "claimed": 0.0095,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "S1g wff0 vs 3-seed baseline mean (%)",
+   "value": 14.455121,
+   "claimed": 14.0,
+   "tol": 0.6,
+   "ok": true
+  },
+  {
+   "name": "ff Jacobian norm, exact-prior arm (mean)",
+   "value": 0.660329,
+   "claimed": 0.66,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "ff Jacobian norm, six-arm mean",
+   "value": 0.888982,
+   "claimed": 0.89,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "contact Jacobian norm, mean",
+   "value": 0.42945,
+   "claimed": 0.43,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "P0b noprior A k=5",
+   "value": 53.891309,
+   "claimed": 53.89,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "P0b noprior C k=5",
+   "value": 1.31263,
+   "claimed": 1.31,
+   "tol": 0.1,
+   "ok": true
+  },
+  {
+   "name": "P0b exact A k=5",
+   "value": 0.49407,
+   "claimed": 0.49,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "P0c C00 one-step",
+   "value": 0.363424,
+   "claimed": 0.363,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "P0c C10 one-step",
+   "value": 0.639984,
+   "claimed": 0.64,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "P0c yao main effect",
+   "value": 0.269474,
+   "claimed": 0.269,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S0b absorption ratio",
+   "value": 0.000508,
+   "claimed": 0.0005,
+   "tol": 0.0002,
+   "ok": true
+  },
+  {
+   "name": "S0b delta one-step",
+   "value": 0.000138,
+   "claimed": 0.0001,
+   "tol": 0.0002,
+   "ok": true
+  },
+  {
+   "name": "S1b exact-arm FF (trained)",
+   "value": 0.861268,
+   "claimed": 0.861,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1c baseline FF (via S1e)",
+   "value": 0.855817,
+   "claimed": 0.856,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1c wff10 FF",
+   "value": 0.46092,
+   "claimed": 0.461,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1e W-arm one-step FF (x100)",
+   "value": 0.306251,
+   "claimed": 0.306,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1e W-arm closed k=3 (x100)",
+   "value": 2.72681,
+   "claimed": 2.727,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1d gate accuracy",
+   "value": 0.9934,
+   "claimed": 0.9934,
+   "tol": 0.0001,
+   "ok": true
+  },
+  {
+   "name": "S1f decode-rule FF closed (max over arms/seeds)",
+   "value": 0.000103,
+   "claimed": 0.0001,
+   "tol": 0.0001,
+   "ok": true
+  },
+  {
+   "name": "S1f false-silence at tau*",
+   "value": 0.019575,
+   "claimed": 0.02,
+   "tol": 0.004,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B FF median, seed 42 (1e-5 px)",
+   "value": 8.025987,
+   "claimed": 8.0,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B FF median, seed 43 (1e-5 px)",
+   "value": 8.948292,
+   "claimed": 8.9,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B FF median, seed 44 (1e-5 px)",
+   "value": 9.244904,
+   "claimed": 9.2,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B FF median spread across arms (px)",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B all-silenced fraction at tau* (min, 9 pairs)",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f unmasked all-silenced fraction (max, 9 pairs)",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f CPU-recheck max relative deviation",
+   "value": 0.0,
+   "claimed": 1e-07,
+   "tol": 5e-07,
+   "ok": true
+  },
+  {
+   "name": "S1f finegrid tau* shift (max |d|, all 9 pairs)",
+   "value": 0.02,
+   "claimed": 0.02,
+   "tol": 1e-06,
+   "ok": true
+  },
+  {
+   "name": "S1f finegrid val-B all-silenced at tau* (min, 9 pairs)",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f finegrid first all-silenced tau (min)",
+   "value": 0.5,
+   "claimed": 0.5,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f finegrid first all-silenced tau (max)",
+   "value": 0.71,
+   "claimed": 0.71,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms arms (n)",
+   "value": 9.0,
+   "claimed": 9.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms vs report grid (max rel diff, shared arms)",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms tau* (min)",
+   "value": 0.75,
+   "claimed": 0.75,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms tau* (max)",
+   "value": 0.85,
+   "claimed": 0.85,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms contact damage at tau* (min)",
+   "value": 1.083539,
+   "claimed": 1.08,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms contact damage at tau* (max)",
+   "value": 1.29197,
+   "claimed": 1.29,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms damage at tau=0.5 (min)",
+   "value": 1.012535,
+   "claimed": 1.01,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms damage at tau=0.5 (max)",
+   "value": 1.036221,
+   "claimed": 1.04,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms damage at tau=0.95 (min)",
+   "value": 1.581049,
+   "claimed": 1.58,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms damage at tau=0.95 (max)",
+   "value": 1.943956,
+   "claimed": 1.94,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms arm-seeds reaching floor at tau* (n)",
+   "value": 22.0,
+   "claimed": 22.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms S-arm all-silenced (max)",
+   "value": 0.75,
+   "claimed": 0.75,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms S-arm FF at tau* (min, px)",
+   "value": 0.577686,
+   "claimed": 0.58,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f allarms S-arm FF at tau* (max, px)",
+   "value": 2.074412,
+   "claimed": 2.07,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S2 clean g (identical across 3 seeds)",
+   "value": 705.733337,
+   "claimed": 705.7,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 g125 H5 g (min)",
+   "value": 870.8703,
+   "claimed": 870.9,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 g125 H5 g (max)",
+   "value": 886.448364,
+   "claimed": 886.4,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 g125 H5 spread (%)",
+   "value": 1.788793,
+   "claimed": 1.8,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 refined g (min)",
+   "value": 957.300293,
+   "claimed": 957.3,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 refined g (max)",
+   "value": 961.391785,
+   "claimed": 961.4,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 refined spread (%)",
+   "value": 0.427399,
+   "claimed": 0.4,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S2 horizon monotone H1<H5<H10 (all seeds)",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s42 fixed prior k=5 (px)",
+   "value": 5.102747,
+   "claimed": 5.1,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s42 refitted prior k=5 (px)",
+   "value": 5.98858,
+   "claimed": 5.99,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s42 criteria A-D all false",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s42 criterion E true",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s43 fixed prior k=5 (px)",
+   "value": 5.323754,
+   "claimed": 5.32,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s43 refitted prior k=5 (px)",
+   "value": 6.075385,
+   "claimed": 6.08,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s43 criteria A-D all false",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s43 criterion E true",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s44 fixed prior k=5 (px)",
+   "value": 5.361787,
+   "claimed": 5.36,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s44 refitted prior k=5 (px)",
+   "value": 6.326489,
+   "claimed": 6.33,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "G4 s44 criteria A-D all false",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "G4 s44 criterion E true",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "E0 euler001x5 roll5 seed-std",
+   "value": 2.434547,
+   "claimed": 2.43,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "E0 rk4005 roll5 seed-std",
+   "value": 1.333203,
+   "claimed": 1.33,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "E0 exact roll5 seed-std",
+   "value": 0.009343,
+   "claimed": 0.01,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "E0 analytic prior roll5 spread (x)",
+   "value": 31.933768,
+   "claimed": 32,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "E0 trained-arm roll5 spread (x)",
+   "value": 28.953736,
+   "claimed": 29,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "E0 head contribution coarse (improve)",
+   "value": 0.097836,
+   "claimed": 0.098,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "E0 head contribution euler001x5 (degrade)",
+   "value": 0.50339,
+   "claimed": 0.504,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "ball parabola = 0.225/sqrt2",
+   "value": 0.159111,
+   "claimed": 0.15909902576697318,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "ball euler005 = 0.9/sqrt2",
+   "value": 0.636397,
+   "claimed": 0.6363961030678927,
+   "tol": 0.0005,
+   "ok": true
+  },
+  {
+   "name": "ball exact closed-loop k=5 (1.4e-4)",
+   "value": 0.000138,
+   "claimed": 0.000138,
+   "tol": 2e-05,
+   "ok": true
+  },
+  {
+   "name": "P0b coarse improvement (x)",
+   "value": 2.892488,
+   "claimed": 2.9,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "P0b stable-arm improvement (x)",
+   "value": 1.002607,
+   "claimed": 1.0,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "training win_ff fraction",
+   "value": 0.045055,
+   "claimed": 0.045,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "eval ff_clean fraction",
+   "value": 0.003683,
+   "claimed": 0.004,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "S1e W1 one-step FF",
+   "value": 0.871577,
+   "claimed": 0.872,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1e W1 one-step mixed",
+   "value": 0.601986,
+   "claimed": 0.602,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1e W1 closed k=3 FF",
+   "value": 1.533384,
+   "claimed": 1.533,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1e W1 closed-loop fall",
+   "value": 0.248987,
+   "claimed": 0.249,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1e W2 one-step FF",
+   "value": 0.612884,
+   "claimed": 0.613,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1e S step1 growth (min)",
+   "value": 2.632282,
+   "claimed": 2.63,
+   "tol": 0.06,
+   "ok": true
+  },
+  {
+   "name": "S1e S step1 growth (max)",
+   "value": 3.930319,
+   "claimed": 3.93,
+   "tol": 0.06,
+   "ok": true
+  },
+  {
+   "name": "S1e S step2 growth (min)",
+   "value": 4.547041,
+   "claimed": 4.55,
+   "tol": 0.06,
+   "ok": true
+  },
+  {
+   "name": "S1e S step2 growth (max)",
+   "value": 5.082118,
+   "claimed": 5.08,
+   "tol": 0.06,
+   "ok": true
+  },
+  {
+   "name": "S1e others step2 growth (max)",
+   "value": 2.5456,
+   "claimed": 2.55,
+   "tol": 0.06,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B FF windows (15/4/11)",
+   "value": 10.0,
+   "claimed": "exactly [15, 4, 11]",
+   "tol": 6.0,
+   "ok": true
+  },
+  {
+   "name": "S1f scan FF windows per seed/tau (range)",
+   "value": 5,
+   "claimed": "n in [22, 26] across seeds/tau",
+   "tol": 2,
+   "ok": true
+  },
+  {
+   "name": "S1f S-arm win|0.9 ff rms (min)",
+   "value": 0.229276,
+   "claimed": 0.23,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f S-arm win|0.9 ff rms (max)",
+   "value": 1.546251,
+   "claimed": 1.55,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f S-arm open fraction at 0.9 (min)",
+   "value": 0.038462,
+   "claimed": 0.04,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f S-arm open fraction at 0.9 (max)",
+   "value": 0.217391,
+   "claimed": 0.22,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f baseline floor dfs pp (min)",
+   "value": 0.551276,
+   "claimed": 0.55,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "S1f baseline floor dfs pp (max)",
+   "value": 1.230724,
+   "claimed": 1.23,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "S1f baseline floor decades (min)",
+   "value": 3.598114,
+   "claimed": 3.6,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "S1f baseline floor decades (max)",
+   "value": 4.012429,
+   "claimed": 4.01,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "S1f operating-point fs% (mean)",
+   "value": 1.972859,
+   "claimed": 1.97,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f unmasked-to-floor decades",
+   "value": 4.292295,
+   "claimed": 4.3,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B false-silence min (9 pairs, %)",
+   "value": 1.799748,
+   "claimed": 1.8,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B false-silence max (9 pairs, %)",
+   "value": 2.132715,
+   "claimed": 2.13,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B false-silence baseline min (%)",
+   "value": 1.917401,
+   "claimed": 1.92,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B false-silence baseline max (%)",
+   "value": 2.00734,
+   "claimed": 2.01,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f val-B false-silence mean (9 pairs, %)",
+   "value": 1.962598,
+   "claimed": 1.96,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f tau=0.5 baseline FF min (px)",
+   "value": 0.395501,
+   "claimed": 0.4,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f tau=0.5 baseline FF max (px)",
+   "value": 0.808829,
+   "claimed": 0.81,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f unmasked baseline FF (mean, px)",
+   "value": 1.960853,
+   "claimed": 1.96,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1f indicator free-cell prob (k=1 mean)",
+   "value": 0.038917,
+   "claimed": 0.04,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "S1f indicator contact-cell prob (k=1 mean)",
+   "value": 0.973165,
+   "claimed": 0.973,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "P0c main-effect CI half-width (t, df=5)",
+   "value": 0.173751,
+   "claimed": 0.174,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "P0c main-effect CI lower (t)",
+   "value": 0.095723,
+   "claimed": 0.096,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "P0c main-effect CI upper (t)",
+   "value": 0.443225,
+   "claimed": 0.443,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "P0c prototype effect",
+   "value": 0.022015,
+   "claimed": 0.022,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "P0c prototype CI lower (t)",
+   "value": -0.020976,
+   "claimed": -0.021,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "P0c prototype CI upper (t)",
+   "value": 0.065005,
+   "claimed": 0.065,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "gate meta pooled effect (px)",
+   "value": 0.160514,
+   "claimed": 0.161,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "C3 gen2 individual CIs excluding zero (count)",
+   "value": 2.0,
+   "claimed": 2.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "C3 V1 individual CI low (px)",
+   "value": 0.003171,
+   "claimed": 0.003,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "C3 V2b individual CI low (px)",
+   "value": 0.104395,
+   "claimed": 0.104,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "C3 Vfree delta (px)",
+   "value": 0.0677,
+   "claimed": 0.068,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "C3 Vfree CI low (px)",
+   "value": -0.069062,
+   "claimed": -0.069,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "C3 Vfree CI high (px)",
+   "value": 0.204462,
+   "claimed": 0.204,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "C3 main-table gated params (k)",
+   "value": 386.664,
+   "claimed": 386.664,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "C3 main-table control params (k)",
+   "value": 402.28,
+   "claimed": 402.28,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "C3 main-table capacity deviation (%)",
+   "value": -3.88,
+   "claimed": -3.9,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "C3 ablation fewer-capacity range min (%)",
+   "value": 7.97,
+   "claimed": 8.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "C3 ablation fewer-capacity range max (%)",
+   "value": 15.71,
+   "claimed": 16.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "C3 V4 capacity deviation (%)",
+   "value": 16.8,
+   "claimed": 17.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "C3 decoupled capacity deviation (max, %)",
+   "value": 0.07,
+   "claimed": 0.1,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "S1f exchange rate (min pp/decade)",
+   "value": 0.153213,
+   "claimed": 0.153,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1f exchange rate (max pp/decade)",
+   "value": 0.306728,
+   "claimed": 0.307,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "crash rate: five slots (sum)",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "crash rate: P0c 2x2 (0/24)",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "manifest checkpoints (n)",
+   "value": 289.0,
+   "claimed": 289,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "reported model sizes (min, k params)",
+   "value": 339.076,
+   "claimed": 339,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "reported model sizes (max, k params)",
+   "value": 615.158,
+   "claimed": 615,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "pendulum model sizes (max, k params)",
+   "value": 431.305,
+   "claimed": 431,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "capacity ablations (max, k params)",
+   "value": 469.864,
+   "claimed": 470,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "silence hist: silenced with-head RMS (min)",
+   "value": 7.593488,
+   "claimed": 7.6,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: silenced with-head RMS (max)",
+   "value": 8.720921,
+   "claimed": 8.7,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: silenced skipped-head RMS (min)",
+   "value": 9.730954,
+   "claimed": 9.7,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: silenced skipped-head RMS (max)",
+   "value": 10.705131,
+   "claimed": 10.7,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: contact pool RMS (max)",
+   "value": 2.281836,
+   "claimed": 2.3,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: windows touched by rule (min, %)",
+   "value": 4.199531,
+   "claimed": 4.2,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: windows touched by rule (max, %)",
+   "value": 4.66007,
+   "claimed": 4.7,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "silence hist: identity residual (max)",
+   "value": 1e-06,
+   "claimed": 0.0,
+   "tol": 1e-06,
+   "ok": true
+  },
+  {
+   "name": "S1c reweighting R3 (closed-loop) fails",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1d supervised gate R3d (closed-loop) fails",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1f R2f contact-safety fails (9/9 arm-seed)",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S2 preregistered R2-a/b/c all pass",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "S1e main criterion R3e fails on every arm",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "floor exact clean-FF head RMS",
+   "value": 0.019673,
+   "claimed": 0.0197,
+   "tol": 0.0002,
+   "ok": true
+  },
+  {
+   "name": "floor legacy clean-FF head RMS",
+   "value": 0.020264,
+   "claimed": 0.0203,
+   "tol": 0.0002,
+   "ok": true
+  },
+  {
+   "name": "floor prior spread across four tiers (x)",
+   "value": 1.219586,
+   "claimed": 1.22,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "floor coarse vs exact head RMS (z)",
+   "value": 2.675234,
+   "claimed": 2.68,
+   "tol": 0.15,
+   "ok": true
+  },
+  {
+   "name": "floor within-prior seed CV (%)",
+   "value": 8.242426,
+   "claimed": 8.2,
+   "tol": 0.4,
+   "ok": true
+  },
+  {
+   "name": "floor ceiling w_ff=100 (corrected head)",
+   "value": 0.579755,
+   "claimed": 0.58,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "floor ceiling dynamic range (x)",
+   "value": 2.424464,
+   "claimed": 2.42,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "floor ceiling monotone in w_ff",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "floor ceiling contact max deviation (%)",
+   "value": 15.952843,
+   "claimed": 16.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "floor rollout at matched fit (x)",
+   "value": 1.616541,
+   "claimed": 1.62,
+   "tol": 0.03,
+   "ok": true
+  },
+  {
+   "name": "floor rollout matched no-roll Huber",
+   "value": 0.00269,
+   "claimed": 0.00269,
+   "tol": 5e-05,
+   "ok": true
+  },
+  {
+   "name": "floor rollout matched roll Huber",
+   "value": 0.00256,
+   "claimed": 0.00256,
+   "tol": 5e-05,
+   "ok": true
+  },
+  {
+   "name": "floor rollout contrast (x)",
+   "value": 4.714451,
+   "claimed": 4.71,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "floor rerun spread max (x)",
+   "value": 0.579755,
+   "claimed": 0.58,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "floor rerun spread min (x)",
+   "value": 0.277979,
+   "claimed": 0.278,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "floor sample-size effect 120k/400k (x)",
+   "value": 1.074637,
+   "claimed": 1.07,
+   "tol": 0.03,
+   "ok": true
+  },
+  {
+   "name": "floor rollout contrast 120k matched (x)",
+   "value": 2.749192,
+   "claimed": 2.75,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "floor free-trunk plateau",
+   "value": 0.470319,
+   "claimed": 0.47,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "floor free-trunk contact improvement",
+   "value": 0.920125,
+   "claimed": 0.92,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "floor pooled no-roll band (min)",
+   "value": 0.277979,
+   "claimed": 0.28,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "floor pooled no-roll band (max)",
+   "value": 0.579755,
+   "claimed": 0.58,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "S1c reweighted / baseline (FF one-step)",
+   "value": 0.538573,
+   "claimed": 0.54,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "S1e single-step x100 / baseline (FF one-step)",
+   "value": 0.357846,
+   "claimed": 0.36,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "frozen w_ff=10 / unmodified",
+   "value": 0.745785,
+   "claimed": 0.75,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "frozen w_ff=0 / unmodified",
+   "value": 1.405594,
+   "claimed": 1.41,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "original head Huber on same features",
+   "value": 0.007172,
+   "claimed": 0.0072,
+   "tol": 0.0003,
+   "ok": true
+  },
+  {
+   "name": "E5 matched head gain k=5 (%)",
+   "value": -0.419872,
+   "claimed": -0.4,
+   "tol": 0.2,
+   "ok": true
+  },
+  {
+   "name": "E5 g1125 prior one-step (px)",
+   "value": 0.212332,
+   "claimed": 0.2123,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "E5 g1125 head gain k=5 (%)",
+   "value": 89.2679,
+   "claimed": 89.3,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "E5 drag prior one-step (px)",
+   "value": 0.233533,
+   "claimed": 0.2335,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "E5 drag head gain k=5 (%)",
+   "value": 96.930802,
+   "claimed": 96.9,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "E5-M2 g1125 frozen-trunk gain k=5 (%)",
+   "value": 92.761898,
+   "claimed": 92.8,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "E5-M2 drag frozen-trunk gain k=5 (%)",
+   "value": 96.273764,
+   "claimed": 96.3,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "E5-M2c g1125 ungated k5 (px)",
+   "value": 0.548433,
+   "claimed": 0.548,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "E5-M2c g1125 all-closed k5 (px)",
+   "value": 0.585775,
+   "claimed": 0.586,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "E5-M2c drag ungated k5 (px)",
+   "value": 0.156915,
+   "claimed": 0.157,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "E5-M2c drag all-closed k5 (px)",
+   "value": 0.262085,
+   "claimed": 0.262,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "legacy common-split exact ratio, seed 42 (audit only)",
+   "value": 0.113933,
+   "claimed": 0.11,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio euler005 descriptive mean",
+   "value": 0.968258,
+   "claimed": 0.968,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio euler005 descriptive SD",
+   "value": 0.042795,
+   "claimed": 0.043,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio euler001x5 descriptive mean",
+   "value": 0.95281,
+   "claimed": 0.953,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio euler001x5 descriptive SD",
+   "value": 0.023693,
+   "claimed": 0.024,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio rk4005 descriptive mean",
+   "value": 0.791798,
+   "claimed": 0.792,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio rk4005 descriptive SD",
+   "value": 0.06973,
+   "claimed": 0.07,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio rk4001x5 descriptive mean",
+   "value": 0.125863,
+   "claimed": 0.126,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio rk4001x5 descriptive SD",
+   "value": 0.008239,
+   "claimed": 0.008,
+   "tol": 0.003,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio uses ten seeds",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio reports descriptive-only status",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "own-split floor ratio does not claim inferential gap",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "pendulum head_ff across 4 priors (max/min)",
+   "value": 830.349733,
+   "claimed": 830.0,
+   "tol": 5.0,
+   "ok": true
+  },
+  {
+   "name": "M4 g1125 full over frozen inflation (%)",
+   "value": 25.438478,
+   "claimed": 25.4,
+   "tol": 0.2,
+   "ok": true
+  },
+  {
+   "name": "M4 g1125 frozen-vs-full reduction (%)",
+   "value": 20.1204,
+   "claimed": 20.1,
+   "tol": 0.2,
+   "ok": true
+  },
+  {
+   "name": "M4 g1125 per-seed spread (%)",
+   "value": 6.224544,
+   "claimed": 6.2,
+   "tol": 0.2,
+   "ok": true
+  },
+  {
+   "name": "M4 g1125 full mean (px)",
+   "value": 0.487718,
+   "claimed": 0.488,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "M4 g1125 frozen mean (px)",
+   "value": 0.389587,
+   "claimed": 0.39,
+   "tol": 0.002,
+   "ok": true
+  },
+  {
+   "name": "M4 drag improvement (%)",
+   "value": -3.504988,
+   "claimed": -3.5,
+   "tol": 0.2,
+   "ok": true
+  },
+  {
+   "name": "M4 drag per-seed spread (%)",
+   "value": 18.295278,
+   "claimed": 18.3,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "M4 seed variation one-step CV (%)",
+   "value": 4.482936,
+   "claimed": 4.5,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio coarse (mean)",
+   "value": 0.981081,
+   "claimed": 0.98,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio coarse (sd)",
+   "value": 0.016072,
+   "claimed": 0.02,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio exact (mean)",
+   "value": 0.125273,
+   "claimed": 0.13,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio exact (sd)",
+   "value": 0.008118,
+   "claimed": 0.008,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio euler001x5 (mean)",
+   "value": 0.957675,
+   "claimed": 0.96,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio euler001x5 (sd)",
+   "value": 0.008985,
+   "claimed": 0.01,
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio rk4005 (mean)",
+   "value": 0.696929,
+   "claimed": 0.7,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "M4 floor ratio rk4005 (sd)",
+   "value": 0.091716,
+   "claimed": 0.09,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "M4 all four tiers have n=7",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "M4 floor separation z (exact vs coarse)",
+   "value": 47.53051,
+   "claimed": 47.5,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse one-step seed CV (%)",
+   "value": 50.953894,
+   "claimed": 51.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse k=2 seed CV (%)",
+   "value": 12.548134,
+   "claimed": 12.6,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse k=5 seed CV (%)",
+   "value": 16.43634,
+   "claimed": 16.4,
+   "tol": 0.3,
+   "ok": true
+  },
+  {
+   "name": "noise floor retrain one-step (%)",
+   "value": 0.511496,
+   "claimed": 0.51,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "noise floor retrain k=2 (%)",
+   "value": 0.181491,
+   "claimed": 0.18,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "noise floor retrain k=5 (%)",
+   "value": 14.956746,
+   "claimed": 14.96,
+   "tol": 0.1,
+   "ok": true
+  },
+  {
+   "name": "noise floor seed/retrain ratio one-step",
+   "value": 99.617417,
+   "claimed": 100.0,
+   "tol": 1.5,
+   "ok": true
+  },
+  {
+   "name": "noise floor seed/retrain ratio k=2",
+   "value": 69.139235,
+   "claimed": 69.0,
+   "tol": 1.5,
+   "ok": true
+  },
+  {
+   "name": "noise floor seed/retrain ratio k=5",
+   "value": 1.098925,
+   "claimed": 1.1,
+   "tol": 0.05,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse one-step LOO CV (%)",
+   "value": 27.227941,
+   "claimed": 27.0,
+   "tol": 0.5,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse one-step ten-seed mean (px)",
+   "value": 0.66521,
+   "claimed": 0.67,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "noise floor coarse one-step ten-seed sd (px)",
+   "value": 0.33895,
+   "claimed": 0.34,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "noise floor exact one-step ten-seed mean (px)",
+   "value": 0.037521,
+   "claimed": 0.038,
+   "tol": 0.001,
+   "ok": true
+  },
+  {
+   "name": "noise floor exact one-step ten-seed sd (px)",
+   "value": 0.000629,
+   "claimed": 0.0006,
+   "tol": 0.0002,
+   "ok": true
+  },
+  {
+   "name": "noise floor exact one-step CV (%)",
+   "value": 1.677592,
+   "claimed": 1.7,
+   "tol": 0.1,
+   "ok": true
+  },
+  {
+   "name": "noise floor 10-seed k=5 ladder separation (x)",
+   "value": 30.97756,
+   "claimed": 31.0,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "noise floor matrix covers ten seeds",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "noise floor other-tiers one-step CV low (%)",
+   "value": 20.54525,
+   "claimed": 21.0,
+   "tol": 1.0,
+   "ok": true
+  },
+  {
+   "name": "noise floor R2 records contamination (s43 overlap fraction)",
+   "value": 0.906667,
+   "claimed": 0.91,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "noise floor per-seed monotone count (one-step)",
+   "value": 10.0,
+   "claimed": 10.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "noise floor per-seed monotone count (k=5)",
+   "value": 10.0,
+   "claimed": 10.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "multistart n starts",
+   "value": 9,
+   "claimed": 9.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "multistart end-g min (px-scale g)",
+   "value": 705.420776,
+   "claimed": 705.42,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "multistart end-g max (px-scale g)",
+   "value": 705.929932,
+   "claimed": 705.93,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "multistart end-g median",
+   "value": 705.769043,
+   "claimed": 705.77,
+   "tol": 0.02,
+   "ok": true
+  },
+  {
+   "name": "multistart end-g spread (% of median)",
+   "value": 0.072142,
+   "claimed": 0.07,
+   "tol": 0.01,
+   "ok": true
+  },
+  {
+   "name": "multistart starts within 20% of true g",
+   "value": 0,
+   "claimed": 0.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "multistart objective relative spread",
+   "value": 0.0,
+   "claimed": 0.0,
+   "tol": 1e-05,
+   "ok": true
+  },
+  {
+   "name": "ladder extension declares overlapping seeds, not independent replication",
+   "value": 1.0,
+   "claimed": 1.0,
+   "tol": 0.0,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 original 3-seed one-step",
+   "value": 0.969015,
+   "claimed": 0.969014585018158,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 original 3-seed k=5",
+   "value": 14.257656,
+   "claimed": 14.257656415303549,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed one-step mean",
+   "value": 0.66521,
+   "claimed": 0.665210009749013,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed one-step SD",
+   "value": 0.33895,
+   "claimed": 0.3389504000526846,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed k=5 mean",
+   "value": 15.39827,
+   "claimed": 15.398269783202286,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed k=5 SD",
+   "value": 2.530912,
+   "claimed": 2.53091195070443,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed head/target ratio mean",
+   "value": 0.968258,
+   "claimed": 0.9682584317223991,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler005 ten-seed head/target ratio SD",
+   "value": 0.042795,
+   "claimed": 0.04279539435061036,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 original 3-seed one-step",
+   "value": 0.196421,
+   "claimed": 0.19642060001691183,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 original 3-seed k=5",
+   "value": 4.873235,
+   "claimed": 4.873234669367473,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed one-step mean",
+   "value": 0.17219,
+   "claimed": 0.17219028173728018,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed one-step SD",
+   "value": 0.035377,
+   "claimed": 0.035376923676272806,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed k=5 mean",
+   "value": 4.975493,
+   "claimed": 4.975493175184086,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed k=5 SD",
+   "value": 3.175684,
+   "claimed": 3.175683820655007,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed head/target ratio mean",
+   "value": 0.95281,
+   "claimed": 0.9528102000016453,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension euler001x5 ten-seed head/target ratio SD",
+   "value": 0.023693,
+   "claimed": 0.02369349766754492,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 original 3-seed one-step",
+   "value": 0.135564,
+   "claimed": 0.1355642651518186,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 original 3-seed k=5",
+   "value": 2.193119,
+   "claimed": 2.193118929862976,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed one-step mean",
+   "value": 0.09679,
+   "claimed": 0.09678986263630665,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed one-step SD",
+   "value": 0.042512,
+   "claimed": 0.042512187926112076,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed k=5 mean",
+   "value": 1.683509,
+   "claimed": 1.6835089875588658,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed k=5 SD",
+   "value": 0.772662,
+   "claimed": 0.7726621980172789,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed head/target ratio mean",
+   "value": 0.791798,
+   "claimed": 0.7917975145806555,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4005 ten-seed head/target ratio SD",
+   "value": 0.06973,
+   "claimed": 0.06973002243070092,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 original 3-seed one-step",
+   "value": 0.036981,
+   "claimed": 0.0369810995956262,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 original 3-seed k=5",
+   "value": 0.492429,
+   "claimed": 0.4924289087454478,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed one-step mean",
+   "value": 0.037521,
+   "claimed": 0.03752093872284512,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed one-step SD",
+   "value": 0.000629,
+   "claimed": 0.0006294481276077167,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed k=5 mean",
+   "value": 0.497078,
+   "claimed": 0.4970782011416717,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed k=5 SD",
+   "value": 0.007574,
+   "claimed": 0.007574035753612347,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed head/target ratio mean",
+   "value": 0.125863,
+   "claimed": 0.12586274145995252,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "name": "ladder extension rk4001x5 ten-seed head/target ratio SD",
+   "value": 0.008239,
+   "claimed": 0.008239275968188992,
+   "tol": 1e-09,
+   "ok": true
+  }
+ ],
+ "n_pass": 319,
+ "n_total": 319,
+ "skipped": []
+}

@@ -1,0 +1,95 @@
+{
+ "protocol": {
+  "spec": "rk4001x5",
+  "L": 8,
+  "K": 5,
+  "epochs": 60,
+  "seed": 42,
+  "lr": 0.0003,
+  "batch": 1024,
+  "action_index": "a0=action[i0+L] (论文 E0Data 口径)",
+  "metric": "feat_weights-weighted position RMSE (px)",
+  "status": "corrected: window/action/target indexing now matches the paper's E0Data convention (verified: prior one-step = 0.0377 px reproduces the paper)",
+  "earlier_versions_invalid": "Two earlier versions of this script produced a false +56% head gain. Both were indexing bugs: (i) action index off by one (used action[i0+L] where the physical transfer wanted action[i0+L-1] under my own window convention), and (ii) the residual target was taken at frame i0+L-1 instead of i0+L. The corrected version reproduces the paper's prior error exactly and gives a clean control."
+ },
+ "conditions": {
+  "matched": {
+   "note": "数据 g=900，先验 g=900（对照）",
+   "data": "hinge",
+   "g_prior": 900.0,
+   "prior_one_step_px": 0.03774667322404969,
+   "hybrid_one_step_px": 0.042758107659521115,
+   "head_gain_one_step": -0.13276493018935698,
+   "prior_roll": [
+    0.037746686694143015,
+    0.11731328808593124,
+    0.224336773579638,
+    0.3509805255823438,
+    0.49387591663707076
+   ],
+   "hybrid_roll": [
+    0.042758156808849354,
+    0.11903997199336404,
+    0.22509578540641464,
+    0.3517516243359522,
+    0.4959495622299292
+   ],
+   "ratio_roll_k5": 1.0041987177811351,
+   "head_gain_roll_k5": -0.0041987177811351195,
+   "verdict": "NO-GO",
+   "n_train": 507600
+  },
+  "g1125": {
+   "note": "数据 g=900，先验 g=1125（参数错 25%）",
+   "data": "hinge",
+   "g_prior": 1125.0,
+   "prior_one_step_px": 0.2123319339736692,
+   "hybrid_one_step_px": 0.051573296984678836,
+   "head_gain_one_step": 0.7571100304155176,
+   "prior_roll": [
+    0.21233191986080047,
+    0.8374692279501705,
+    1.8603697200156843,
+    3.2656336181918286,
+    5.040893346830622
+   ],
+   "hybrid_roll": [
+    0.051573541262961375,
+    0.12885713744416588,
+    0.24031055661263337,
+    0.3770307277195928,
+    0.5409937258261931
+   ],
+   "ratio_roll_k5": 0.10732100217242921,
+   "head_gain_roll_k5": 0.8926789978275708,
+   "verdict": "GO",
+   "n_train": 507600
+  },
+  "drag": {
+   "note": "数据含阻尼+摩擦，先验无（未建模力）",
+   "data": "drag",
+   "g_prior": 900.0,
+   "prior_one_step_px": 0.23353316387889322,
+   "hybrid_one_step_px": 0.017711396177436965,
+   "head_gain_one_step": 0.9241589679030691,
+   "prior_roll": [
+    0.23353319661669136,
+    0.9124987083761671,
+    1.9950158376309453,
+    3.419635872683131,
+    5.112584205665375
+   ],
+   "hybrid_roll": [
+    0.017711292790842242,
+    0.03975583347178682,
+    0.07235245809624714,
+    0.11180784346076414,
+    0.15691531456522706
+   ],
+   "ratio_roll_k5": 0.030691976552942736,
+   "head_gain_roll_k5": 0.9693080234470572,
+   "verdict": "GO",
+   "n_train": 101520
+  }
+ }
+}

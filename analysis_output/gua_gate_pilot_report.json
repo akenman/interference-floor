@@ -1,0 +1,51 @@
+{
+  "prereg": {
+    "written": "2026-09-21",
+    "TH_ECE": 0.05,
+    "TH_RATIO": 2.0,
+    "TH_SPEARMAN": -0.4,
+    "TH_CONTACT_GAIN": 0.1
+  },
+  "model": "checkpoints-v3-calib2/best.pt",
+  "use_gua": false,
+  "n_windows": 10000,
+  "n_samples": 30000,
+  "gua_occupancy": {
+    "坤": 0.4120666666666667,
+    "艮": 0.024466666666666668,
+    "坎": 0.0696,
+    "巽": 0.013633333333333334,
+    "震": 0.2441,
+    "离": 0.015433333333333334,
+    "兑": 0.12036666666666666,
+    "乾": 0.10033333333333333
+  },
+  "C1": {
+    "temperature": 1.0,
+    "gua_acc": 0.8102666666666667,
+    "ece": 0.017083763552495784,
+    "pass": true
+  },
+  "C2": {
+    "rmse_low_conf20": 0.7473330771395024,
+    "rmse_high_conf20": 0.10164043056000076,
+    "ratio": 7.352714594202097,
+    "spearman_rho": -0.19725758079391334,
+    "p": 1.8364132981735115e-131,
+    "pass": false
+  },
+  "C3": {
+    "rmse_model": 0.546540332284357,
+    "rmse_prior": 1.2828357058429223,
+    "best_tau": 0.16292936498340485,
+    "rmse_gated": 0.546540332284357,
+    "frac_model": 1.0,
+    "gain_overall": 0.0,
+    "rmse_model_contact": 0.5841584156158054,
+    "rmse_prior_contact": 1.4417323508753008,
+    "rmse_gated_contact": 0.5841584156158054,
+    "gain_contact": 0.0,
+    "pass": false
+  },
+  "verdict": "NO-GO"
+}

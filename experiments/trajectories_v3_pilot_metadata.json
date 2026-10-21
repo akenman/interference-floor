@@ -1,0 +1,46 @@
+{
+  "version": "v3",
+  "description": "2D物理模拟轨迹数据集 v3（几何可观测 + 净冲量动作 + 20Hz + 接触真值）",
+  "episodes": 300,
+  "seq_length": 200,
+  "sample_rate_hz": 20.0,
+  "physics_dt": 0.01,
+  "layout": {
+    "per_obj": 11,
+    "obj_fields": [
+      "presence",
+      "x",
+      "y",
+      "sin_t",
+      "cos_t",
+      "vx",
+      "vy",
+      "w",
+      "type",
+      "size",
+      "mass"
+    ],
+    "obj_dims": 33,
+    "obstacle_slots": 8,
+    "obstacle_per_slot": 10,
+    "obstacle_dims": 80,
+    "contact_dims": 3,
+    "assembled_dim": 116,
+    "note": "模型输入 = assemble_frame(obj, obstacles, contact)，见 layout.py"
+  },
+  "action": {
+    "dim": 6,
+    "format": "[impulse_x, impulse_y] × 3，采样间隔内净冲量 ΣF·dt",
+    "norm_constant": 25.0
+  },
+  "contact_definition": "pymunk 仲裁器在采样间隔内任一物理步存在接触点即记 1（含墙/障碍/物体间）",
+  "known_approximations": [
+    "多边形障碍仅编码质心+外接圆半径+顶点数（顶点级形状留 v4）",
+    "接触真值依赖 arb.contacts 非空判定，静态压紧接触可能偶发漏记"
+  ],
+  "gravity": [
+    0,
+    -900
+  ],
+  "random_seed": 42
+}
